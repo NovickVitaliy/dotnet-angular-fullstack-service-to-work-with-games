@@ -1,6 +1,7 @@
 using System.Text;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Models.Identity;
+using GameProject.Identity.Contracts;
 using GameProject.Identity.DbContext;
 using GameProject.Identity.Models;
 using GameProject.Identity.Services;
@@ -17,6 +18,7 @@ public static class IdentityConfiguration
     public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JwtSettings>(configuration.GetSection("JWT"));
+        services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
