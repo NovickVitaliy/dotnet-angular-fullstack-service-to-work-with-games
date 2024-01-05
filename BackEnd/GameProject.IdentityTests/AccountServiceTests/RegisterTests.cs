@@ -30,7 +30,7 @@ public class RegisterTests
         //Act
         IAccountService accountService = new AccountService(_mockUserManager.Object);
 
-        var register = await accountService.Register(registerRequest);
+        var register = await accountService.RegisterAsync(registerRequest);
 
         //Assert
         register.StatusCode.Should().Be(200, "because user with free email was given");
@@ -38,7 +38,7 @@ public class RegisterTests
     
     [Fact]
     public async Task
-        Register_GivenInvalidUserRequest_Returns400StatusCodeAndAppropriateDescription()
+        Register_GivenInvalidUserRequest_Returns400StatusCodeAndNotEmptyDescription()
     {
         _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>()))
             .ReturnsAsync(IdentityResult.Failed());
@@ -47,7 +47,7 @@ public class RegisterTests
 
         IAccountService accountService = new AccountService(_mockUserManager.Object);
 
-        BaseResponse<AuthenticationResponse> response = await accountService.Register(registerRequest);
+        BaseResponse<AuthenticationResponse> response = await accountService.RegisterAsync(registerRequest);
 
         response.Description.Should().NotBeNullOrEmpty("because invalid request was given");
         response.StatusCode.Should().Be(400);
