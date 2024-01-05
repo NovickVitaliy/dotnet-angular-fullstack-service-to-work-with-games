@@ -2,6 +2,7 @@ using FluentAssertions;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Models.Identity;
+using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
 using GameProject.Identity.Services;
 using Microsoft.AspNetCore.Identity;
@@ -13,39 +14,46 @@ namespace GameProject.IdentityTests.AccountServiceTests;
 public class RegisterTests
 {
     private readonly Mock<UserManager<ApplicationUser>> _mockUserManager;
+    private readonly Mock<IJwtService> _mockJwtService;
 
     public RegisterTests()
     {
         _mockUserManager = new Mock<UserManager<ApplicationUser>>(Mock.Of<IUserStore<ApplicationUser>>(), null, null,
             null, null, null, null, null, null);
+        _mockJwtService = new Mock<IJwtService>();
     }
-    
+
     [Fact]
     public async Task Register_GivenUserWithFreeEmail_ReturnsResponseWith200StatusCode()
     {
         //Arrange
-        _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>()))
+        _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
             .ReturnsAsync(IdentityResult.Success);
         RegisterRequest registerRequest = new RegisterRequest();
-        //Act
-        IAccountService accountService = new AccountService(_mockUserManager.Object);
+        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+            .Returns(It.IsAny<string>());
+
+        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
 
         var register = await accountService.RegisterAsync(registerRequest);
 
         //Assert
         register.StatusCode.Should().Be(200, "because user with free email was given");
     }
-    
+
     [Fact]
     public async Task
         Register_GivenInvalidUserRequest_Returns400StatusCodeAndNotEmptyDescription()
     {
-        _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>()))
-            .ReturnsAsync(IdentityResult.Failed());
+        _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+            .ReturnsAsync(IdentityResult.Failed(new IdentityError()
+                { Code = "ErrorCode", Description = "Error Description" }));
 
         RegisterRequest registerRequest = new RegisterRequest();
+        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+            .Returns(It.IsAny<string>());
 
-        IAccountService accountService = new AccountService(_mockUserManager.Object);
+        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
 
         BaseResponse<AuthenticationResponse> response = await accountService.RegisterAsync(registerRequest);
 

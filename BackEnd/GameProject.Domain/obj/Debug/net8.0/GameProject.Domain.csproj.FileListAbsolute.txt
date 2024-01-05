@@ -1,0 +1,12 @@
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\bin\Debug\net8.0\GameProject.Domain.deps.json
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\bin\Debug\net8.0\GameProject.Domain.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\bin\Debug\net8.0\GameProject.Domain.pdb
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.AssemblyInfo.cs
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.sourcelink.json
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\refint\GameProject.Domain.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\GameProject.Domain.pdb
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Domain\obj\Debug\net8.0\ref\GameProject.Domain.dll

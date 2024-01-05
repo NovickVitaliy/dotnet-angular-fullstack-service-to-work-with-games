@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "GameProject.Infrastructure/1.0.0": {
+        "runtime": {
+          "GameProject.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GameProject.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
