@@ -4,14 +4,14 @@
     "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj": {
+    "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj",
-        "projectName": "GameProject.Identity",
-        "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj",
+        "projectName": "GameProject.Application",
+        "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -37,6 +37,89 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj",
+        "projectName": "GameProject.Identity",
+        "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

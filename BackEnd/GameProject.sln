@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameProject.Identity", "Gam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameProject.API", "GameProject.API\GameProject.API.csproj", "{D031FC24-94E5-46BA-A458-24BF84C6334C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameProject.IdentityTests", "GameProject.IdentityTests\GameProject.IdentityTests.csproj", "{2012618F-A5F3-44AD-A55D-17A703B32B9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,7 @@ Global
 		{A6302159-F4A0-4087-9554-7B8FDE2E3D5D} = {BC242469-5F9B-4DB0-AC41-044E8BE86D11}
 		{619BE479-076E-4E9A-B423-B1FD342B4B3E} = {BC242469-5F9B-4DB0-AC41-044E8BE86D11}
 		{D031FC24-94E5-46BA-A458-24BF84C6334C} = {DE0AD0DC-A9C6-4663-A0E7-C8A0B3BF9902}
+		{2012618F-A5F3-44AD-A55D-17A703B32B9E} = {B66DAE0F-EB26-4F3D-A70D-9FC54144123B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9E81C4CD-E359-489D-831C-B5CA84676D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -69,5 +72,9 @@ Global
 		{D031FC24-94E5-46BA-A458-24BF84C6334C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D031FC24-94E5-46BA-A458-24BF84C6334C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D031FC24-94E5-46BA-A458-24BF84C6334C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2012618F-A5F3-44AD-A55D-17A703B32B9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2012618F-A5F3-44AD-A55D-17A703B32B9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2012618F-A5F3-44AD-A55D-17A703B32B9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2012618F-A5F3-44AD-A55D-17A703B32B9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
