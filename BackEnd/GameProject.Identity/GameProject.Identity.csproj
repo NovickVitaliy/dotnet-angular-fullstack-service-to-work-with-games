@@ -19,4 +19,8 @@
       <ProjectReference Include="..\GameProject.Application\GameProject.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Helpers\" />
+    </ItemGroup>
+
 </Project>

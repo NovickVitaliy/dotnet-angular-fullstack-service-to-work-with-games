@@ -1,0 +1,6 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f4fd0a03_002Dc90c_002D4008_002D8dd5_002Dc293126a5388/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Register_GivenUserWithTakenEmail_ReturnsResponseWith400StatusCode" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::2012618F-A5F3-44AD-A55D-17A703B32B9E::net8.0::GameProject.IdentityTests.AccountServiceTests.RegisterTests.Register_GivenUserWithTakenEmail_ReturnsResponseWith400StatusCode&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
