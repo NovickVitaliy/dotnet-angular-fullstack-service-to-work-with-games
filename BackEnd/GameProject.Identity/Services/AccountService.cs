@@ -22,7 +22,39 @@ public class AccountService : IAccountService
 
     public async Task<BaseResponse<AuthenticationResponse>> LoginAsync(LoginRequest loginRequest)
     {
-        throw new NotImplementedException();
+        var user = await _userManager.FindByEmailAsync(loginRequest.Email);
+        if (user == null)
+        {
+            return new BaseResponse<AuthenticationResponse>()
+            {
+                StatusCode = StatusCodes.Status404NotFound,
+                Description = "User with given email was not found"
+            };
+        }
+
+        bool isPasswordCorrect = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
+
+        if (!isPasswordCorrect)
+        {
+            return new BaseResponse<AuthenticationResponse>()
+            {
+                StatusCode = StatusCodes.Status400BadRequest,
+                Description = "Incorrect password"
+            };
+        }
+
+
+        var jwtToken = _jwtService.CreateJwtToken(user);
+
+        return new BaseResponse<AuthenticationResponse>()
+        {
+            StatusCode = StatusCodes.Status200OK,
+            Data = new AuthenticationResponse()
+            {
+                Email = user.Email,
+                Token = jwtToken
+            }
+        };
     }
 
     public async Task<BaseResponse<AuthenticationResponse>> RegisterAsync(RegisterRequest registerRequest)
