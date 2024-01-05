@@ -5,7 +5,7 @@ namespace GameProject.Application.Contracts.Identity;
 
 public interface IAccountService
 {
-    Task<BaseResponse<AuthenticationResponse>> Login(LoginRequest loginRequest);
-    Task<BaseResponse<AuthenticationResponse>> Register(RegisterRequest registerRequest);
-    Task ConfigureAccount(ConfigureAccountRequest configureAccountRequest);
+    Task<BaseResponse<AuthenticationResponse>> LoginAsync(LoginRequest loginRequest);
+    Task<BaseResponse<AuthenticationResponse>> RegisterAsync(RegisterRequest registerRequest);
+    Task ConfigureAccountAsync(ConfigureAccountRequest configureAccountRequest);
 }

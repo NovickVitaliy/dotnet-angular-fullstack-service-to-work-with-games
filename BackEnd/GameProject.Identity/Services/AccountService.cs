@@ -15,17 +15,17 @@ public class AccountService : IAccountService
         _userManager = userManager;
     }
 
-    public Task<BaseResponse<AuthenticationResponse>> Login(LoginRequest loginRequest)
+    public Task<BaseResponse<AuthenticationResponse>> LoginAsync(LoginRequest loginRequest)
     {
         throw new NotImplementedException();
     }
 
-    public Task<BaseResponse<AuthenticationResponse>> Register(RegisterRequest registerRequest)
+    public Task<BaseResponse<AuthenticationResponse>> RegisterAsync(RegisterRequest registerRequest)
     {
         throw new NotImplementedException();
     }
 
-    public Task ConfigureAccount(ConfigureAccountRequest configureAccountRequest)
+    public Task ConfigureAccountAsync(ConfigureAccountRequest configureAccountRequest)
     {
         throw new NotImplementedException();
     }
