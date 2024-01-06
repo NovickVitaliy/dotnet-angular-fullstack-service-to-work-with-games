@@ -35,7 +35,6 @@ public class AccountService : IAccountService
 
         return new BaseResponse<AuthenticationResponse>()
         {
-            StatusCode = StatusCodes.Status200OK,
             Data = new AuthenticationResponse()
             {
                 Email = user.Email,
@@ -65,7 +64,6 @@ public class AccountService : IAccountService
             var jwtToken = _jwtService.CreateJwtToken(user);
             return new BaseResponse<AuthenticationResponse>()
             {
-                StatusCode = StatusCodes.Status200OK,
                 Data = new AuthenticationResponse()
                 {
                     Email = user.Email,

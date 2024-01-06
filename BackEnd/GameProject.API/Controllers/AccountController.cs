@@ -1,5 +1,6 @@
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
+using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +13,7 @@ namespace GameProject.API.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly IAccountService _accountService;
-        
+
     public AccountController(IAccountService accountService)
     {
         _accountService = accountService;
@@ -25,22 +26,13 @@ public class AccountController : ControllerBase
     {
         if (!ModelState.IsValid)
         {
-            BaseResponse<AuthenticationResponse> response = new()
-            {
-                Description = "Bad Request",
-                Errors = ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage).ToArray()
-            };
-            return BadRequest(response);
+            throw new BadRequestException(string.Join('\n',
+                ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
         }
 
         BaseResponse<AuthenticationResponse> registerResult = await _accountService.RegisterAsync(registerRequest);
 
-        if (registerResult.StatusCode == StatusCodes.Status200OK)
-        {
-            return Ok(registerResult);
-        }
-
-        return BadRequest(registerResult);
+        return Ok(registerResult);
     }
 
     [HttpPost]
@@ -51,22 +43,13 @@ public class AccountController : ControllerBase
     {
         if (!ModelState.IsValid)
         {
-            BaseResponse<AuthenticationResponse> response = new()
-            {
-                Description = "Bad Request",
-                Errors = ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage).ToArray()
-            };
-            return BadRequest(response);
+            throw new BadRequestException(string.Join('\n',
+                ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
         }
 
         BaseResponse<AuthenticationResponse> loginResponse = await _accountService.LoginAsync(loginRequest);
-        
-        if (loginResponse.StatusCode == StatusCodes.Status200OK)
-        {
-            return Ok(loginResponse);
-        }
 
-        return BadRequest(loginResponse);
+        return Ok(loginResponse);
     }
 
     [HttpGet]

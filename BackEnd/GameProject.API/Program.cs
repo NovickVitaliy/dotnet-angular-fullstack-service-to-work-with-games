@@ -1,7 +1,10 @@
+using GameProject.API.Middlewares;
 using GameProject.Application;
 using GameProject.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,8 +29,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection();
-// app.UseHsts();
+app.UseHttpsRedirection();
+app.UseHsts();
+app.UseExceptionHandler();
 app.UseRouting();
 
 app.UseCors("all");
