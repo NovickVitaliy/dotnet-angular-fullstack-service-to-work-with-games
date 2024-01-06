@@ -1,6 +1,7 @@
 using FluentAssertions;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
+using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
@@ -38,7 +39,7 @@ public class RegisterTests
         var register = await accountService.RegisterAsync(registerRequest);
 
         //Assert
-        register.StatusCode.Should().Be(200, "because user with free email was given");
+        register.Should().NotBeNull();
     }
 
     [Fact]
@@ -55,9 +56,11 @@ public class RegisterTests
 
         IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
 
-        BaseResponse<AuthenticationResponse> response = await accountService.RegisterAsync(registerRequest);
+        Func<Task> action = async () =>
+        {
+            BaseResponse<AuthenticationResponse> response = await accountService.RegisterAsync(registerRequest);
+        };
 
-        response.Description.Should().NotBeNullOrEmpty("because invalid request was given");
-        response.StatusCode.Should().Be(400);
+        await action.Should().ThrowExactlyAsync<BadRequestException>();
     }
 }

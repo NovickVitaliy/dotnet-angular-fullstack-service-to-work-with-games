@@ -1,5 +1,6 @@
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
+using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
@@ -23,26 +24,12 @@ public class AccountService : IAccountService
     public async Task<BaseResponse<AuthenticationResponse>> LoginAsync(LoginRequest loginRequest)
     {
         var user = await _userManager.FindByEmailAsync(loginRequest.Email);
-        if (user == null)
-        {
-            return new BaseResponse<AuthenticationResponse>()
-            {
-                StatusCode = StatusCodes.Status404NotFound,
-                Description = "User with given email was not found"
-            };
-        }
-
         bool isPasswordCorrect = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
 
-        if (!isPasswordCorrect)
+        if (!isPasswordCorrect || user == null)
         {
-            return new BaseResponse<AuthenticationResponse>()
-            {
-                StatusCode = StatusCodes.Status400BadRequest,
-                Description = "Incorrect password"
-            };
+            throw new BadRequestException("user with given email was not found or given password is incorrect");
         }
-
 
         var jwtToken = _jwtService.CreateJwtToken(user);
 
@@ -62,14 +49,10 @@ public class AccountService : IAccountService
         var user = await _userManager.FindByEmailAsync(registerRequest.Email);
         if (user != null)
         {
-            return new BaseResponse<AuthenticationResponse>()
-            {
-                StatusCode = StatusCodes.Status400BadRequest, 
-                Description = "User with given email already exists"
-            };
+            throw new BadRequestException("User with given email already exists");
         }
 
-        user = new ApplicationUser()
+        user = new ApplicationUser
         {
             Email = registerRequest.Email,
             UserName = registerRequest.Username,
@@ -90,12 +73,7 @@ public class AccountService : IAccountService
                 }
             };
         }
-
-        return new BaseResponse<AuthenticationResponse>()
-        {
-            StatusCode = StatusCodes.Status400BadRequest,
-            Errors = identityResult.Errors.Select(err => err.Description).ToArray()
-        };
+        throw new BadRequestException(string.Join("\n", identityResult.Errors.SelectMany(err => err.Description)));
     }
 
     public async Task ConfigureAccountAsync(ConfigureAccountRequest configureAccountRequest)

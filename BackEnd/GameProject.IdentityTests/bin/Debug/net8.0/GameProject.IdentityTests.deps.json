@@ -1346,6 +1346,9 @@
       },
       "xunit.runner.visualstudio/2.4.5": {},
       "GameProject.Application/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "8.0.0"
+        },
         "runtime": {
           "GameProject.Application.dll": {}
         }

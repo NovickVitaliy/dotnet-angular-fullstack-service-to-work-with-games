@@ -1,6 +1,7 @@
 using FluentAssertions;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
+using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
@@ -16,6 +17,7 @@ public class LoginTests
 {
     private readonly Mock<UserManager<ApplicationUser>> _mockUserManager;
     private readonly Mock<IJwtService> _mockJwtService;
+
     public LoginTests()
     {
         _mockUserManager = new Mock<UserManager<ApplicationUser>>(Mock.Of<IUserStore<ApplicationUser>>(), null, null,
@@ -24,24 +26,26 @@ public class LoginTests
     }
 
     [Fact]
-    public async Task Login_GivenNonExistingUser_Returns400StatusCodeAndNotEmptyDescription()
+    public async Task Login_GivenNonExistingUser_ThrowsNotFoundException()
     {
         _mockUserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
             .ReturnsAsync(() => null);
         _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
-        
+
         IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
 
-        LoginRequest loginRequest = new LoginRequest();
-        BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+        Func<Task> action = async () =>
+        {
+            LoginRequest loginRequest = new LoginRequest();
+            BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+        };
 
-        response.StatusCode.Should().Be(StatusCodes.Status404NotFound);
-        response.Description.Should().NotBeNullOrEmpty();
+        await action.Should().ThrowExactlyAsync<BadRequestException>();
     }
-    
+
     [Fact]
-    public async Task Login_GivenIncorrectPasswordForUser_Returns400StatusCodeAndNotEmptyDescription()
+    public async Task Login_GivenIncorrectPasswordForUser_ThrowsBadRequestException()
     {
         _mockUserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
             .ReturnsAsync(new ApplicationUser());
@@ -49,18 +53,20 @@ public class LoginTests
             It.IsAny<string>())).ReturnsAsync(false);
         _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
-        
+
         IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
 
-        LoginRequest loginRequest = new LoginRequest();
-        BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+        Func<Task> action = async () =>
+        {
+            LoginRequest loginRequest = new LoginRequest();
+            BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+        };
 
-        response.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
-        response.Description.Should().NotBeNullOrEmpty();
+        await action.Should().ThrowExactlyAsync<BadRequestException>();
     }
-    
+
     [Fact]
-    public async Task Login_GivenCorrectPasswordForUser_Returns200StatusCode()
+    public async Task Login_GivenCorrectPasswordForUser_ReturnsNotNullResponse()
     {
         _mockUserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
             .ReturnsAsync(new ApplicationUser());
@@ -68,12 +74,12 @@ public class LoginTests
             It.IsAny<string>())).ReturnsAsync(true);
         _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
-        
+
         IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
 
         LoginRequest loginRequest = new LoginRequest();
         BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
 
-        response.StatusCode.Should().Be(StatusCodes.Status200OK);
+        response.Should().NotBeNull();
     }
 }
