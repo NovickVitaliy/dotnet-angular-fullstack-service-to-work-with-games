@@ -14,3 +14,5 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Identity\obj\Debug\net8.0\
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Identity\obj\Debug\net8.0\refint\GameProject.Identity.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Identity\obj\Debug\net8.0\GameProject.Identity.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Identity\obj\Debug\net8.0\ref\GameProject.Identity.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Identity\bin\Debug\net8.0\GameProject.Identity.runtimeconfig.json
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Identity\obj\Debug\net8.0\GameProject.Identity.genruntimeconfig.cache

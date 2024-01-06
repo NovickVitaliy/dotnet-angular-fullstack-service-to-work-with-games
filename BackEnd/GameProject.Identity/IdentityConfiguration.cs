@@ -3,9 +3,11 @@ using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.DbContext;
+using GameProject.Identity.Helpers;
 using GameProject.Identity.Models;
 using GameProject.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,16 +17,26 @@ namespace GameProject.Identity;
 
 public static class IdentityConfiguration
 {
-    public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.Configure<JwtSettings>(configuration.GetSection("JWT"));
-        services.AddScoped<IJwtService, JwtService>();
-        services.AddScoped<IAccountService, AccountService>();
+
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
-        
+
+        services.AddIdentityCore<ApplicationUser>(options =>
+            {
+                options.Password.ConfigurePasswordOptions();
+            })
+            .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
+        services.AddScoped<IJwtService, JwtService>();
+        services.AddScoped<IAccountService, AccountService>();
+
         services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

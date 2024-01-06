@@ -2411,6 +2411,9 @@
       "GameProject.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "8.0.0"
+        },
         "compile": {
           "bin/placeholder/GameProject.Application.dll": {}
         },

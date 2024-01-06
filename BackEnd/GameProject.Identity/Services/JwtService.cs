@@ -24,16 +24,14 @@ public class JwtService : IJwtService
         Claim[] claims = {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Iss, _jwtSettings.Issuer),
-            new(JwtRegisteredClaimNames.Aud, _jwtSettings.Audience),
-            new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.Millisecond.ToString()),
+            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
             new(JwtRegisteredClaimNames.NameId, user.Id.ToString())
         };
         
         SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
 
-        SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha512);
-        SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor();
+        SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
         JwtSecurityToken securityToken = new JwtSecurityToken(
             claims:claims,

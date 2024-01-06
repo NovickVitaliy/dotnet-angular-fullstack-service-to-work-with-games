@@ -94,7 +94,7 @@ public class AccountService : IAccountService
         return new BaseResponse<AuthenticationResponse>()
         {
             StatusCode = StatusCodes.Status400BadRequest,
-            Description = string.Join('\n', identityResult.Errors.Select(err => err.Description))
+            Errors = identityResult.Errors.Select(err => err.Description).ToArray()
         };
     }
 
