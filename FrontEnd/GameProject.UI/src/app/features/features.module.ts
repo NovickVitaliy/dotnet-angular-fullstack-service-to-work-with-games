@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {NavbarModule} from "./navbar/navbar.module";
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    NavbarModule
+  ],
+  exports: [NavbarModule]
 })
 export class FeaturesModule { }
