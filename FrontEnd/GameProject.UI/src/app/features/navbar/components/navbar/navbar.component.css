@@ -7,20 +7,19 @@
 }
 
 @media (max-width: 480px) {
-  .dropdown{
+  .dropdown {
     display: inline;
   }
-
   .navigation-items {
     display: none;
   }
-
   .buttons {
     display: none;
   }
-
   .navbar-items {
     display: flex;
     justify-content: space-between;
   }
 }
+
+/*# sourceMappingURL=navbar.component.css.map */

@@ -1,11 +1,23 @@
-<div data-theme="sonytheme" class="navbar bg-base-primary flex justify-center">
-  <div class="w-1/2">
-    <div class="flex-1 flex-row">
+<div data-theme="sonytheme" class="navbar bg-primary flex justify-center">
+  <div class="w-3/4">
+    <div class="flex-1 flex-row text-white navbar-items" >
       <a class="btn btn-ghost text-xl">Game Project</a>
-      <div class="inline">
-        <button class="btn btn-ghost inline mr-1 ml-1">Home</button>
-        <button class="btn btn-ghost inline mr-1 ml-1">News</button>
-        <button class="btn btn-ghost inline mr-1 ml-1">Games</button>
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52">
+          <li><a>Register</a></li>
+          <li><a>Log In</a></li>
+          <li><a>Home</a></li>
+          <li><a>News</a></li>
+          <li><a>Games</a></li>
+        </ul>
+      </div>
+      <div class="navigation-items inline">
+        <button class="btn btn-ghost inline mr-1 ml-1 text-base">Home</button>
+        <button class="btn btn-ghost inline mr-1 ml-1 text-base">News</button>
+        <button class="btn btn-ghost inline mr-1 ml-1 text-base">Games</button>
       </div>
     </div>
     <div class="flex-none">
