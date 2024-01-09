@@ -1,0 +1,34 @@
+<div class="register-form pt-32 pl-10 pr-10 mx-auto">
+  <div class="w-auto">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-sm mx-auto mt-5 font-sans my-auto border text-black  border-gray-400 rounded-lg p-16">
+      <div class="form-input flex flex-col mb-3">
+        <label class="text-lg mb-1">Username:</label>
+        <input [ngClass]="{'border-red-500': registerForm.controls['username'].touched && registerForm.controls['username'].errors}" formControlName="username" type="text" placeholder="Type here" class="input text-black input-bordered"/>
+        <div class="text-red-600" *ngIf="registerForm.controls['username'].touched && registerForm.controls['username'].errors?.['required']">Username is required</div>
+      </div>
+      <div class="form-input flex flex-col mb-3">
+        <label  class="text-lg mb-1">Email:</label>
+        <input [ngClass]="{'border-red-500': registerForm.controls['email'].touched && registerForm.controls['email'].errors}" formControlName="email" type="email" placeholder="Type here" class="input text-black input-bordered"/>
+        <div class="text-red-600" *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.['required']">Email is required</div>
+        <div class="text-red-600" *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors?.['email']">Email must be in proper format</div>
+      </div>
+      <div class="form-input flex flex-col mb-3">
+        <label class="text-lg mb-1">Password:</label>
+        <input [ngClass]="{'border-red-500': registerForm.controls['password'].touched && registerForm.controls['password'].errors}" formControlName="password" type="password" placeholder="Type here" class="input text-black input-bordered"/>
+        <div class="text-red-600" *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors?.['required']">Password is required</div>
+      </div>
+      <div class="form-input flex flex-col mb-3">
+        <label class="text-lg mb-1">Confirm Password:</label>
+        <input [ngClass]="{'border-red-500': registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors}" formControlName="confirmPassword" type="password" placeholder="Type here" class="input text-black input-bordered"/>
+        <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['required']">Confirm password is required</div>
+        <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['comparePassword']">Confirm password and Password must be equal</div>
+      </div>
+      <div class="buttons flex justify-between">
+        <button class="btn btn-base" routerLink="">Cancel</button>
+        <button class="btn btn-primary" type='submit' [disabled]="registerForm.invalid">Register</button>
+      </div>
+    </form>
+  </div>
+
+
+</div>

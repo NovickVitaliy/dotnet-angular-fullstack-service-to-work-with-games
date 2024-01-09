@@ -1,4 +1,4 @@
-<div data-theme="sonytheme" class="navbar bg-primary flex justify-center">
+<div *ngIf="!isRegistrationMode" data-theme="sonytheme" class="navbar bg-primary flex justify-center">
   <div class="w-3/4">
     <div class="flex-1 flex-row text-white navbar-items" >
       <a class="btn btn-ghost text-xl">Game Project</a>
@@ -22,7 +22,7 @@
     </div>
     <div class="flex-none">
       <div class="buttons">
-        <button class="btn btn-secondary m-1">Register</button>
+        <button class="btn btn-secondary m-1" routerLink="register">Register</button>
         <button class="btn btn-secondary m-1">Log In</button>
       </div>
     </div>

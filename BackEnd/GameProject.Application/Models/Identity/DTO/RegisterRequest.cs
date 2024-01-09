@@ -16,5 +16,5 @@ public class RegisterRequest
     
     [Required]
     [Compare(nameof(Password), ErrorMessage = "Passwors must match")]
-    public string ComparePassword { get; set; }
+    public string ConfirmPassword { get; set; }
 }
