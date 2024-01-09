@@ -6,6 +6,10 @@
   display: none;
 }
 
+.theme-toggler {
+  height: 50px;
+}
+
 @media (max-width: 480px) {
   .dropdown {
     display: inline;

@@ -6,12 +6,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { LoginComponent } from './login/login.component';
 
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

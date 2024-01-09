@@ -1,4 +1,4 @@
-<div *ngIf="!isRegistrationMode" data-theme="sonytheme" class="navbar bg-primary flex justify-center">
+<div *ngIf="!isRegistrationMode" class="navbar bg-primary flex justify-center">
   <div class="w-3/4">
     <div class="flex-1 flex-row text-white navbar-items" >
       <a class="btn btn-ghost text-xl">Game Project</a>
@@ -20,10 +20,11 @@
         <button class="btn btn-ghost inline mr-1 ml-1 text-base">Games</button>
       </div>
     </div>
-    <div class="flex-none">
-      <div class="buttons">
-        <button class="btn btn-secondary m-1" routerLink="register">Register</button>
-        <button class="btn btn-secondary m-1">Log In</button>
+    <div class="flex">
+      <div class="buttons flex align-middle">
+        <button class="btn border-none m-1" (click)="changeTheme()"><img [src]="getThemeIcon()" class="h-full" alt=""></button>
+        <button class="btn btn-secondary m-1" routerLink="auth/register">Register</button>
+        <button class="btn btn-secondary m-1" routerLink="auth/login">Log In</button>
       </div>
     </div>
   </div>
