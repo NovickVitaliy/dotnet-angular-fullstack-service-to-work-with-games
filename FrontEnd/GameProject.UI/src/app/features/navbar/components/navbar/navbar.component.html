@@ -1,17 +1,40 @@
 <div *ngIf="!isRegistrationMode" class="navbar bg-primary flex justify-center">
   <div class="w-3/4">
-    <div class="flex-1 flex-row text-white navbar-items" >
+    <div class="flex-1 flex-row text-white navbar-items">
       <a class="btn btn-ghost text-xl">Game Project</a>
-      <div class="dropdown">
+      <div class="dropdown burger">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
+          </svg>
         </div>
-        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52">
-          <li><a>Register</a></li>
-          <li><a>Log In</a></li>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 text-neutral rounded-box w-52">
+          <ng-container *ngIf="!(currentUser$ | async)">
+            <li><a>Register</a></li>
+            <li><a>Log In</a></li>
+          </ng-container>
+          <ng-container>
+            <li>
+              <a class="justify-between">
+                Profile
+                <div class="avatar placeholder">
+                  <div class="bg-neutral text-neutral-content rounded-full outline-0 w-8">
+                    <span class="text-xs"><img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt=""></span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ng-container>
           <li><a>Home</a></li>
           <li><a>News</a></li>
           <li><a>Games</a></li>
+          <li>
+            <a class="justify-between" (click)="changeTheme()">
+              <span>Theme:</span>
+              <span>{{getCurrentTheme() === 'sony' ? 'Ps4' : 'Xbox'}}</span>
+            </a>
+          </li>
+          <li><a class="text-red-600" (click)="logout()">Logout</a></li>
         </ul>
       </div>
       <div class="navigation-items inline">
@@ -21,10 +44,31 @@
       </div>
     </div>
     <div class="flex">
-      <div class="buttons flex align-middle">
-        <button class="btn border-none m-1" (click)="changeTheme()"><img [src]="getThemeIcon()" class="h-full" alt=""></button>
+      <button class="btn border-none m-1 theme-toggler" (click)="changeTheme()"><img [src]="getThemeIcon()" class="h-full" alt="">
+      </button>
+      <div *ngIf="!(currentUser$ | async)" class="buttons flex align-middle">
         <button class="btn btn-secondary m-1" routerLink="auth/register">Register</button>
         <button class="btn btn-secondary m-1" routerLink="auth/login">Log In</button>
+      </div>
+      <div *ngIf="(currentUser$ | async)" class="buttons flex align-middle">
+        <div class="dropdown dropdown-end profile-button">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar mt-1">
+            <div class="w-10 rounded-full">
+              <img alt="Tailwind CSS Navbar component"
+                   src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
+            </div>
+          </div>
+          <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <a class="justify-between">
+                Profile
+                <span class="badge">New</span>
+              </a>
+            </li>
+            <li><a>Settings</a></li>
+            <li><a class="text-red-600" (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

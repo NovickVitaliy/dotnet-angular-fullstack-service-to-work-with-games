@@ -1,6 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 import {ThemeService} from "../../../../core/services/theme.service";
+import {Observable, of} from "rxjs";
+import {User} from "../../../../shared/models/user";
+import {AccountService} from "../../../../core/authentication/services/account.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +13,14 @@ import {ThemeService} from "../../../../core/services/theme.service";
 })
 export class NavbarComponent implements OnInit  {
   @Input() isRegistrationMode: boolean = false;
-
+  currentUser$: Observable<User | null> = of(null);
+  currentUser: User | null = null;
   constructor(private router: Router,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private accountService: AccountService) {
+    this.currentUser$ = this.accountService.currentUser$;
   }
-
   ngOnInit(): void {
-    this.router.events.subscribe({
-      next: event => {
-        if(event instanceof NavigationEnd){
-          this.isRegistrationMode = event.url === '/register';
-        }
-      }
-    });
   }
 
   changeTheme() {
@@ -36,5 +35,14 @@ export class NavbarComponent implements OnInit  {
     return currentTheme === 'sony'
       ? this.themeService.pathToSonyIcon
       : this.themeService.pathToMicrosoftIcon;
+  }
+
+  logout(){
+    console.log("Logging out")
+    this.accountService.logout();
+  }
+
+  getCurrentTheme(){
+    return this.themeService.getCurrentTheme();
   }
 }

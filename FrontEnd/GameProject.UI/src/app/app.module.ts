@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {FeaturesModule} from "./features/features.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ToastrModule} from "ngx-toastr";
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
     }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

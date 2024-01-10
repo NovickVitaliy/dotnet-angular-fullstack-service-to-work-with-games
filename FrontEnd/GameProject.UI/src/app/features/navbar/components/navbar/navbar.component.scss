@@ -1,18 +1,32 @@
 .navbar {
   border-radius: 0 0 25px 25px;
 }
-
-.dropdown {
-  display: none;
+.burger {
+  display:none;
 }
-
 .theme-toggler {
   height: 50px;
 }
 
-@media (max-width: 480px) {
-  .dropdown{
+.profile-button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menu {
+  position: absolute;
+  top: 40px;
+}
+@media (max-width: 765px) {
+  .burger{
     display: inline;
+  }
+  .menu {
+    right: 1px;
+  }
+  .theme-toggler {
+    display: none;
   }
 
   .navigation-items {

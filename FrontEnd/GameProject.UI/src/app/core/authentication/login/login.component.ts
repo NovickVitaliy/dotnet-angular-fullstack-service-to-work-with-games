@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../services/account.service";
 import {LoginRequest} from "../../../shared/models/login-request";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private accountService: AccountService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -31,8 +33,8 @@ export class LoginComponent implements OnInit {
   login() {
     let loginRequest: LoginRequest = {...this.loginForm.value};
     this.accountService.login(loginRequest).subscribe({
-      next: response => {
-        this.toastrService.success(`Welcome ${response.data?.email}`)
+      next: _ => {
+          this.router.navigateByUrl('');
       },
       error: err => {
         this.toastrService.error(err.error.description);

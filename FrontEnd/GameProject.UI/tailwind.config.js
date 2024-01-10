@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{html,ts}",
+    "./src/**/*.{html,ts}"
   ],
   theme: {
     extend: {
@@ -27,15 +27,15 @@ module.exports = {
           "error": "#be123c",
         },
         microsofttheme: {
-            "primary": "#107b10",
-            "secondary": "#166534",
-            "accent": "#65a30d",
-            "neutral": "#ffffff",
-            "base-100": "#171717",
-            "info": "#1d4ed8",
-            "success": "#15803d",
-            "warning": "#b45309",
-            "error": "#be123c",
+          "primary": "#107b10",
+          "secondary": "#166534",
+          "accent": "#65a30d",
+          "neutral": "#ffffff",
+          "base-100": "#171717",
+          "info": "#1d4ed8",
+          "success": "#15803d",
+          "warning": "#b45309",
+          "error": "#be123c",
         }
       },
     ]

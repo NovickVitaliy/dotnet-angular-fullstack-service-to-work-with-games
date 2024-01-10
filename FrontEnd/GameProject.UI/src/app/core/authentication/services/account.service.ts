@@ -1,29 +1,57 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment.development";
 import {HttpClient} from "@angular/common/http";
 import {RegisterRequest} from "../../../shared/models/register-request";
 import {BaseResponse} from "../../../shared/models/base-response";
-import {AuthenticationResponse} from "../../../shared/models/authentication-response";
 import {LoginRequest} from "../../../shared/models/login-request";
 import {ConfigureAccountRequest} from "../../../shared/models/configure-account-request";
+import {BehaviorSubject, map, Observable, shareReplay} from "rxjs";
+import {User} from "../../../shared/models/user";
 
 @Injectable({
-  providedIn: 'any'
+  providedIn: 'root'
 })
 export class AccountService {
+  private currentUserSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) {}
-
-  register(registerRequest: RegisterRequest){
-    console.log(registerRequest);
-    return this.http.post<BaseResponse<AuthenticationResponse>>(environment.apiUrl + 'Account/Register', registerRequest);
+  constructor(private http: HttpClient) {
   }
 
-  login(loginRequest: LoginRequest){
-    return this.http.post<BaseResponse<AuthenticationResponse>>(environment.apiUrl + 'Account/Login', loginRequest);
+  register(registerRequest: RegisterRequest) {
+    return this.http.post<BaseResponse<User>>(environment.apiUrl + 'Account/Register', registerRequest).pipe(
+      map((response) => {
+        const user = response.data;
+        if(user){
+          this.setCurrentUser(user);
+        }
+      })
+    );
   }
 
-  configureAccount(configureAccountRequest: ConfigureAccountRequest){
+  login(loginRequest: LoginRequest) {
+    return this.http.post<BaseResponse<User>>(environment.apiUrl + 'Account/Login', loginRequest).pipe(
+      map((response) => {
+        const user = response.data;
+        if(user){
+          this.setCurrentUser(user);
+        }
+        return user;
+      })
+    )
+  }
+
+  setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUserSource.next(user);
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.currentUserSource.next(null);
+  }
+
+  configureAccount(configureAccountRequest: ConfigureAccountRequest) {
     return this.http.post<BaseResponse<void>>(environment.apiUrl + 'Account/ConfigureAccount', configureAccountRequest);
   }
 }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {ThemeService} from "./core/services/theme.service";
+import {AccountService} from "./core/authentication/services/account.service";
+import {User} from "./shared/models/user";
 
 @Component({
   selector: 'app-root',
@@ -8,26 +10,42 @@ import {ThemeService} from "./core/services/theme.service";
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
-  isRegistrationPage: boolean = false;
+  isAuthenticationMode: boolean = false;
   title = 'GameProject.UI';
 
   constructor(private router: Router,
-              private themeService: ThemeService) {
+              private themeService: ThemeService,
+              private accountService: AccountService) {
   }
 
   ngOnInit(): void {
+    this.setupAuthenticationModeCatcher();
+    this.setCurrentUser();
+  }
+
+  getTheme(){
+    return this.themeService.getCurrentTheme();
+  }
+
+  setupAuthenticationModeCatcher(){
     this.router.events.subscribe({
       next: event => {
         if(event instanceof NavigationEnd){
           console.log(event.url);
-          this.isRegistrationPage = event.url === '/auth/register'
-                                    || event.url === '/auth/login';
+          this.isAuthenticationMode = event.url === '/auth/register'
+            || event.url === '/auth/login';
         }
       }
     });
   }
 
-  getTheme(){
-    return this.themeService.getCurrentTheme();
+  setCurrentUser(){
+    let userString = localStorage.getItem('user');
+    if(userString){
+      const user: User = JSON.parse(userString);
+      console.log("app.component.setCurrentUser" + userString)
+      console.log({...user});
+      this.accountService.setCurrentUser(user);
+    }
   }
 }

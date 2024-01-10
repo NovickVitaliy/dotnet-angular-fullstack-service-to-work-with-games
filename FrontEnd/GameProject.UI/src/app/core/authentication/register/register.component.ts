@@ -4,6 +4,7 @@ import {FormValidatorsService} from "../../services/form-validators.service";
 import {AccountService} from "../services/account.service";
 import {RegisterRequest} from "../../../shared/models/register-request";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private validatorService: FormValidatorsService,
               private accountService: AccountService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class RegisterComponent implements OnInit {
     console.log(registerRequest);
     this.accountService.register(registerRequest).subscribe({
       next: value => {
-        console.log(value);
+        this.router.navigateByUrl('');
       },
       error: err => {
         this.toastr.error(err.error.description);

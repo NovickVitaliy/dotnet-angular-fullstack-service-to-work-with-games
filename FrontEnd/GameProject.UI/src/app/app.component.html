@@ -1,7 +1,7 @@
 <div class="bg-cover bg-center h-screen"
      [attr.data-theme]="getTheme() === 'sony' ? 'sonytheme' : 'microsofttheme'"
      [ngClass]="getTheme() === 'sony' ? 'bg-sony' : 'bg-microsoft'">
-  <app-navbar [isRegistrationMode]="isRegistrationPage"></app-navbar>
+  <app-navbar [isRegistrationMode]="isAuthenticationMode"></app-navbar>
   <router-outlet></router-outlet>
 </div>
 
