@@ -15,13 +15,13 @@ namespace GameProject.IdentityTests.AccountServiceTests;
 public class RegisterTests
 {
     private readonly Mock<UserManager<ApplicationUser>> _mockUserManager;
-    private readonly Mock<IJwtService> _mockJwtService;
+    private readonly Mock<ITokenService> _mockJwtService;
 
     public RegisterTests()
     {
         _mockUserManager = new Mock<UserManager<ApplicationUser>>(Mock.Of<IUserStore<ApplicationUser>>(), null, null,
             null, null, null, null, null, null);
-        _mockJwtService = new Mock<IJwtService>();
+        _mockJwtService = new Mock<ITokenService>();
     }
 
     [Fact]
@@ -31,12 +31,12 @@ public class RegisterTests
         _mockUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
             .ReturnsAsync(IdentityResult.Success);
         RegisterRequest registerRequest = new RegisterRequest();
-        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+        _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
 
-        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null);
 
-        var register = await accountService.RegisterAsync(registerRequest);
+        var register = await authenticationService.RegisterAsync(registerRequest);
 
         //Assert
         register.Should().NotBeNull();
@@ -51,14 +51,14 @@ public class RegisterTests
                 { Code = "ErrorCode", Description = "Error Description" }));
 
         RegisterRequest registerRequest = new RegisterRequest();
-        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+        _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
 
-        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null);
 
         Func<Task> action = async () =>
         {
-            BaseResponse<AuthenticationResponse> response = await accountService.RegisterAsync(registerRequest);
+            BaseResponse<AuthenticationResponse> response = await authenticationService.RegisterAsync(registerRequest);
         };
 
         await action.Should().ThrowExactlyAsync<BadRequestException>();

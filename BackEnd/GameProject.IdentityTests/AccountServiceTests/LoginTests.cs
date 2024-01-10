@@ -16,13 +16,13 @@ namespace GameProject.IdentityTests.AccountServiceTests;
 public class LoginTests
 {
     private readonly Mock<UserManager<ApplicationUser>> _mockUserManager;
-    private readonly Mock<IJwtService> _mockJwtService;
+    private readonly Mock<ITokenService> _mockJwtService;
 
     public LoginTests()
     {
         _mockUserManager = new Mock<UserManager<ApplicationUser>>(Mock.Of<IUserStore<ApplicationUser>>(), null, null,
             null, null, null, null, null, null);
-        _mockJwtService = new Mock<IJwtService>();
+        _mockJwtService = new Mock<ITokenService>();
     }
 
     [Fact]
@@ -30,15 +30,15 @@ public class LoginTests
     {
         _mockUserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
             .ReturnsAsync(() => null);
-        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+        _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
 
-        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null);
 
         Func<Task> action = async () =>
         {
             LoginRequest loginRequest = new LoginRequest();
-            BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+            BaseResponse<AuthenticationResponse> response = await authenticationService.LoginAsync(loginRequest);
         };
 
         await action.Should().ThrowExactlyAsync<BadRequestException>();
@@ -51,15 +51,15 @@ public class LoginTests
             .ReturnsAsync(new ApplicationUser());
         _mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<ApplicationUser>(),
             It.IsAny<string>())).ReturnsAsync(false);
-        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+        _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
 
-        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null);
 
         Func<Task> action = async () =>
         {
             LoginRequest loginRequest = new LoginRequest();
-            BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+            BaseResponse<AuthenticationResponse> response = await authenticationService.LoginAsync(loginRequest);
         };
 
         await action.Should().ThrowExactlyAsync<BadRequestException>();
@@ -72,13 +72,13 @@ public class LoginTests
             .ReturnsAsync(new ApplicationUser());
         _mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<ApplicationUser>(),
             It.IsAny<string>())).ReturnsAsync(true);
-        _mockJwtService.Setup(x => x.CreateJwtToken(It.IsAny<ApplicationUser>()))
+        _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .Returns(It.IsAny<string>());
 
-        IAccountService accountService = new AccountService(_mockUserManager.Object, _mockJwtService.Object);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null);
 
         LoginRequest loginRequest = new LoginRequest();
-        BaseResponse<AuthenticationResponse> response = await accountService.LoginAsync(loginRequest);
+        BaseResponse<AuthenticationResponse> response = await authenticationService.LoginAsync(loginRequest);
 
         response.Should().NotBeNull();
     }

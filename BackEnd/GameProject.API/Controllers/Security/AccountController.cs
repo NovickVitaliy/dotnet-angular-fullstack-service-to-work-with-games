@@ -12,11 +12,11 @@ namespace GameProject.API.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly IAccountService _accountService;
+    private readonly IAuthenticationService _authenticationService;
 
-    public AccountController(IAccountService accountService)
+    public AccountController(IAuthenticationService authenticationService)
     {
-        _accountService = accountService;
+        _authenticationService = authenticationService;
     }
 
     [HttpPost]
@@ -30,7 +30,7 @@ public class AccountController : ControllerBase
                 ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
         }
 
-        BaseResponse<AuthenticationResponse> registerResult = await _accountService.RegisterAsync(registerRequest);
+        BaseResponse<AuthenticationResponse> registerResult = await _authenticationService.RegisterAsync(registerRequest);
 
         return Ok(registerResult);
     }
@@ -47,7 +47,7 @@ public class AccountController : ControllerBase
                 ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
         }
 
-        BaseResponse<AuthenticationResponse> loginResponse = await _accountService.LoginAsync(loginRequest);
+        BaseResponse<AuthenticationResponse> loginResponse = await _authenticationService.LoginAsync(loginRequest);
 
         return Ok(loginResponse);
     }

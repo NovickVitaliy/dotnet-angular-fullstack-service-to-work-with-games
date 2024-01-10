@@ -20,8 +20,9 @@ public static class IdentityConfiguration
     public static IServiceCollection ConfigureIdentityServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.Configure<JwtSettings>(configuration.GetSection("JWT"));
-
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        services.Configure<RefreshTokenSettings>(configuration.GetSection("RefreshTokenSettings"));
+        
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
@@ -34,8 +35,8 @@ public static class IdentityConfiguration
             .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddScoped<IJwtService, JwtService>();
-        services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<ITokenService, IJwtService>();
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
 
         services.AddAuthentication(options =>
             {
