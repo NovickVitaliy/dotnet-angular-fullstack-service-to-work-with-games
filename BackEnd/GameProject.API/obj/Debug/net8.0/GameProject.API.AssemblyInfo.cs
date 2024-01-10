@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameProject.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff4790aa0e76b3d547c1c95defd3e5ddfa35d197")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5c6333fc285d3eb0b4fe6e1bbca5e32c6198d44")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameProject.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameProject.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

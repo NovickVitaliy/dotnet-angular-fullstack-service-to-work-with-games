@@ -16,8 +16,9 @@ public class AuthenticationService : IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RefreshTokenSettings _refreshTokenSettings;
     private readonly ITokenService _tokenService;
+
     public AuthenticationService(
-        UserManager<ApplicationUser> userManager, 
+        UserManager<ApplicationUser> userManager,
         ITokenService tokenService,
         IOptionsSnapshot<RefreshTokenSettings> refreshTokenOptions)
     {
@@ -36,17 +37,26 @@ public class AuthenticationService : IAuthenticationService
             throw new BadRequestException("user with given email was not found or given password is incorrect");
         }
 
-        var jwtToken = _tokenService.CreateAccessToken(user);
-
-        return new BaseResponse<AuthenticationResponse>()
+        var accessToken = _tokenService.CreateAccessToken(user);
+        var refreshToken = _tokenService.CreateRefreshToken();
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiryTime = DateTime.UtcNow.AddHours(_refreshTokenSettings.RefreshTokenLifeTimeInHours);
+        var identityResult = await _userManager.UpdateAsync(user);
+        if (identityResult.Succeeded)
         {
-            Data = new AuthenticationResponse()
+            return new BaseResponse<AuthenticationResponse>()
             {
-                Username = user.UserName,
-                Email = user.Email,
-                AccessToken = jwtToken
-            }
-        };
+                Data = new AuthenticationResponse()
+                {
+                    Username = user.UserName,
+                    Email = user.Email,
+                    AccessToken = accessToken,
+                    RefreshToken = refreshToken
+                }
+            };
+        }
+
+        throw new BadRequestException(string.Join('\n', identityResult.Errors.Select(err => err.Description)));
     }
 
     public async Task<BaseResponse<AuthenticationResponse>> RegisterAsync(RegisterRequest registerRequest)
@@ -82,6 +92,7 @@ public class AuthenticationService : IAuthenticationService
                 }
             };
         }
+
         throw new BadRequestException(string.Join("\n", identityResult.Errors.SelectMany(err => err.Description)));
     }
 
@@ -103,7 +114,7 @@ public class AuthenticationService : IAuthenticationService
             throw new BadRequestException("Invalid refresh token");
         }
 
-        if (user.RefreshTokenExpiryTime >= DateTime.UtcNow)
+        if (user.RefreshTokenExpiryTime <= DateTime.UtcNow)
         {
             throw new BadRequestException("Refresh token expired");
         }
