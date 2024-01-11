@@ -31,9 +31,9 @@ export class AppComponent implements OnInit{
     this.router.events.subscribe({
       next: event => {
         if(event instanceof NavigationEnd){
-          console.log(event.url);
           this.isAuthenticationMode = event.url === '/auth/register'
-            || event.url === '/auth/login';
+            || event.url === '/auth/login'
+            || event.url === '/auth/configure';
         }
       }
     });

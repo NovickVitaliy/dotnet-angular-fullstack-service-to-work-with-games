@@ -1,7 +1,7 @@
-<div class="register-form pt-32 pl-10 pr-10 mx-auto">
+<div class="register-form">
   <div class="w-auto">
     <form [formGroup]="loginForm" (ngSubmit)="login()"
-          class="max-w-sm mx-auto mt-40 font-sans my-auto border text-neutral bg-base-100 border-black rounded-lg p-16">
+          class="max-w-sm mx-auto font-sans my-auto border text-neutral bg-base-100 border-black rounded-lg p-16">
       <div class="form-input flex flex-col mb-3">
         <label class="text-lg mb-1">Email:</label>
         <input [ngClass]="{'border-red-500': loginForm.controls['email'].touched && loginForm.controls['email'].errors}"

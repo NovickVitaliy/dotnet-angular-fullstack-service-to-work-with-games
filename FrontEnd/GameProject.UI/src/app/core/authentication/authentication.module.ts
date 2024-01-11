@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register/register.component';
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
-import {ToastrModule} from "ngx-toastr";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { LoginComponent } from './login/login.component';
 import { ConfigureAccountComponent } from './configure-account/configure-account.component';
-
-
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {authenticationInterceptor} from "../interceptors/authentication.interceptor";
 
 @NgModule({
   declarations: [
@@ -21,8 +18,9 @@ import { ConfigureAccountComponent } from './configure-account/configure-account
     CommonModule,
     AuthenticationRoutingModule,
     ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule
+    FormsModule
+  ],
+  providers: [
   ]
 })
 export class AuthenticationModule { }

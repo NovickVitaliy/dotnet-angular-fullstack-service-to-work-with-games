@@ -4,6 +4,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {ConfigureAccountRequest} from "../../../shared/models/configure-account-request";
 import {AccountService} from "../services/account.service";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-configure-account',
@@ -22,7 +23,8 @@ export class ConfigureAccountComponent implements OnInit{
   constructor(private quoteService: QuoteService,
               private formBuilder: FormBuilder,
               private accountService: AccountService,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class ConfigureAccountComponent implements OnInit{
     this.configureForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      location: ['', [Validators.required]],
+      country: ['', [Validators.required]],
       description: [''],
       platforms: this.createPlatformsControls()
     });
@@ -48,10 +50,14 @@ export class ConfigureAccountComponent implements OnInit{
 
     this.accountService.configureAccount(configureRequest).subscribe({
       next: response => {
-        this.toastrService.success("Configuration finished. Welcome!")
+        this.accountService.userJustRegistered = false;
+        this.toastrService.success("Configuration finished. Welcome!");
+        localStorage.removeItem('configurable')
+        this.router.navigateByUrl('/');
       },
       error: err => {
-        this.toastrService.error(err.error.description);
+        console.log(err)
+        this.toastrService.error(err.error);
       }
     });
   }

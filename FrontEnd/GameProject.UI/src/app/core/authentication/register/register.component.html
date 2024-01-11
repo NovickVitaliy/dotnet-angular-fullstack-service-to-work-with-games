@@ -1,6 +1,6 @@
-<div class="register-form pt-32 pl-10 pr-10 mx-auto">
+<div class="register-form">
   <div class="w-auto">
-    <form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-sm mx-auto mt-5 font-sans my-auto border bg-base-100 text-neutral border-black rounded-lg p-16">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-sm mx-auto font-sans my-auto border bg-base-100 text-neutral border-black rounded-lg p-16">
       <div class="form-input flex flex-col mb-3">
         <label class="text-lg mb-1">Username:</label>
         <input [ngClass]="{'border-red-500': registerForm.controls['username'].touched && registerForm.controls['username'].errors}" formControlName="username" type="text" placeholder="Type here" class="input input-bordered"/>

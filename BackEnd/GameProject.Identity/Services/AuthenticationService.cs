@@ -80,7 +80,15 @@ public class AuthenticationService : IAuthenticationService
             var accessToken = _tokenService.CreateAccessToken(user);
             var refreshToken = _tokenService.CreateRefreshToken();
             user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddMinutes(_refreshTokenSettings.RefreshTokenLifeTimeInHours);
+            user.RefreshTokenExpiryTime = DateTime.UtcNow
+                .AddHours(_refreshTokenSettings.RefreshTokenLifeTimeInHours);
+            var updateAsync = await _userManager.UpdateAsync(user);
+            if (!updateAsync.Succeeded)
+            {
+                throw new BadRequestException(string.Join('\n', 
+                    updateAsync.Errors.Select(err => err.Description)));
+            }
+
             return new BaseResponse<AuthenticationResponse>()
             {
                 Data = new AuthenticationResponse()
@@ -93,7 +101,31 @@ public class AuthenticationService : IAuthenticationService
             };
         }
 
-        throw new BadRequestException(string.Join("\n", identityResult.Errors.SelectMany(err => err.Description)));
+        throw new BadRequestException(string.Join("\n", 
+            identityResult.Errors.SelectMany(err => err.Description)));
+    }
+
+    public async Task ConfigureAccountAsync(ConfigureAccountRequest configureAccountRequest)
+    {
+        var user = await _userManager.FindByEmailAsync(configureAccountRequest.Email);
+
+        if (user == null)
+        {
+            throw new NotFoundException("User with given email does not exist");
+        }
+
+        user.Description = configureAccountRequest.Description;
+        user.Platforms = string.Join(';', configureAccountRequest.Platforms);
+        user.Country = configureAccountRequest.Country;
+        user.FirstName = configureAccountRequest.FirstName;
+        user.LastName = configureAccountRequest.LastName;
+        var identityResult = await _userManager.UpdateAsync(user);
+
+        if (!identityResult.Succeeded)
+        {
+            throw new BadRequestException(string.Join('\n', 
+                identityResult.Errors.Select(err => err.Description)));
+        }
     }
 
     public async Task<BaseResponse<TokensModel>> RefreshToken(TokensModel tokens)

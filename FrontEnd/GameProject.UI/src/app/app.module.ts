@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import {FeaturesModule} from "./features/features.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
+import {authenticationInterceptor} from "./core/interceptors/authentication.interceptor";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FeaturesModule,
@@ -20,9 +22,10 @@ import {HttpClientModule} from "@angular/common/http";
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
     }),
-    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptors([authenticationInterceptor]))
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

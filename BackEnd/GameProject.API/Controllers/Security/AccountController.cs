@@ -1,7 +1,9 @@
+using System.Security.Claims;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +29,8 @@ public class AccountController : ControllerBase
         if (!ModelState.IsValid)
         {
             throw new BadRequestException(string.Join('\n',
-                ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
+                ModelState.Values.SelectMany(v => v.Errors)
+                    .Select(err => err.ErrorMessage)));
         }
 
         BaseResponse<AuthenticationResponse> registerResult = await _authenticationService.RegisterAsync(registerRequest);
@@ -44,7 +47,8 @@ public class AccountController : ControllerBase
         if (!ModelState.IsValid)
         {
             throw new BadRequestException(string.Join('\n',
-                ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
+                ModelState.Values.SelectMany(v => v.Errors)
+                    .Select(err => err.ErrorMessage)));
         }
 
         BaseResponse<AuthenticationResponse> loginResponse = await _authenticationService.LoginAsync(loginRequest);
@@ -52,10 +56,28 @@ public class AccountController : ControllerBase
         return Ok(loginResponse);
     }
 
-    [HttpGet]
+    [HttpPost]
     [Authorize]
-    public async Task<ActionResult<string>> Test()
+    public async Task<ActionResult> ConfigureAccount(ConfigureAccountRequest configureAccountRequest)
     {
-        return Ok("PEREMOGA");
+        if (!ModelState.IsValid)
+        {
+            throw new BadRequestException(string.Join('\n', 
+                ModelState.Values.SelectMany(v => v.Errors)
+                    .Select(err => err.ErrorMessage)));
+        }
+
+        configureAccountRequest.Email = User.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+
+        await _authenticationService.ConfigureAccountAsync(configureAccountRequest);
+
+        return NoContent();
+    }
+
+    [HttpGet]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public string Test()
+    {
+        return "Chel";
     }
 }

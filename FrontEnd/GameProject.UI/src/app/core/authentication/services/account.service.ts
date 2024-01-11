@@ -14,6 +14,7 @@ import {User} from "../../../shared/models/user";
 export class AccountService {
   private currentUserSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
+  userJustRegistered: boolean = false;
 
   constructor(private http: HttpClient) {
   }
@@ -43,11 +44,15 @@ export class AccountService {
 
   setCurrentUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('access_token', user.accessToken);
+    localStorage.setItem('refresh_token', user.refreshToken);
     this.currentUserSource.next(user);
   }
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     this.currentUserSource.next(null);
   }
 
