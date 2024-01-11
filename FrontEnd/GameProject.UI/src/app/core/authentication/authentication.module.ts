@@ -7,6 +7,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { LoginComponent } from './login/login.component';
+import { ConfigureAccountComponent } from './configure-account/configure-account.component';
 
 
 
@@ -14,6 +15,7 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     RegisterComponent,
     LoginComponent,
+    ConfigureAccountComponent,
   ],
   imports: [
     CommonModule,

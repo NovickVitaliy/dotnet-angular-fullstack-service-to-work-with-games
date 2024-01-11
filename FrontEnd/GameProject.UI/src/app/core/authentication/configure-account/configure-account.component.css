@@ -1,0 +1,5 @@
+.configure-input {
+  @apply p-3 text-lg rounded-lg border-2 border-gray-400 focus:outline-none focus:outline-gray-500 text-black;
+}
+
+/*# sourceMappingURL=configure-account.component.css.map */

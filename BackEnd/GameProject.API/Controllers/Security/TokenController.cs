@@ -18,6 +18,9 @@ namespace GameProject.API.Controllers.Security
         }
 
         [HttpPost("refresh")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<BaseResponse<TokensModel>>> Refresh(TokensModel tokens)
         {
             return Ok(await _authenticationService.RefreshToken(tokens));

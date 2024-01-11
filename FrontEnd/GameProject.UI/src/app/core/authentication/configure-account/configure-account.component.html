@@ -1,0 +1,49 @@
+<div class="mx-auto bg-base-100 w-3/4 mt-5 p-10 border rounded-lg lg:flex lg:space-x-5">
+  <div class="w-full lg:w-2/3">
+    <form [formGroup]="configureForm" (ngSubmit)="configureAccount()">
+      <h1 class="text-3xl mb-5">Let others to know more about you</h1>
+      <div class="lg:flex lg:space-x-10 mb-10">
+        <div class="flex flex-col">
+          <label class="text-neutral text-lg mb-1">First Name:</label>
+          <input formControlName="firstName" type="text" class="configure-input">
+        </div>
+        <div class="flex flex-col">
+          <label class="text-neutral text-lg mb-1">Last Name:</label>
+          <input formControlName="lastName" type="text" class="configure-input">
+        </div>
+      </div>
+      <div class="flex lg:w-[237px] mb-10 flex-col">
+          <label class="text-neutral text-lg mb-1">Location:</label>
+          <input formControlName="location" type="text" class="configure-input">
+      </div>
+      <div class="flex mb-10">
+        <div class="flex flex-col">
+          <label class="text-neutral text-lg mb-1">What platforms do you play on?</label>
+          <div class="flex">
+            <div *ngFor="let platform of getPlatforms.controls; let i = index" class="text-lg mr-5 space-x-0.5">
+              <input id="{{platforms[i].platform}}" type="checkbox" [formControl]="$any(platform)">
+              <label for="{{platforms[i].platform}}">{{platforms[i].platform}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex mb-10">
+        <div class="flex flex-col w-full">
+          <label class="text-lg text-neutral mb-1">Description (optional)</label>
+          <textarea formControlName="description" class="resize-none configure-input">
+
+          </textarea>
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button type="submit" class="btn btn-primary">
+          Finish
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="w-full lg:w-1/3 flex items-center lg:my-0.5 border-l border-gray-400 justify-center flex-col">
+    <p class="italic lg:px-5 text-center">"{{quote?.quote}}"</p>
+    <span>- {{quote?.author}}</span>
+  </div>
+</div>
