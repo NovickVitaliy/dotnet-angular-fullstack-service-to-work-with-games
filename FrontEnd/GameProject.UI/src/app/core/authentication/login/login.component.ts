@@ -31,14 +31,20 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log("LOGIN!!!!!!!!!!");
     let loginRequest: LoginRequest = {...this.loginForm.value};
     this.accountService.login(loginRequest).subscribe({
       next: _ => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('home');
       },
       error: err => {
         this.toastrService.error(err.error.description);
       }
     });
+  }
+
+  cancel(){
+    console.log("cancel")
+    this.router.navigateByUrl('home');
   }
 }

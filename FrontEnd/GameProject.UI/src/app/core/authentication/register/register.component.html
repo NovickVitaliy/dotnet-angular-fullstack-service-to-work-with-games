@@ -1,6 +1,6 @@
-<div class="register-form">
+<div class="register-form h-screen flex items-center justify-center">
   <div class="w-auto">
-    <form [formGroup]="registerForm" (ngSubmit)="register()" class="max-w-sm mx-auto font-sans my-auto border bg-base-100 text-neutral border-black rounded-lg p-16">
+    <form [formGroup]="registerForm" class="max-w-sm mx-auto font-sans my-auto border bg-base-100 text-neutral border-black rounded-lg p-16">
       <div class="form-input flex flex-col mb-3">
         <label class="text-lg mb-1">Username:</label>
         <input [ngClass]="{'border-red-500': registerForm.controls['username'].touched && registerForm.controls['username'].errors}" formControlName="username" type="text" placeholder="Type here" class="input input-bordered"/>
@@ -24,11 +24,9 @@
         <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['comparePassword']">Confirm password and Password must be equal</div>
       </div>
       <div class="buttons flex justify-between">
-        <button class="btn btn-base" routerLink="">Cancel</button>
-        <button class="btn btn-primary" type='submit' [disabled]="registerForm.invalid">Register</button>
+        <button class="btn btn-base" routerLink="/home">Cancel</button>
+        <button class="btn btn-primary" [disabled]="registerForm.invalid" (click)="register()">Register</button>
       </div>
     </form>
   </div>
-
-
 </div>

@@ -42,7 +42,6 @@ export class RegisterComponent implements OnInit {
 
   register() {
     let registerRequest: RegisterRequest = {...this.registerForm.value};
-    console.log(registerRequest);
     this.accountService.register(registerRequest).subscribe({
       next: value => {
         this.accountService.userJustRegistered = true;

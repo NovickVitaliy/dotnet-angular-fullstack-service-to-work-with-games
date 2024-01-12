@@ -21,7 +21,7 @@
           <label class="text-neutral text-lg mb-1">What platforms do you play on?</label>
           <div class="flex">
             <div *ngFor="let platform of getPlatforms.controls; let i = index" class="text-lg mr-5 space-x-0.5">
-              <input id="{{platforms[i].platform}}" type="checkbox" [formControl]="$any(platform)">
+              <input class="checkbox" id="{{platforms[i].platform}}" type="checkbox" [formControl]="$any(platform)">
               <label for="{{platforms[i].platform}}">{{platforms[i].platform}}</label>
             </div>
           </div>

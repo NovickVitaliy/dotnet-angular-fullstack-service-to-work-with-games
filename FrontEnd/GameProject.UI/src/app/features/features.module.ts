@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NavbarModule} from "./navbar/navbar.module";
+import {PersonalProfileModule} from "./personal-profile/personal-profile.module";
+import {HomeModule} from "./home/home.module";
 
 
 
@@ -9,8 +11,14 @@ import {NavbarModule} from "./navbar/navbar.module";
   ],
   imports: [
     CommonModule,
-    NavbarModule
+    NavbarModule,
+    PersonalProfileModule,
+    HomeModule
   ],
-  exports: [NavbarModule]
+  exports: [
+    NavbarModule,
+    PersonalProfileModule,
+    HomeModule
+  ]
 })
 export class FeaturesModule { }

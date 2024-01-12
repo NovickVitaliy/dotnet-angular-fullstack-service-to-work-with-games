@@ -8,6 +8,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authenticationInterceptor} from "./core/interceptors/authentication.interceptor";
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {authenticationInterceptor} from "./core/interceptors/authentication.inte
     BrowserModule,
     AppRoutingModule,
     FeaturesModule,
+    CoreModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'

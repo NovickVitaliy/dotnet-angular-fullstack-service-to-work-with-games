@@ -1,5 +1,5 @@
 <app-navbar [attr.data-theme]="getTheme() === 'sony' ? 'sonytheme' : 'microsofttheme'" [isRegistrationMode]="isAuthenticationMode"></app-navbar>
-<div class="min-h-screen bg-cover bg-center flex items-center justify-center"
+<div class="min-h-screen bg-cover bg-center"
      [attr.data-theme]="getTheme() === 'sony' ? 'sonytheme' : 'microsofttheme'"
      [ngClass]="getTheme() === 'sony' ? 'bg-sony' : 'bg-microsoft'">
   <router-outlet></router-outlet>

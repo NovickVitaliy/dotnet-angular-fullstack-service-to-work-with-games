@@ -1,7 +1,7 @@
 <div *ngIf="!isRegistrationMode" class="navbar bg-primary flex justify-center">
   <div class="w-3/4">
     <div class="flex-1 flex-row text-white navbar-items">
-      <a class="btn btn-ghost text-xl">Game Project</a>
+      <a class="btn btn-ghost text-xl" routerLink="home">Game Project</a>
       <div class="dropdown burger">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -15,17 +15,17 @@
           </ng-container>
           <ng-container>
             <li>
-              <a class="justify-between">
+              <a class="justify-between" routerLink="profile">
                 Profile
                 <div class="avatar placeholder">
                   <div class="bg-neutral text-neutral-content rounded-full outline-0 w-8">
-                    <span class="text-xs"><img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" alt=""></span>
+                    <span class="text-xs"><img src="assets/images/defaultUserPicture.png" alt="user"></span>
                   </div>
                 </div>
               </a>
             </li>
           </ng-container>
-          <li><a>Home</a></li>
+          <li><a routerLink="home">Home</a></li>
           <li><a>News</a></li>
           <li><a>Games</a></li>
           <li>
@@ -54,15 +54,14 @@
         <div class="dropdown dropdown-end profile-button">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar mt-1">
             <div class="w-10 rounded-full">
-              <img alt="Tailwind CSS Navbar component"
-                   src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>
+              <img alt="user"
+                   src="assets/images/defaultUserPicture.png"/>
             </div>
           </div>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a class="justify-between">
+              <a class="justify-between" routerLink="profile/">
                 Profile
-                <span class="badge">New</span>
               </a>
             </li>
             <li><a>Settings</a></li>

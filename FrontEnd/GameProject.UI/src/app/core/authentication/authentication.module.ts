@@ -5,8 +5,6 @@ import {AuthenticationRoutingModule} from "./authentication-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { ConfigureAccountComponent } from './configure-account/configure-account.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {authenticationInterceptor} from "../interceptors/authentication.interceptor";
 
 @NgModule({
   declarations: [
