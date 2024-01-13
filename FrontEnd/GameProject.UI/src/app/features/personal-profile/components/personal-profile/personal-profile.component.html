@@ -1,7 +1,12 @@
 <div *ngIf="(currentUser$ | async) as user" class="relative w-3/4 top-14 bg-base-100 flex items-center rounded-lg justify-center mx-auto p-5 profile">
   <div class="profile-top lg:flex justify-start w-full lg:space-x-3">
     <div class="profile-top-image w-full flex justify-center lg:w-1/5">
-      <img src="assets/images/defaultUserPicture.png" alt="">
+      <div>
+        <img class="rounded-md" src="assets/images/defaultUserPicture.png" alt="">
+        <div class="mt-2">
+          <button class="btn btn-primary w-full" routerLink="edit/account-data">Edit profile</button>
+        </div>
+      </div>
     </div>
     <div class="profile-top-text">
       <h1 class="text-3xl">{{user.username}}</h1>

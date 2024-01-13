@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from "rxjs";
 import {User} from "../../../../shared/models/user";
-import {AccountService} from "../../../../core/authentication/services/account.service";
+import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
 
 @Component({
   selector: 'app-personal-profile',
@@ -11,10 +11,10 @@ import {AccountService} from "../../../../core/authentication/services/account.s
 export class PersonalProfileComponent implements OnInit{
   currentUser$: Observable<User | null> = of(null);
 
-  constructor(private accountService: AccountService) {
+  constructor(private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUser$;
+    this.currentUser$ = this.authenticationService.currentUser$;
   }
 }

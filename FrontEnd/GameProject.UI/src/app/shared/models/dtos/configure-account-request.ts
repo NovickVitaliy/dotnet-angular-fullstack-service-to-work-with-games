@@ -1,6 +1,6 @@
 export interface ConfigureAccountRequest {
   description: string;
   dateOfBirth: Date;
-  country: string;
+  location: string;
   platforms: string[];
 }

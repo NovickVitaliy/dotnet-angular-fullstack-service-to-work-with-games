@@ -1,4 +1,5 @@
 using System.Text;
+using GameProject.Application.Contracts.Account;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
@@ -37,6 +38,7 @@ public static class IdentityConfiguration
 
         services.AddScoped<ITokenService, IJwtService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IAccountService, AccountService>();
 
         services.AddAuthentication(options =>
             {

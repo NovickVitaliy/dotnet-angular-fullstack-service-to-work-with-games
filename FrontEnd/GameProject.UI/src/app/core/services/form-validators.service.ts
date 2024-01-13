@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {AbstractControl, Form, FormArray, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,14 @@ export class FormValidatorsService {
         return null;
       }
       return {comparePassword: {valid: false}}
+    }
+  }
+
+  public atLeastOneItemSelected(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formArray = control as FormArray;
+      const atLeastOneSelected = formArray.controls.some(control => control.value === true);
+      return atLeastOneSelected ? null : { atLeastOneItemSelected: true };
     }
   }
 }

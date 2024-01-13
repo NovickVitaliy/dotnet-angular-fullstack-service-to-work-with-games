@@ -1,12 +1,12 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {AccountService} from "../authentication/services/account.service";
+import {AuthenticationService} from "../authentication/services/authentication.service";
 import {map} from "rxjs";
 
 export const personalProfileGuard: CanActivateFn = (route, state) => {
-  const accountService = inject(AccountService);
+  const authenticationService = inject(AuthenticationService);
   const router = inject(Router);
-  return accountService.currentUser$.pipe(map(
+  return authenticationService.currentUser$.pipe(map(
     user => {
       if(user){
         return true;

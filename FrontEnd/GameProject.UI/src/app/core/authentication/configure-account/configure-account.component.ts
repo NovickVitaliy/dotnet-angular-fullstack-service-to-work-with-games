@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {QuoteService} from "../../services/quote.service";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ConfigureAccountRequest} from "../../../shared/models/configure-account-request";
-import {AccountService} from "../services/account.service";
+import {ConfigureAccountRequest} from "../../../shared/models/dtos/configure-account-request";
+import {AuthenticationService} from "../services/authentication.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {FormValidatorsService} from "../../services/form-validators.service";
 
 @Component({
   selector: 'app-configure-account',
@@ -22,9 +23,10 @@ export class ConfigureAccountComponent implements OnInit{
   configureForm: FormGroup = new FormGroup<any>({});
   constructor(private quoteService: QuoteService,
               private formBuilder: FormBuilder,
-              private accountService: AccountService,
+              private authenticationService: AuthenticationService,
               private toastrService: ToastrService,
-              private router: Router) {
+              private router: Router,
+              private formValidator: FormValidatorsService) {
   }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class ConfigureAccountComponent implements OnInit{
     this.configureForm = this.formBuilder.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      country: ['', [Validators.required]],
+      location: ['', [Validators.required]],
       description: [''],
       platforms: this.createPlatformsControls()
     });
@@ -48,12 +50,20 @@ export class ConfigureAccountComponent implements OnInit{
       .filter(platform => platform !== null);
     const configureRequest: ConfigureAccountRequest = {...this.configureForm.value, platforms: selectedPlatforms};
 
-    this.accountService.configureAccount(configureRequest).subscribe({
+    this.authenticationService.configureAccount(configureRequest).subscribe({
       next: response => {
-        this.accountService.userJustRegistered = false;
+        this.authenticationService.userJustRegistered = false;
         this.toastrService.success("Configuration finished. Welcome!");
         localStorage.removeItem('configurable')
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/home');
+        this.authenticationService.currentUser$.subscribe({
+          next: user => {
+            if(user){
+              Object.assign(user, configureRequest);
+              this.authenticationService.setCurrentUser(user);
+            }
+          }
+        })
       },
       error: err => {
         console.log(err)
@@ -70,7 +80,7 @@ export class ConfigureAccountComponent implements OnInit{
     const arr = this.platforms.map(platform => {
       return this.formBuilder.control(platform.selected);
     });
-    return this.formBuilder.array(arr);
+    return this.formBuilder.array(arr, this.formValidator.atLeastOneItemSelected());
   }
 
 }

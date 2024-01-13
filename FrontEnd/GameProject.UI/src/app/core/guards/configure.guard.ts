@@ -1,13 +1,13 @@
 import {CanActivateFn, Router} from '@angular/router';
 import {inject} from "@angular/core";
-import {AccountService} from "../authentication/services/account.service";
+import {AuthenticationService} from "../authentication/services/authentication.service";
 
 export const configureGuard: CanActivateFn = (route, state) => {
   const configurable = localStorage.getItem('configurable');
   const accessToken = localStorage.getItem('access_token');
-  const accountService = inject(AccountService);
+  const authenticationService = inject(AuthenticationService);
 
-  if(configurable && accessToken && accountService.userJustRegistered){
+  if(configurable && accessToken && authenticationService.userJustRegistered){
     return true;
   }
   const router = inject(Router);

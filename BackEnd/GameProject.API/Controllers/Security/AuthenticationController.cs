@@ -12,11 +12,11 @@ namespace GameProject.API.Controllers;
 
 [Route("api/[controller]/[action]")]
 [ApiController]
-public class AccountController : ControllerBase
+public class AuthenticationController : ControllerBase
 {
     private readonly IAuthenticationService _authenticationService;
 
-    public AccountController(IAuthenticationService authenticationService)
+    public AuthenticationController(IAuthenticationService authenticationService)
     {
         _authenticationService = authenticationService;
     }

@@ -1,29 +1,35 @@
-<div class="mx-auto bg-base-100 m-5 basis-1/2 p-10 border rounded-lg lg:flex lg:space-x-10">
+<div class="relative w-3/4 top-14 bg-base-100 lg:flex items-center rounded-lg justify-center mx-auto p-5">
   <div class="w-full lg:w-2/3">
     <form [formGroup]="configureForm" (ngSubmit)="configureAccount()">
       <h1 class="text-3xl mb-5">Let others to know more about you</h1>
-      <div class="lg:flex lg:space-x-5 mb-10">
+      <div class="lg:flex lg:space-x-5">
         <div class="flex flex-col">
           <label class="text-neutral text-lg mb-1">First Name:</label>
           <input formControlName="firstName" type="text" class="configure-input">
+          <span class="text-red-600 text-sm pl-1" *ngIf="configureForm.controls['firstName'].touched && configureForm.controls['firstName'].errors?.['required']">First Name cannot be empty.</span>
         </div>
         <div class="flex flex-col">
           <label class="text-neutral text-lg mb-1">Last Name:</label>
           <input formControlName="lastName" type="text" class="configure-input">
+          <span class="text-red-600 text-sm pl-1" *ngIf="configureForm.controls['lastName'].touched && configureForm.controls['lastName'].errors?.['required']">Last Name cannot be empty.</span>
+
         </div>
       </div>
       <div class="flex lg:w-[237px] mb-10 flex-col">
           <label class="text-neutral text-lg mb-1">Location:</label>
-          <input formControlName="country" type="text" class="configure-input">
+          <input formControlName="location" type="text" class="configure-input">
+        <span class="text-red-600 text-sm pl-1" *ngIf="configureForm.controls['location'].touched && configureForm.controls['location'].errors?.['required']">Location cannot be empty.</span>
+
       </div>
       <div class="flex mb-10">
         <div class="flex flex-col">
           <label class="text-neutral text-lg mb-1">What platforms do you play on?</label>
-          <div class="flex">
-            <div *ngFor="let platform of getPlatforms.controls; let i = index" class="text-lg mr-5 space-x-0.5">
+          <div class="flex flex-col">
+            <div *ngFor="let platform of getPlatforms.controls; let i = index" class="text-lg mr-5 space-x-0.5 flex items-center">
               <input class="checkbox" id="{{platforms[i].platform}}" type="checkbox" [formControl]="$any(platform)">
               <label for="{{platforms[i].platform}}">{{platforms[i].platform}}</label>
             </div>
+            <span class="text-red-600 text-sm pl-1" *ngIf="configureForm.controls['platforms'].touched && configureForm.controls['platforms'].errors?.['atLeastOneItemSelected']">At least one item must be chosen.</span>
           </div>
         </div>
       </div>

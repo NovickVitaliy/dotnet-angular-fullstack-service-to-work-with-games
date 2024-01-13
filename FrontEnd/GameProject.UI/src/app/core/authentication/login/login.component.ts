@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AccountService} from "../services/account.service";
-import {LoginRequest} from "../../../shared/models/login-request";
+import {AuthenticationService} from "../services/authentication.service";
+import {LoginRequest} from "../../../shared/models/dtos/login-request";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});
 
   constructor(private formBuilder: FormBuilder,
-              private accountService: AccountService,
+              private authenticationService: AuthenticationService,
               private toastrService: ToastrService,
               private router: Router) {
   }
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   login() {
     console.log("LOGIN!!!!!!!!!!");
     let loginRequest: LoginRequest = {...this.loginForm.value};
-    this.accountService.login(loginRequest).subscribe({
+    this.authenticationService.login(loginRequest).subscribe({
       next: _ => {
           this.router.navigateByUrl('home');
       },

@@ -51,7 +51,12 @@ public class AuthenticationService : IAuthenticationService
                     Username = user.UserName,
                     Email = user.Email,
                     AccessToken = accessToken,
-                    RefreshToken = refreshToken
+                    RefreshToken = refreshToken,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Description = user.Description,
+                    Location = user.Country,
+                    Platforms = user.Platforms.Split(';')
                 }
             };
         }
@@ -96,7 +101,12 @@ public class AuthenticationService : IAuthenticationService
                     Username = user.UserName,
                     Email = user.Email,
                     AccessToken = accessToken,
-                    RefreshToken = refreshToken
+                    RefreshToken = refreshToken,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Description = user.Description,
+                    Location = user.Country,
+                    Platforms = user.Platforms.Split(';')
                 }
             };
         }
@@ -116,7 +126,7 @@ public class AuthenticationService : IAuthenticationService
 
         user.Description = configureAccountRequest.Description;
         user.Platforms = string.Join(';', configureAccountRequest.Platforms);
-        user.Country = configureAccountRequest.Country;
+        user.Country = configureAccountRequest.Location;
         user.FirstName = configureAccountRequest.FirstName;
         user.LastName = configureAccountRequest.LastName;
         var identityResult = await _userManager.UpdateAsync(user);

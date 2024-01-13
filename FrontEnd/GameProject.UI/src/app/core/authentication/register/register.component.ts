@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormValidatorsService} from "../../services/form-validators.service";
-import {AccountService} from "../services/account.service";
-import {RegisterRequest} from "../../../shared/models/register-request";
+import {AuthenticationService} from "../services/authentication.service";
+import {RegisterRequest} from "../../../shared/models/dtos/register-request";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private validatorService: FormValidatorsService,
-              private accountService: AccountService,
+              private authenticationService: AuthenticationService,
               private toastr: ToastrService,
               private router: Router) {
   }
@@ -42,9 +42,9 @@ export class RegisterComponent implements OnInit {
 
   register() {
     let registerRequest: RegisterRequest = {...this.registerForm.value};
-    this.accountService.register(registerRequest).subscribe({
+    this.authenticationService.register(registerRequest).subscribe({
       next: value => {
-        this.accountService.userJustRegistered = true;
+        this.authenticationService.userJustRegistered = true;
         localStorage.setItem("configurable", JSON.stringify(true));
         this.router.navigateByUrl('auth/configure');
       },

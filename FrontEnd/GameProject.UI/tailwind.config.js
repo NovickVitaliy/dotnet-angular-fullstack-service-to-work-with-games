@@ -8,7 +8,10 @@ module.exports = {
       backgroundImage: {
         'sony': "url('assets/images/sony.jpeg')",
         'microsoft': "url('assets/images/microsoft.png')"
-      }
+      },
+      backgroundAttachment: {
+        'fixed': 'fixed',
+      },
     },
   },
   plugins: [require("daisyui")],
@@ -25,6 +28,7 @@ module.exports = {
           "success": "#15803d",
           "warning": "#b45309",
           "error": "#be123c",
+          "background-attachment": "fixed"
         },
         microsofttheme: {
           "primary": "#107b10",
@@ -36,6 +40,7 @@ module.exports = {
           "success": "#15803d",
           "warning": "#b45309",
           "error": "#be123c",
+          "background-attachment": "fixed"
         }
       },
     ]

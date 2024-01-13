@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment.development";
 import {HttpClient} from "@angular/common/http";
-import {RegisterRequest} from "../../../shared/models/register-request";
-import {BaseResponse} from "../../../shared/models/base-response";
-import {LoginRequest} from "../../../shared/models/login-request";
-import {ConfigureAccountRequest} from "../../../shared/models/configure-account-request";
+import {RegisterRequest} from "../../../shared/models/dtos/register-request";
+import {BaseResponse} from "../../../shared/models/dtos/base-response";
+import {LoginRequest} from "../../../shared/models/dtos/login-request";
+import {ConfigureAccountRequest} from "../../../shared/models/dtos/configure-account-request";
 import {BehaviorSubject, map, Observable, shareReplay} from "rxjs";
 import {User} from "../../../shared/models/user";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class AuthenticationService {
   private currentUserSource: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
   userJustRegistered: boolean = false;
@@ -20,7 +20,7 @@ export class AccountService {
   }
 
   register(registerRequest: RegisterRequest) {
-    return this.http.post<BaseResponse<User>>(environment.apiUrl + 'Account/Register', registerRequest).pipe(
+    return this.http.post<BaseResponse<User>>(environment.apiUrl + 'Authentication/Register', registerRequest).pipe(
       map((response) => {
         const user = response.data;
         if(user){
@@ -31,7 +31,7 @@ export class AccountService {
   }
 
   login(loginRequest: LoginRequest) {
-    return this.http.post<BaseResponse<User>>(environment.apiUrl + 'Account/Login', loginRequest).pipe(
+    return this.http.post<BaseResponse<User>>(environment.apiUrl + 'Authentication/Login', loginRequest).pipe(
       map((response) => {
         const user = response.data;
         if(user){
@@ -57,6 +57,6 @@ export class AccountService {
   }
 
   configureAccount(configureAccountRequest: ConfigureAccountRequest) {
-    return this.http.post<BaseResponse<void>>(environment.apiUrl + 'Account/ConfigureAccount', configureAccountRequest);
+    return this.http.post<BaseResponse<void>>(environment.apiUrl + 'Authentication/ConfigureAccount', configureAccountRequest);
   }
 }

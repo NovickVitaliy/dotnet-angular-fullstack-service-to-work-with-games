@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {ThemeService} from "./core/services/theme.service";
-import {AccountService} from "./core/authentication/services/account.service";
+import {AuthenticationService} from "./core/authentication/services/authentication.service";
 import {User} from "./shared/models/user";
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
 
   constructor(private router: Router,
               private themeService: ThemeService,
-              private accountService: AccountService) {
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit{
       const user: User = JSON.parse(userString);
       console.log("app.component.setCurrentUser" + userString)
       console.log({...user});
-      this.accountService.setCurrentUser(user);
+      this.authenticationService.setCurrentUser(user);
     }
   }
 }

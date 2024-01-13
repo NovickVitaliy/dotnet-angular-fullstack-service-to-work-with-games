@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {ThemeService} from "../../../../core/services/theme.service";
 import {Observable, of} from "rxjs";
 import {User} from "../../../../shared/models/user";
-import {AccountService} from "../../../../core/authentication/services/account.service";
+import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
@@ -17,8 +17,8 @@ export class NavbarComponent implements OnInit  {
   currentUser: User | null = null;
   constructor(private router: Router,
               private themeService: ThemeService,
-              private accountService: AccountService) {
-    this.currentUser$ = this.accountService.currentUser$;
+              private authenticationService: AuthenticationService) {
+    this.currentUser$ = this.authenticationService.currentUser$;
   }
   ngOnInit(): void {
   }
@@ -39,7 +39,8 @@ export class NavbarComponent implements OnInit  {
 
   logout(){
     console.log("Logging out")
-    this.accountService.logout();
+    this.authenticationService.logout();
+    this.router.navigateByUrl('home')
   }
 
   getCurrentTheme(){
