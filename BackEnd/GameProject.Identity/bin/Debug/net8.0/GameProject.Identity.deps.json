@@ -655,10 +655,16 @@
       "System.Threading.Channels/6.0.0": {},
       "GameProject.Application/1.0.0": {
         "dependencies": {
+          "GameProject.Domain": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0"
         },
         "runtime": {
           "GameProject.Application.dll": {}
+        }
+      },
+      "GameProject.Domain/1.0.0": {
+        "runtime": {
+          "GameProject.Domain.dll": {}
         }
       }
     }
@@ -1083,6 +1089,11 @@
       "hashPath": "system.threading.channels.6.0.0.nupkg.sha512"
     },
     "GameProject.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GameProject.Domain/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

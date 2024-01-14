@@ -21,7 +21,7 @@
         <label class="text-lg mb-1">Confirm Password:</label>
         <input [ngClass]="{'border-red-500': registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors}" formControlName="confirmPassword" type="password" placeholder="Type here" class="input input-bordered"/>
         <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['required']">Confirm password is required</div>
-        <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['comparePassword']">Confirm password and Password must be equal</div>
+        <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['compare']">Confirm password and Password must be equal</div>
       </div>
       <div class="buttons flex justify-between">
         <button class="btn btn-base" routerLink="/home">Cancel</button>

@@ -245,3 +245,5 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameP
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Application.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Identity.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Domain.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Domain.pdb

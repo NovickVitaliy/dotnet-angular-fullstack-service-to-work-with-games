@@ -1203,6 +1203,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
+          "GameProject.Domain": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "8.0.0"
         },
         "compile": {
@@ -1210,6 +1211,16 @@
         },
         "runtime": {
           "bin/placeholder/GameProject.Application.dll": {}
+        }
+      },
+      "GameProject.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/GameProject.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GameProject.Domain.dll": {}
         }
       }
     }
@@ -3133,6 +3144,11 @@
       "type": "project",
       "path": "../GameProject.Application/GameProject.Application.csproj",
       "msbuildProject": "../GameProject.Application/GameProject.Application.csproj"
+    },
+    "GameProject.Domain/1.0.0": {
+      "type": "project",
+      "path": "../GameProject.Domain/GameProject.Domain.csproj",
+      "msbuildProject": "../GameProject.Domain/GameProject.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {

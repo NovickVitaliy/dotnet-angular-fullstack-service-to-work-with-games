@@ -59,4 +59,13 @@ export class AuthenticationService {
   configureAccount(configureAccountRequest: ConfigureAccountRequest) {
     return this.http.post<BaseResponse<void>>(environment.apiUrl + 'Authentication/ConfigureAccount', configureAccountRequest);
   }
+
+  get currentUserEmail(){
+    return this.currentUser$.pipe(map(user => {
+      if(user){
+        return user.email;
+      }
+      throw new Error("Could not access user email property");
+    }));
+  }
 }

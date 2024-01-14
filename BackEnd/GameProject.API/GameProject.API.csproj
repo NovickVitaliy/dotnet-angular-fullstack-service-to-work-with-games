@@ -22,4 +22,8 @@
       <ProjectReference Include="..\GameProject.Identity\GameProject.Identity.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Models\das.cs" />
+    </ItemGroup>
+
 </Project>

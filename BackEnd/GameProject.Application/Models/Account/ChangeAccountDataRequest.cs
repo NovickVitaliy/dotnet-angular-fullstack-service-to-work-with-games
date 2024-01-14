@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GameProject.Application.Models.Account;
 
-public class EditAccountDataRequest
+public class ChangeAccountDataRequest
 {
     [Required]
     public string Email { get; set; } = string.Empty;

@@ -4,5 +4,6 @@ namespace GameProject.Application.Contracts.Account;
 
 public interface IAccountService
 {
-    Task EditAccountData(EditAccountDataRequest editAccountDataRequest);
+    Task ChangeAccountData(ChangeAccountDataRequest changeAccountDataRequest);
+    Task ChangeAccountPassword(ChangeAccountPasswordRequest changeAccountPasswordRequest);
 }

@@ -5,35 +5,50 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GameProject.API.Controllers
+namespace GameProject.API.Controllers;
+
+[Authorize]
+[Route("api/[controller]/[action]")]
+[ApiController]
+public class AccountController : ControllerBase
 {
-    [Authorize]
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    private readonly IAccountService _accountService;
+
+    public AccountController(IAccountService accountService)
     {
-        private readonly IAccountService _accountService;
+        _accountService = accountService;
+    }
 
-        public AccountController(IAccountService accountService)
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> ChangeAccountData(ChangeAccountDataRequest changeAccountDataRequest)
+    {
+        if (!ModelState.IsValid)
         {
-            _accountService = accountService;
+            throw new BadRequestException(string.Join('\n', 
+                ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
         }
 
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> EditAccountData(EditAccountDataRequest editAccountDataRequest)
+        await _accountService.ChangeAccountData(changeAccountDataRequest);
+
+        return NoContent();
+    }
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult> ChangeAccountPassword(ChangeAccountPasswordRequest changeAccountPasswordRequest)
+    {
+        if (!ModelState.IsValid)
         {
-            if (!ModelState.IsValid)
-            {
-                throw new BadRequestException(string.Join('\n', 
-                    ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
-            }
-
-            await _accountService.EditAccountData(editAccountDataRequest);
-
-            return NoContent();
+            throw new BadRequestException(string.Join('\n', 
+                ModelState.Values.SelectMany(v => v.Errors).Select(err => err.ErrorMessage)));
         }
+
+        await _accountService.ChangeAccountPassword(changeAccountPasswordRequest);
+
+        return NoContent();
     }
 }

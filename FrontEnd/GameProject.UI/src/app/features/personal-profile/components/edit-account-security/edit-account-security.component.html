@@ -1,1 +1,31 @@
-<p>edit-account-security works!</p>
+<div class="text-black w-full h-full text-xl">
+  <form [formGroup]="changeAccountPasswordForm">
+    <label class="text-3xl">Change Password</label>
+    <div class="flex flex-wrap justify-between lg:flex lg:flex-wrap lg:justify-between">
+      <div class="flex flex-col w-full lg:w-auto mb-3">
+        <label class="">Old Password:</label>
+        <input type="password" class="data-input" formControlName="oldPassword">
+        <span class="text-red-600 text-sm pl-1" *ngIf="changeAccountPasswordForm.controls['oldPassword'].touched
+        && changeAccountPasswordForm.controls['oldPassword'].errors?.['required']">Old password cannot be empty.</span>
+      </div>
+      <div class="flex flex-col w-full lg:w-auto mb-3">
+        <label>New Password:</label>
+        <input type="password" class="data-input" formControlName="newPassword">
+        <span class="text-red-600 text-sm pl-1" *ngIf="changeAccountPasswordForm.controls['newPassword'].touched
+        && changeAccountPasswordForm.controls['newPassword'].errors?.['required']">New password cannot be empty.</span>
+      </div>
+      <div class="flex flex-col w-full lg:w-auto mb-3">
+        <label>New Password confirm:</label>
+        <input type="password" class="data-input" formControlName="newPasswordRepeat">
+        <span class="text-red-600 text-sm pl-1" *ngIf="changeAccountPasswordForm.controls['newPasswordRepeat'].touched
+        && changeAccountPasswordForm.controls['newPasswordRepeat'].errors?.['required']">New password confirm cannot be empty.</span>
+        <span class="text-red-600 text-sm pl-1" *ngIf="changeAccountPasswordForm.controls['newPasswordRepeat'].touched
+        && changeAccountPasswordForm.controls['newPasswordRepeat'].errors?.['compare']">New password and New password confirmation must be equal.</span>
+      </div>
+
+    </div>
+    <div class="flex justify-end">
+      <button class="btn btn-primary" (click)="changeAccountPassword()" [disabled]="changeAccountPasswordForm.invalid">Change password</button>
+    </div>
+  </form>
+</div>

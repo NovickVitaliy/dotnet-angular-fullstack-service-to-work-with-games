@@ -17,7 +17,7 @@ export class FormValidatorsService {
       if(control.value === controlToCompare.value){
         return null;
       }
-      return {comparePassword: {valid: false}}
+      return {compare: {valid: false}}
     }
   }
 

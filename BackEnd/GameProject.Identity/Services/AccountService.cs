@@ -8,32 +8,50 @@ namespace GameProject.Identity.Services;
 
 public class AccountService : IAccountService
 {
-    private UserManager<ApplicationUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
     public AccountService(UserManager<ApplicationUser> userManager)
     {
         _userManager = userManager;
     }
-
-    public async Task EditAccountData(EditAccountDataRequest editAccountDataRequest)
+    
+    public async Task ChangeAccountData(ChangeAccountDataRequest changeAccountDataRequest)
     {
-        var user = await _userManager.FindByEmailAsync(editAccountDataRequest.Email);
+        var user = await _userManager.FindByEmailAsync(changeAccountDataRequest.Email);
         if (user == null)
         {
             throw new NotFoundException("User with given email was not found");
         }
-        user.FirstName = editAccountDataRequest.FirstName;
-        user.LastName = editAccountDataRequest.LastName;
-        user.Country = editAccountDataRequest.Location;
-        user.Platforms = string.Join(';', editAccountDataRequest.Platforms);
-        user.Description = editAccountDataRequest.Description;
-        user.UserName = editAccountDataRequest.Username;
+        user.FirstName = changeAccountDataRequest.FirstName;
+        user.LastName = changeAccountDataRequest.LastName;
+        user.Country = changeAccountDataRequest.Location;
+        user.Platforms = string.Join(';', changeAccountDataRequest.Platforms);
+        user.Description = changeAccountDataRequest.Description;
+        user.UserName = changeAccountDataRequest.Username;
 
         var result = await _userManager.UpdateAsync(user);
 
         if (!result.Succeeded)
         {
             throw new BadRequestException("Updating of account data was not successfull");
+        }
+    }
+
+    public async Task ChangeAccountPassword(ChangeAccountPasswordRequest changeAccountPasswordRequest)
+    {
+        var user = await _userManager.FindByEmailAsync(changeAccountPasswordRequest.Email);
+        if (user == null)
+        {
+            throw new NotFoundException("User with given email does not exist");
+        }
+
+        var changePasswordAsync = await _userManager.ChangePasswordAsync(user, changeAccountPasswordRequest.OldPassword,
+            changeAccountPasswordRequest.NewPassword);
+
+        if (!changePasswordAsync.Succeeded)
+        {
+            throw new BadRequestException(string.Join('\n', 
+                changePasswordAsync.Errors.Select(err => err.Description)));
         }
     }
 }

@@ -1,4 +1,4 @@
-export interface EditAccountDataRequest {
+export interface ChangeAccountDataRequest {
   email: string;
   firstName: string;
   lastName: string;

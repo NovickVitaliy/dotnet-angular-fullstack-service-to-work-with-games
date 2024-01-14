@@ -10,10 +10,10 @@
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 text-neutral rounded-box w-52">
           <ng-container *ngIf="!(currentUser$ | async)">
-            <li><a>Register</a></li>
-            <li><a>Log In</a></li>
+            <li><a routerLink="auth/register">Register</a></li>
+            <li><a routerLink="auth/login">Log In</a></li>
           </ng-container>
-          <ng-container>
+          <ng-container *ngIf="(currentUser$ | async)">
             <li>
               <a class="justify-between" routerLink="profile">
                 Profile

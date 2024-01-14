@@ -11,3 +11,6 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\obj\Debug\net8
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\obj\Debug\net8.0\GameProject.Application.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\obj\Debug\net8.0\ref\GameProject.Application.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\obj\Debug\net8.0\GameProject.Application.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\bin\Debug\net8.0\GameProject.Domain.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\bin\Debug\net8.0\GameProject.Domain.pdb
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.Application\obj\Debug\net8.0\GameProject.Application.csproj.CopyComplete

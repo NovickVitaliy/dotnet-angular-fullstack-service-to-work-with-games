@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
-import {EditAccountDataRequest} from "../../../../shared/models/dtos/edit-account-data-request";
+import {ChangeAccountDataRequest} from "../../../../shared/models/dtos/change-account-data-request";
 import {FormValidatorsService} from "../../../../core/services/form-validators.service";
 import {AccountService} from "../../../../core/services/account.service";
 import {ToastrService} from "ngx-toastr";
+import {map, take} from "rxjs";
 
 @Component({
   selector: 'app-edit-account-data',
@@ -67,11 +68,19 @@ export class EditAccountDataComponent implements OnInit {
 
   editAccountData() {
     const editRequest = this.getEditRequest();
-    this.accountService.editAccountData(editRequest).subscribe({
+    this.accountService.changeAccountData(editRequest).subscribe({
       next: _ => {
         this.editForm.patchValue(editRequest);
         this.toastrService.success("Editing account data was successfully");
-        this.editForm.updateValueAndValidity();
+        this.authenticationService.currentUser$.pipe(take(1)).subscribe(user => {
+          if(user){
+            Object.assign(user, editRequest);
+            console.log("editAccountData" + user);
+            this.authenticationService.setCurrentUser(user);
+          } else {
+            console.log("loh")
+          }
+        });
       },
       error: error => {
         this.toastrService.error(error.error);
@@ -83,7 +92,7 @@ export class EditAccountDataComponent implements OnInit {
     const selectedPlatforms = this.getPlatforms.controls
       .map((control, index) => control.value ? this.platforms[index].platform : null)
       .filter(platform => platform !== null);
-    const editAccountDataRequest: EditAccountDataRequest = {...this.editForm.value, platforms: selectedPlatforms, email: this.userEmail};
+    const editAccountDataRequest: ChangeAccountDataRequest = {...this.editForm.value, platforms: selectedPlatforms, email: this.userEmail};
     return editAccountDataRequest;
   }
 
