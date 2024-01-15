@@ -1,14 +1,37 @@
 <div class="relative w-3/4 top-14 bg-base-100 flex flex-col items-center rounded-lg justify-center mx-auto p-5 profile">
   <h1 class="text-3xl self-start mb-5">What games are you interested in?</h1>
-  <div class="flex w-full">
-    <div class="w-1/5">
+  <div class="flex w-full space-x-1">
+    <div class="w-1/6">
       <h1 class="text-2xl">Filters</h1>
       <hr class="border-neutral my-2">
       <h1 class="text-lg te">Platforms</h1>
-      <app-platforms-filters></app-platforms-filters>
+      <app-platforms-filters [chosenPlatformsForFiltering]="chosenPlatformsForFiltering"
+                             (chosenPlatformEvent)="setPlatformForFiltering($event)"></app-platforms-filters>
     </div>
     <div class="w-full">
-
+      <div class="flex w-full justify-between mb-3">
+        <input type="text" class="data-input w-1/2" #searchString>
+        <div>
+          <button class="btn btn-primary mx-1" (click)="searchGames()">Search</button>
+          <button class="btn btn-gray mx-1">Reset</button>
+        </div>
+      </div>
+      <div class="w-full flex">
+        <div class="flex-wrap w-[80%] flex justify-start">
+          <div *ngFor="let game of games" class="card w-[24%] m-0.5 image-full">
+            <figure><img src="{{game.background_image}}"/></figure>
+            <div class="card-body justify-between">
+              <h2 class="card-title">{{game.name}}</h2>
+              <div class="bg-green-700 w-fit p-3 rounded-lg text-3xl text-white self-end">
+                <h1>{{game.metacritic}}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div >
+          SideBar
+        </div>
+      </div>
     </div>
   </div>
 </div>

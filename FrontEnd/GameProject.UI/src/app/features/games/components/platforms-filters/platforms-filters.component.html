@@ -1,6 +1,18 @@
-<div>
-  <div class="flex items-center justify-start space-x-1">
-    <input type="checkbox" class="checkbox">
-    <label>PS4</label>
+<div class="space-y-1">
+  <div *ngFor="let platform of gamingPlatforms.slice(0,5)" class="flex items-center justify-start space-x-1">
+    <input type="checkbox" class="checkbox" id="{{platform.id}}" (click)="addPlatformForFiltering(platform.id)">
+    <label class="cursor-pointer" for="{{platform.id}}">{{platform.name}}</label>
+  </div>
+  <ng-container *ngIf="isAllPlatforms">
+    <div *ngFor="let platform of gamingPlatforms.slice(5)" class="flex items-center justify-start space-x-1">
+      <input type="checkbox" class="checkbox" id="{{platform.id}}" (click)="addPlatformForFiltering(platform.id)">
+      <label class="cursor-pointer" for="{{platform.id}}">{{platform.name}}</label>
+    </div>
+  </ng-container>
+  <div *ngIf="!isAllPlatforms" class="font-bold cursor-pointer" (click)="showAllPlatforms()">
+    Show All Platforms <i class="fa fa-solid fa-arrow-alt-circle-down"></i>
+  </div>
+  <div *ngIf="isAllPlatforms" class="font-bold cursor-pointer" (click)="showAllPlatforms()">
+    Show Less Platforms <i class="fa fa-solid fa-arrow-alt-circle-up"></i>
   </div>
 </div>

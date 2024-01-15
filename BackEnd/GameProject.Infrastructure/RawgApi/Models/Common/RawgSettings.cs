@@ -9,4 +9,7 @@ public class RawgSettings
     
     [Required]
     public string AuthenticationToken { get; set; }
+    
+    [Required]
+    public string ClientName { get; set; }
 }

@@ -1,6 +1,8 @@
 using GameProject.Application.Contracts.Games;
+using GameProject.Application.Contracts.RawgApi.Platforms;
 using GameProject.Infrastructure.Games;
 using GameProject.Infrastructure.Models.Games;
+using GameProject.Infrastructure.RawgApi.Platforms;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -13,12 +15,17 @@ public static class InfratructureConfiguration
     {
         services.AddMemoryCache();
         services.Configure<RawgSettings>(configuration.GetSection("RawgSettings"));
-        services.AddHttpClient<IGamesResearcher, GamesResearcher>((provider, client) =>
+        services.AddHttpClient("RawgClient",(provider, client) =>
         {
             var options = provider.GetRequiredService<IOptions<RawgSettings>>();
             client.BaseAddress = new Uri(options.Value.BaseUrl);
         });
+        
+        services.AddScoped<IGamesResearcher, GamesResearcher>();
         services.Decorate<IGamesResearcher, CachedGamesResearcher>();
+        
+        services.AddScoped<IPlatformsResearcher, PlatformsResearcher>();
+        services.Decorate<IPlatformsResearcher, CachedPlatformsResearcher>();
 
         return services;
     }

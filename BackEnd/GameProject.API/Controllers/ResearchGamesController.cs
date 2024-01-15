@@ -1,6 +1,7 @@
 using GameProject.Application.Contracts.Games;
 using GameProject.Domain.Models;
 using GameProject.Identity.Extensions;
+using GameProject.Infrastructure.RawgApi.Models.Games;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,5 +25,12 @@ public class ResearchGamesController : ControllerBase
     public async Task<ActionResult<List<GameCardItem>>> Top10HighestRatedGamesOfAllTime()
     {
         return Ok(await _gamesResearcher.Get10HighestRatedGamesOfAllTime());
+    }
+
+    [HttpGet("")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<GameMainInfo>>> Games([FromQuery] GameFilterQuery filterQuery)
+    {
+        return Ok(await _gamesResearcher.GetGames(filterQuery));
     }
 }
