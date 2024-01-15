@@ -247,3 +247,6 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameP
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Domain.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Domain.pdb
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Infrastructure.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Infrastructure.pdb
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\Scrutor.dll

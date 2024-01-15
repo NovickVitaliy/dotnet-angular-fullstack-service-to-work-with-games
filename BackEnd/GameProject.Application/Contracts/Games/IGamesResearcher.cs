@@ -4,5 +4,5 @@ namespace GameProject.Application.Contracts.Games;
 
 public interface IGamesResearcher
 {
-    Task<List<GameCarouselItem>> GetTopGames();
+    Task<List<GameCardItem>> Get10HighestRatedGamesOfAllTime();
 }

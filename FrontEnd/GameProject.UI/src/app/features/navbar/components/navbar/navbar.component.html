@@ -27,7 +27,7 @@
           </ng-container>
           <li><a routerLink="home">Home</a></li>
           <li><a>News</a></li>
-          <li><a>Games</a></li>
+          <li><a routerLink="games">Games</a></li>
           <li>
             <a class="justify-between" (click)="changeTheme()">
               <span>Theme:</span>
@@ -38,9 +38,9 @@
         </ul>
       </div>
       <div class="navigation-items inline">
-        <button class="btn btn-ghost inline mr-1 ml-1 text-base">Home</button>
+        <button class="btn btn-ghost inline mr-1 ml-1 text-base" routerLink="home">Home</button>
         <button class="btn btn-ghost inline mr-1 ml-1 text-base">News</button>
-        <button class="btn btn-ghost inline mr-1 ml-1 text-base">Games</button>
+        <button class="btn btn-ghost inline mr-1 ml-1 text-base" routerLink="games">Games</button>
       </div>
     </div>
     <div class="flex">

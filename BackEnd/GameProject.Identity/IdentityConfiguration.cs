@@ -44,6 +44,7 @@ public static class IdentityConfiguration
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(builder =>
             {
@@ -59,7 +60,8 @@ public static class IdentityConfiguration
                 };
             });
 
-
+        services.AddAuthorization();
+        
         return services;
     }
 }

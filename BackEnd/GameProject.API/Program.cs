@@ -1,6 +1,7 @@
 using GameProject.API.Middlewares;
 using GameProject.Application;
 using GameProject.Identity;
+using GameProject.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("all", policyBuilder =>
@@ -19,7 +21,6 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.ConfigureIdentityServices(builder.Configuration);
-
 
 var app = builder.Build();
 
