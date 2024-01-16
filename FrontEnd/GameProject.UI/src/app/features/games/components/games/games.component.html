@@ -1,24 +1,49 @@
 <div class="relative w-3/4 top-14 bg-base-100 flex flex-col items-center rounded-lg justify-center mx-auto p-5 profile">
   <h1 class="text-3xl self-start mb-5">What games are you interested in?</h1>
   <div class="flex w-full space-x-1 mb-3">
-    <div class="w-1/6">
+    <div class="w-1/6 filters">
       <h1 class="text-2xl">Filters</h1>
       <hr class="border-neutral my-2">
       <h1 class="text-lg te">Platforms</h1>
       <app-platforms-filters [chosenPlatformsForFiltering]="chosenPlatformsForFiltering"
                              (chosenPlatformEvent)="setPlatformForFiltering($event)"></app-platforms-filters>
+      <h1 class="text-lg te">Genres</h1>
+      <app-genres-filters [chosenGenreForFiltering]="chosenGenresForFiltering"
+                          (chosenGenreEvent)="setGenreForFiltering($event)"></app-genres-filters>
     </div>
     <div class="w-full">
-      <div class="flex w-full justify-between mb-3">
-        <input type="text" class="data-input w-1/2" #searchString>
-        <div>
-          <button class="btn btn-primary mx-1" (click)="searchGames()">Search</button>
-          <button class="btn btn-gray mx-1">Reset</button>
+      <div class="flex flex-col mb-3">
+        <div class="flex w-full justify-between mb-3">
+          <input type="text" class="data-input w-1/2" #searchString>
+          <div>
+            <button class="btn btn-primary mx-1" (click)="searchGames()">Search</button>
+            <button class="btn btn-gray mx-1">Reset</button>
+          </div>
+        </div>
+        <div class="hidden filters-button">
+          <div class="collapse bg-base-200">
+            <input type="checkbox" />
+            <div class="collapse-title text-xl font-medium">
+              <i class="fa-solid fa-filter"></i>
+            </div>
+            <div class="collapse-content flex flex-row">
+              <div class="w-1/2">
+                <h1 class="text-lg te">Platforms</h1>
+                <app-platforms-filters [chosenPlatformsForFiltering]="chosenPlatformsForFiltering"
+                                       (chosenPlatformEvent)="setPlatformForFiltering($event)"></app-platforms-filters>
+              </div>
+              <div class="w-1/2">
+                <h1 class="text-lg te">Genres</h1>
+                <app-genres-filters [chosenGenreForFiltering]="chosenGenresForFiltering"
+                                       (chosenGenreEvent)="setGenreForFiltering($event)"></app-genres-filters>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="w-full flex">
-        <div class="flex-wrap w-[80%] flex justify-start">
-          <div *ngFor="let game of games?.items" class="card w-[24%] m-0.5 image-full">
+      <div class="w-full flex space-x-1">
+        <div class="flex-wrap flex space-y-1 justify-around lg:justify-start">
+          <div *ngFor="let game of games?.items" class="card w-full lg:w-[24%] m-[0.1px] lg:m-0.5 image-full">
             <figure><img src="{{game.background_image}}"/></figure>
             <div class="card-body justify-between">
               <h2 class="card-title">{{game.name}}</h2>
@@ -28,8 +53,16 @@
             </div>
           </div>
         </div>
-        <div >
+        <div class="w-1/6 genres">
           <h1 class="text-2xl">Explore this genres</h1>
+          <div class="flex flex-col space-y-2">
+            <button *ngFor="let genre of genres" class="btn btn-primary" (click)="researchGenre(genre.id)" >
+              {{genre.name}}
+              <div class="badge">
+                {{genre.games_count}}
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </div>

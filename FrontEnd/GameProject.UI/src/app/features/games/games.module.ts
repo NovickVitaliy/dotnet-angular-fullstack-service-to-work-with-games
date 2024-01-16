@@ -4,13 +4,15 @@ import { GamesComponent } from './components/games/games.component';
 import {GamesRoutingModule} from "./games.routing.module";
 import { PlatformsFiltersComponent } from './components/platforms-filters/platforms-filters.component';
 import {SharedModule} from "../../shared/shared.module";
+import { GenresFiltersComponent } from './components/genres-filters/genres-filters.component';
 
 
 
 @NgModule({
   declarations: [
     GamesComponent,
-    PlatformsFiltersComponent
+    PlatformsFiltersComponent,
+    GenresFiltersComponent
   ],
     imports: [
         CommonModule,

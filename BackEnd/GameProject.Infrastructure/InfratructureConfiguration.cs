@@ -1,7 +1,9 @@
 using GameProject.Application.Contracts.Games;
+using GameProject.Application.Contracts.RawgApi.Genres;
 using GameProject.Application.Contracts.RawgApi.Platforms;
 using GameProject.Infrastructure.Games;
 using GameProject.Infrastructure.Models.Games;
+using GameProject.Infrastructure.RawgApi.Genres;
 using GameProject.Infrastructure.RawgApi.Platforms;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,9 @@ public static class InfratructureConfiguration
         
         services.AddScoped<IPlatformsResearcher, PlatformsResearcher>();
         services.Decorate<IPlatformsResearcher, CachedPlatformsResearcher>();
+
+        services.AddScoped<IGenresResearcher, GenresResearcher>();
+        services.Decorate<IGenresResearcher, CachedGenresResearcher>();
 
         return services;
     }

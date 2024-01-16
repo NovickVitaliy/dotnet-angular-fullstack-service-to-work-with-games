@@ -3,6 +3,8 @@ import {GameMainInfo} from "../../../../shared/models/game-main-info";
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
 import {PagedResult} from "../../../../shared/models/dtos/paged-result";
 import {GameFilterQuery} from "../../../../shared/models/game-filter-query";
+import {GenresResearcherService} from "../../../../core/services/genres-researcher.service";
+import {GenreMainInfo} from "../../../../shared/models/genre-main-info";
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
@@ -12,15 +14,23 @@ export class GamesComponent implements OnInit {
   @ViewChild('searchString', {static: true}) searchStringInput: ElementRef | null = null;
   games: PagedResult<GameMainInfo> | null = null;
   chosenPlatformsForFiltering: number[] = [];
+  chosenGenresForFiltering: number[] = [];
+  genres: GenreMainInfo[];
 
-  constructor(private gamesResearcher: GamesResearcherService) {
+  constructor(private gamesResearcher: GamesResearcherService,
+              private genresResearcher: GenresResearcherService) {
   }
   setPlatformForFiltering(platforms: number[]){
     this.chosenPlatformsForFiltering = platforms;
   }
 
+  setGenreForFiltering(genres: number[]){
+    this.chosenGenresForFiltering = genres;
+  }
+
   ngOnInit(): void {
     this.loadGames();
+    this.loadGenres();
   }
 
   loadGames(){
@@ -38,7 +48,7 @@ export class GamesComponent implements OnInit {
   searchGames(){
     const filterQuery: GameFilterQuery = {
       searchString: this.searchStringInput?.nativeElement?.value,
-      genres: [],
+      genres: this.chosenGenresForFiltering,
       platforms: this.chosenPlatformsForFiltering,
       pageNumber: 1,
       pageSize: 32
@@ -50,7 +60,7 @@ export class GamesComponent implements OnInit {
   changePage(event: number){
     const filterQuery: GameFilterQuery = {
       searchString: this.searchStringInput?.nativeElement?.value,
-      genres: [],
+      genres: this.chosenGenresForFiltering,
       platforms: this.chosenPlatformsForFiltering,
       pageNumber: event,
       pageSize: 32
@@ -66,5 +76,18 @@ export class GamesComponent implements OnInit {
           this.games = response;
         }
       })
+  }
+
+  private loadGenres() {
+    this.genresResearcher.getGenres()
+      .subscribe({
+        next: genres => {
+          this.genres = genres;
+        }
+      })
+  }
+
+  researchGenre(genreId: number){
+    //TODO: Implement genre researching
   }
 }

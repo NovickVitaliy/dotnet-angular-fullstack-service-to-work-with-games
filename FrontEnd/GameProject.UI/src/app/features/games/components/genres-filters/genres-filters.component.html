@@ -1,0 +1,18 @@
+<div class="space-y-1">
+  <div *ngFor="let genre of genres.slice(0,5)" class="flex items-center justify-start space-x-1">
+    <input type="checkbox" class="checkbox" id="{{genre.id}}" (click)="addGenreForFiltering(genre.id)">
+    <label class="cursor-pointer" for="{{genre.id}}">{{genre.name}}</label>
+  </div>
+  <ng-container *ngIf="isAllGenres">
+    <div *ngFor="let platform of genres.slice(5)" class="flex items-center justify-start space-x-1">
+      <input type="checkbox" class="checkbox" id="{{platform.id}}" (click)="addGenreForFiltering(platform.id)">
+      <label class="cursor-pointer" for="{{platform.id}}">{{platform.name}}</label>
+    </div>
+  </ng-container>
+  <div *ngIf="!isAllGenres" class="font-bold cursor-pointer" (click)="showAllGenres()">
+    Show All Genres <i class="fa fa-solid fa-arrow-alt-circle-down"></i>
+  </div>
+  <div *ngIf="isAllGenres" class="font-bold cursor-pointer" (click)="showAllGenres()">
+    Show Less Genres <i class="fa fa-solid fa-arrow-alt-circle-up"></i>
+  </div>
+</div>

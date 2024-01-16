@@ -5,3 +5,18 @@
 .image-full::before {
   opacity: 0.5;
 }
+
+
+@media (width <= 768px) {
+  .filters{
+    display: none;
+  }
+
+  .genres {
+    display: none;
+  }
+
+  .filters-button {
+    display: block;
+  }
+}
