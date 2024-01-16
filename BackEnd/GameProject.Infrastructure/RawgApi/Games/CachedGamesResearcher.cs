@@ -1,5 +1,6 @@
 using System.Text;
 using GameProject.Application.Contracts.Games;
+using GameProject.Application.Models.Shared;
 using GameProject.Domain.Models;
 using GameProject.Infrastructure.RawgApi.Models.Games;
 using Microsoft.Extensions.Caching.Memory;
@@ -34,7 +35,7 @@ public class CachedGamesResearcher : IGamesResearcher
         return games;
     }
 
-    public async Task<List<GameMainInfo>> GetGames(GameFilterQuery filterQuery)
+    public async Task<PagedResult<GameMainInfo>> GetGames(GameFilterQuery filterQuery)
     {
         StringBuilder queryKey = new StringBuilder();
         queryKey.Append(string.Join(',', filterQuery.Platforms));
@@ -43,7 +44,7 @@ public class CachedGamesResearcher : IGamesResearcher
         queryKey.Append(filterQuery.PageNumber);
         queryKey.Append(filterQuery.PageSize);
 
-        if (_cache.TryGetValue(queryKey, out List<GameMainInfo> games))
+        if (_cache.TryGetValue(queryKey, out PagedResult<GameMainInfo> games))
         {
             return games!;
         }

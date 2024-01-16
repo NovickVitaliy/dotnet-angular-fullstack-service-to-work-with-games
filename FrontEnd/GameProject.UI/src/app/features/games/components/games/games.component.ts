@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GameMainInfo} from "../../../../shared/models/game-main-info";
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
+import {PagedResult} from "../../../../shared/models/dtos/paged-result";
+import {GameFilterQuery} from "../../../../shared/models/game-filter-query";
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
@@ -8,7 +10,7 @@ import {GamesResearcherService} from "../../../../core/services/games-researcher
 })
 export class GamesComponent implements OnInit {
   @ViewChild('searchString', {static: true}) searchStringInput: ElementRef | null = null;
-  games: GameMainInfo[] = [];
+  games: PagedResult<GameMainInfo> | null = null;
   chosenPlatformsForFiltering: number[] = [];
 
   constructor(private gamesResearcher: GamesResearcherService) {
@@ -22,27 +24,43 @@ export class GamesComponent implements OnInit {
   }
 
   loadGames(){
-    this.gamesResearcher.getGames({
+    const filterQuery: GameFilterQuery = {
       pageNumber: 1,
       pageSize:32,
       genres: [],
       platforms: [],
       searchString: ''
-    }).subscribe({
-      next: response => {
-        this.games = response;
-      }
-    });
+    };
+
+    this.getGames(filterQuery);
   }
 
   searchGames(){
-    this.gamesResearcher.getGames({
+    const filterQuery: GameFilterQuery = {
       searchString: this.searchStringInput?.nativeElement?.value,
       genres: [],
       platforms: this.chosenPlatformsForFiltering,
       pageNumber: 1,
       pageSize: 32
-    })
+    };
+
+    this.getGames(filterQuery);
+  }
+
+  changePage(event: number){
+    const filterQuery: GameFilterQuery = {
+      searchString: this.searchStringInput?.nativeElement?.value,
+      genres: [],
+      platforms: this.chosenPlatformsForFiltering,
+      pageNumber: event,
+      pageSize: 32
+    }
+
+    this.getGames(filterQuery);
+  }
+
+  getGames(filterQuery: GameFilterQuery){
+    this.gamesResearcher.getGames(filterQuery)
       .subscribe({
         next: response => {
           this.games = response;

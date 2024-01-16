@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment.development";
 import {map} from "rxjs";
 import {GameMainInfo} from "../../shared/models/game-main-info";
 import {GameFilterQuery} from "../../shared/models/game-filter-query";
+import {PagedResult} from "../../shared/models/dtos/paged-result";
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,6 @@ export class GamesResearcherService {
       url += `&searchString=${filterQuery.searchString}`;
     }
 
-    return this.http.get<GameMainInfo[]>(url);
+    return this.http.get<PagedResult<GameMainInfo>>(url);
   }
 }

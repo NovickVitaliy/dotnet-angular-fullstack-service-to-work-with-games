@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using GameProject.Application.Contracts.Games;
+using GameProject.Application.Models.Shared;
 using GameProject.Domain.Models;
 using GameProject.Infrastructure.Models.Games;
 using GameProject.Infrastructure.RawgApi.Models.Games;
@@ -32,7 +33,7 @@ public class GamesResearcher : IGamesResearcher
         return result.Results.Take(10).ToList();
     }
 
-    public async Task<List<GameMainInfo>> GetGames(GameFilterQuery filterQuery)
+    public async Task<PagedResult<GameMainInfo>> GetGames(GameFilterQuery filterQuery)
     {
         StringBuilder requestUrl = new StringBuilder($"games?key={_authenticationToken}");
         if (filterQuery.Platforms.Length > 0)
@@ -59,6 +60,13 @@ public class GamesResearcher : IGamesResearcher
         RawgResponse<GameMainInfo> games = JsonSerializer.Deserialize<RawgResponse<GameMainInfo>>(dataAsJson,
             new JsonSerializerOptions() { PropertyNameCaseInsensitive = true })!;
 
-        return games.Results;
+        return new PagedResult<GameMainInfo>()
+        {
+            CurrentPage = filterQuery.PageNumber,
+            ItemsPerPage = filterQuery.PageSize,
+            TotalCount = games.Count,
+            Items = games.Results
+            
+        };
     }
 }
