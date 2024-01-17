@@ -8,4 +8,5 @@ public interface IGamesResearcher
 {
     Task<List<GameCardItem>> Get10HighestRatedGamesOfAllTime();
     Task<PagedResult<GameMainInfo>> GetGames(GameFilterQuery filterQuery);
+    Task<GameAllInfo> GetGameInfo(int gameId);
 }

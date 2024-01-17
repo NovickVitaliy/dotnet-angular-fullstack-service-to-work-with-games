@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameProject.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee622db4a68de00aaf927217483b625ba2e3a5ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+774e9f0c4e4b2cc9f6ca4cf382fb73392f8b53a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameProject.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameProject.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

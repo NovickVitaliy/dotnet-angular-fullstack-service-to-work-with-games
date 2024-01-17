@@ -57,4 +57,21 @@ public class CachedGamesResearcher : IGamesResearcher
         });
         return games;
     }
+
+    public async Task<GameAllInfo> GetGameInfo(int gameId)
+    {
+        if (_cache.TryGetValue(gameId, out GameAllInfo gameAllInfo))
+        {
+            return gameAllInfo!;
+        }
+
+        gameAllInfo = await _gamesResearcher.GetGameInfo(gameId);
+
+        _cache.Set(gameId, gameAllInfo, new MemoryCacheEntryOptions()
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(7)
+        });
+
+        return gameAllInfo;
+    }
 }

@@ -69,4 +69,16 @@ public class GamesResearcher : IGamesResearcher
             
         };
     }
+
+    public async Task<GameAllInfo> GetGameInfo(int gameId)
+    {
+        var response = await _http.GetAsync($"games/{gameId}?key={_authenticationToken}");
+
+        string dataAsString = await response.Content.ReadAsStringAsync();
+
+        GameAllInfo result = JsonSerializer.Deserialize<GameAllInfo>(dataAsString,
+            new JsonSerializerOptions() { PropertyNameCaseInsensitive = true })!;
+
+        return result;
+    }
 }

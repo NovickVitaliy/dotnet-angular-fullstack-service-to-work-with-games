@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GamingPlatform} from "../../../../shared/models/gaming-platform";
+import {GamingPlatform} from "../../../../shared/models/rawg-api/platforms/gaming-platform";
 import {PlatformsResearcherService} from "../../../../core/services/platforms-researcher.service";
 
 @Component({

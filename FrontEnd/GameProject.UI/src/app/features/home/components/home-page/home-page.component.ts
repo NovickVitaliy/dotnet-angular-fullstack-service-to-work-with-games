@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GameCardItem} from "../../../../shared/models/game-card-item";
+import {GameCardItem} from "../../../../shared/models/rawg-api/games/game-card-item";
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
 import {ThemeService} from "../../../../core/services/theme.service";
 

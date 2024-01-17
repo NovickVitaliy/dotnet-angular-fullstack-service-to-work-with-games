@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {GenreMainInfo} from "../../shared/models/genre-main-info";
+import {GenreMainInfo} from "../../shared/models/rawg-api/genres/genre-main-info";
 import {environment} from "../../../environments/environment.development";
 
 @Injectable({

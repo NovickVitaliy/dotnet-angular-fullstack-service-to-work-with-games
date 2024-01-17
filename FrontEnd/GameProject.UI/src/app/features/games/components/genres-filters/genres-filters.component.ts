@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {GamingPlatform} from "../../../../shared/models/gaming-platform";
+import {GamingPlatform} from "../../../../shared/models/rawg-api/platforms/gaming-platform";
 import {PlatformsResearcherService} from "../../../../core/services/platforms-researcher.service";
-import {GenreMainInfo} from "../../../../shared/models/genre-main-info";
+import {GenreMainInfo} from "../../../../shared/models/rawg-api/genres/genre-main-info";
 import {GenresResearcherService} from "../../../../core/services/genres-researcher.service";
 
 @Component({

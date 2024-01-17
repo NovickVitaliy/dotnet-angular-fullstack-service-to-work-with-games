@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {GameCardItem} from "../../shared/models/game-card-item";
+import {GameCardItem} from "../../shared/models/rawg-api/games/game-card-item";
 import {environment} from "../../../environments/environment.development";
 import {map} from "rxjs";
-import {GameMainInfo} from "../../shared/models/game-main-info";
-import {GameFilterQuery} from "../../shared/models/game-filter-query";
+import {GameMainInfo} from "../../shared/models/rawg-api/games/game-main-info";
+import {GameFilterQuery} from "../../shared/models/rawg-api/common/game-filter-query";
 import {PagedResult} from "../../shared/models/dtos/paged-result";
+import {GameAllInfo} from "../../shared/models/rawg-api/games/game-all-info";
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,9 @@ export class GamesResearcherService {
     }
 
     return this.http.get<PagedResult<GameMainInfo>>(url);
+  }
+
+  getGameInfo(gameId: number){
+    return this.http.get<GameAllInfo>(`${environment.apiUrl}ResearchGames/GetGameInfo/${gameId}`);
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {GamingPlatform} from "../../shared/models/gaming-platform";
+import {GamingPlatform} from "../../shared/models/rawg-api/platforms/gaming-platform";
 import {environment} from "../../../environments/environment.development";
 
 @Injectable({

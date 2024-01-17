@@ -27,10 +27,17 @@ public class ResearchGamesController : ControllerBase
         return Ok(await _gamesResearcher.Get10HighestRatedGamesOfAllTime());
     }
 
-    [HttpGet("")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<List<GameMainInfo>>> Games([FromQuery] GameFilterQuery filterQuery)
     {
         return Ok(await _gamesResearcher.GetGames(filterQuery));
+    }
+
+    [HttpGet("{gameId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<GameAllInfo>> GetGameInfo([FromRoute] int gameId)
+    {
+        return Ok(_gamesResearcher.GetGameInfo(gameId));
     }
 }
