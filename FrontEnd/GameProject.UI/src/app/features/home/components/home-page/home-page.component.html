@@ -2,7 +2,7 @@
     <div class="w-full flex flex-col">
       <h1 class="text-3xl mb-3">Top 10 highest rated games of all time</h1>
       <div class="flex flex-wrap justify-between">
-        <div *ngFor="let game of top10highestRatedGamesOfAllTime" class="card w-1/6 m-2 image-full">
+        <div *ngFor="let game of top10highestRatedGamesOfAllTime" class="card w-1/6 m-2 image-full cursor-pointer" routerLink="/games/{{game.id}}">
           <figure><img src="{{game.background_image}}" /></figure>
           <div class="card-body justify-between">
             <h2 class="card-title">{{game.name}}</h2>

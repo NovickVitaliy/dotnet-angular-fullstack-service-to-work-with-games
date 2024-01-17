@@ -38,6 +38,6 @@ public class ResearchGamesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<GameAllInfo>> GetGameInfo([FromRoute] int gameId)
     {
-        return Ok(_gamesResearcher.GetGameInfo(gameId));
+        return Ok(await _gamesResearcher.GetGameInfo(gameId));
     }
 }

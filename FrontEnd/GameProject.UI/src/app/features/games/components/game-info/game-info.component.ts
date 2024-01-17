@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GameAllInfo} from "../../../../shared/models/rawg-api/games/game-all-info";
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
@@ -8,26 +8,21 @@ import {GamesResearcherService} from "../../../../core/services/games-researcher
   templateUrl: './game-info.component.html',
   styleUrl: './game-info.component.scss'
 })
-export class GameInfoComponent implements OnInit{
+export class GameInfoComponent implements OnInit {
   gameId: number;
-  game: GameAllInfo;
+  game: GameAllInfo | null;
+
   constructor(private activatedRoute: ActivatedRoute,
               private gamesResearcher: GamesResearcherService) {
 
   }
 
   ngOnInit(): void {
+    this.gameId = +this.activatedRoute.snapshot.paramMap.get("id");
     this.loadGame();
-
   }
 
   private loadGame() {
-    this.activatedRoute.params.subscribe({
-      next: params =>{
-        this.gameId = +params['id'];
-      }
-    });
-
     this.gamesResearcher.getGameInfo(this.gameId)
       .subscribe({
         next: game => {
