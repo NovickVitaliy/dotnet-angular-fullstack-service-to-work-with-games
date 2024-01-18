@@ -2,6 +2,10 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GameAllInfo} from "../../../../shared/models/rawg-api/games/game-all-info";
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
+import {ScoreColorService} from "../../../../core/services/score-color.service";
+import {GameScreenshot} from "../../../../shared/models/rawg-api/games/game-screenshot";
+import {forkJoin} from "rxjs";
+import {GameTrailer} from "../../../../shared/models/rawg-api/games/game-trailer";
 
 @Component({
   selector: 'app-game-info',
@@ -11,9 +15,12 @@ import {GamesResearcherService} from "../../../../core/services/games-researcher
 export class GameInfoComponent implements OnInit {
   gameId: number;
   game: GameAllInfo | null;
+  gameScreenshots: GameScreenshot[];
+  gameTrailers: GameTrailer[];
 
   constructor(private activatedRoute: ActivatedRoute,
-              private gamesResearcher: GamesResearcherService) {
+              private gamesResearcher: GamesResearcherService,
+              private colorScoreService: ScoreColorService) {
 
   }
 
@@ -23,11 +30,21 @@ export class GameInfoComponent implements OnInit {
   }
 
   private loadGame() {
-    this.gamesResearcher.getGameInfo(this.gameId)
-      .subscribe({
-        next: game => {
-          this.game = game;
-        }
-      });
+    forkJoin({
+      gameData: this.gamesResearcher.getGameInfo(this.gameId),
+      gameScreenshots: this.gamesResearcher.getGamesScreenshots(this.gameId),
+      gameTrailers: this.gamesResearcher.getGamesTrailers(this.gameId)
+    }).subscribe({
+    next: response => {
+      this.game = response.gameData;
+      this.gameScreenshots = response.gameScreenshots;
+      this.gameTrailers = response.gameTrailers;
+      console.log(response.gameTrailers)
+    }
+    })
+  }
+
+  getColorBasedOnScore(score: number){
+    return this.colorScoreService.getColorBasedOnScore(score);
   }
 }

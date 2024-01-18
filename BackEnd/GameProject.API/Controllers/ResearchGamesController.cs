@@ -40,4 +40,18 @@ public class ResearchGamesController : ControllerBase
     {
         return Ok(await _gamesResearcher.GetGameInfo(gameId));
     }
+
+    [HttpGet("{gameId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<GameScreenshot>>> GetGamesScreenshots([FromRoute] int gameId)
+    {
+        return Ok(await _gamesResearcher.GetGamesScreenshots(gameId));
+    }
+
+    [HttpGet("{gameId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<List<GameTrailer>>> GetGamesTrailers([FromRoute] int gameId)
+    {
+        return Ok(await _gamesResearcher.GetGamesTrailers(gameId));
+    }
 }

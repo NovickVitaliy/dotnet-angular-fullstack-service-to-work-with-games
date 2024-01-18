@@ -81,4 +81,29 @@ public class GamesResearcher : IGamesResearcher
 
         return result;
     }
+
+    public async Task<List<GameScreenshot>> GetGamesScreenshots(int gameId)
+    {
+        var response = await _http.GetAsync($"games/{gameId}/screenshots?key={_authenticationToken}");
+
+        string dataAsString = await response.Content.ReadAsStringAsync();
+
+        RawgResponse<GameScreenshot> result = JsonSerializer.Deserialize<RawgResponse<GameScreenshot>>(dataAsString, 
+            new JsonSerializerOptions() {PropertyNameCaseInsensitive = true})!;
+
+        return result.Results;
+    }
+
+    public async Task<List<GameTrailer>> GetGamesTrailers(int gameId)
+    {
+        var response = await _http.GetAsync($"games/{gameId}/movies?key={_authenticationToken}");
+
+        string dataAsString = await response.Content.ReadAsStringAsync();
+
+        RawgResponse<GameTrailer> result = JsonSerializer.Deserialize<RawgResponse<GameTrailer>>(dataAsString,
+            new JsonSerializerOptions {PropertyNameCaseInsensitive = true})!;
+
+        return result.Results;
+
+    }
 }

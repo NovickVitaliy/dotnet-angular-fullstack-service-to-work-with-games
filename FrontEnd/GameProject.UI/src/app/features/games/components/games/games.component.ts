@@ -5,6 +5,7 @@ import {PagedResult} from "../../../../shared/models/dtos/paged-result";
 import {GameFilterQuery} from "../../../../shared/models/rawg-api/common/game-filter-query";
 import {GenresResearcherService} from "../../../../core/services/genres-researcher.service";
 import {GenreMainInfo} from "../../../../shared/models/rawg-api/genres/genre-main-info";
+import {ScoreColorService} from "../../../../core/services/score-color.service";
 @Component({
   selector: 'app-games',
   templateUrl: './games.component.html',
@@ -18,7 +19,8 @@ export class GamesComponent implements OnInit {
   genres: GenreMainInfo[];
 
   constructor(private gamesResearcher: GamesResearcherService,
-              private genresResearcher: GenresResearcherService) {
+              private genresResearcher: GenresResearcherService,
+              private scoreColorService: ScoreColorService) {
   }
   setPlatformForFiltering(platforms: number[]){
     this.chosenPlatformsForFiltering = platforms;
@@ -89,5 +91,9 @@ export class GamesComponent implements OnInit {
 
   researchGenre(genreId: number){
     //TODO: Implement genre researching
+  }
+
+  getColorBasedOnScore(score: number){
+    return this.scoreColorService.getColorBasedOnScore(score);
   }
 }

@@ -6,7 +6,7 @@
           <figure><img src="{{game.background_image}}" /></figure>
           <div class="card-body justify-between">
             <h2 class="card-title">{{game.name}}</h2>
-            <div class="bg-green-700 w-fit p-5 rounded-lg text-3xl text-white self-end">
+            <div [ngClass]="getColorBasedOnScore(game.metacritic)" class="w-fit p-5 rounded-lg text-3xl text-white self-end">
               <h1>{{game.metacritic}}</h1>
             </div>
           </div>

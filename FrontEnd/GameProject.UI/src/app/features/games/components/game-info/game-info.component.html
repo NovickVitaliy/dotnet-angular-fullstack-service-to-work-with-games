@@ -1,7 +1,7 @@
 <div class="relative w-3/4 top-14 bg-base-100 flex flex-col items-center rounded-lg justify-center p-5 mx-auto profile">
-  <div class="game-header 2xl:flex 2xl:justify-between space-x-3">
+  <div class="game-header 2xl:flex 2xl:justify-between space-x-3 mb-5">
     <div class="object-cover 2xl:w-1/2 rounded-lg 2xl:order-2 mb-3 2xl:mb-0">
-      <img src="{{game.background_image}}" class="object-cover w-full h-[90%] rounded-lg 2xl:order-2 shadow-lg mb-3">
+      <img src="{{game.background_image}}" class="object-cover rounded-lg 2xl:order-2 shadow-lg mb-3">
       <div class="flex flex-row flex-wrap">
         <button class="btn btn-primary my-1 mx-2"><i class="fa-solid fa-heart"></i> Add to favourite</button>
         <button class="btn btn-primary my-1 mx-2"><i class="fa-solid fa-book-bookmark"></i>Add to wishlist</button>
@@ -11,14 +11,82 @@
     </div>
     <div class="2xl:w-1/2 2xl:pr-3">
       <h1 class="text-6xl">{{game.name}}</h1>
-      <hr class="w-3/4 mx-auto my-2 border-neutral">
-      <div class="flex flex-wrap items-center">
-        <p class="ml-2 px-2 py-1 my-1 bg-primary w-fit text-white rounded-lg">Released: {{game.released | date}}</p>
-        <p routerLink="" class="ml-2 my-1 px-2 py-1 bg-secondary w-fit text-white rounded-lg cursor-pointer hover:bg-secondary/90" *ngFor="let genre of game.genres">{{genre.name}}</p>
-        <p routerLink="" class="ml-2 my-1 px-2 py-1 bg-secondary w-fit text-white rounded-lg cursor-pointer hover:bg-secondary/90" *ngFor="let tag of game.tags">{{tag.name}}</p>
-      </div>
-      <hr class="w-3/4 mx-auto my-2 border-neutral">
+      <hr class="w-full mx-auto my-3 border-neutral">
+      <p class="ml-2 px-2 py-1 my-1 bg-primary w-fit text-white rounded-lg">Released: {{game.released | date}}</p>
+      <hr class="w-full mx-auto my-3 border-neutral">
       <p>{{game.description_raw}}</p>
+    </div>
+  </div>
+  <div class="game-body w-full">
+    <div role="tablist" class="tabs tabs-bordered">
+      <input type="radio" name="my_tabs_1" role="tab" class="tab text-2xl pb-2" aria-label="Details" checked/>
+      <div role="tabpanel" class="tab-content my-1">
+        <div class="2xl:flex 2xl:space-x-2">
+          <div class="2xl:w-3/4">
+            <div>
+              <h1 class="text-xl ">Platforms</h1>
+              <hr class=" my-2 border-neutral">
+              <div class="flex flex-wrap items-center ">
+                <p routerLink=""
+                   class="ml-2 my-1 px-2 py-1 bg-secondary w-fit text-white rounded-lg cursor-pointer hover:bg-secondary/90"
+                   *ngFor="let platform of game.platforms">{{platform.platform.name}}</p>
+              </div>
+            </div>
+            <div>
+              <h1 class="text-xl ">Genres</h1>
+              <hr class=" my-2 border-neutral">
+
+              <div class="flex flex-wrap items-center ">
+                <p routerLink=""
+                   class="ml-2 my-1 px-2 py-1 bg-secondary w-fit text-white rounded-lg cursor-pointer hover:bg-secondary/90"
+                   *ngFor="let genre of game.genres">{{genre.name}}</p>
+              </div>
+            </div>
+
+            <div>
+              <h1 class="text-xl ">Tags</h1>
+              <hr class="  my-2 border-neutral">
+
+              <div class="flex flex-wrap items-center ">
+                <p routerLink=""
+                   class="ml-2 my-1 px-2 py-1 bg-secondary w-fit text-white rounded-lg cursor-pointer hover:bg-secondary/90"
+                   *ngFor="let tag of game.tags">{{tag.name}}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex space-x-2 justify-center">
+              <div class="flex flex-col justify-between">
+                <h1 class="text-2xl">Score on metacritic</h1>
+                <div [ngClass]="getColorBasedOnScore(game.metacritic)" class="w-full p-3 rounded-lg text-3xl text-center text-white self-end">
+                  <h1>{{game.metacritic}}</h1>
+                </div>
+              </div>
+              <img src="assets/images/metacritic.webp" class="w-28 rounded-lg">
+            </div>
+            <div *ngIf="game.metacritic >= 90" class="flex justify-center">
+              <img class="w-28" src="assets/images/must-play.png" >
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <input type="radio" name="my_tabs_1" role="tab" class="tab text-2xl" aria-label="Screenshots"/>
+      <div role="tabpanel" class="tab-content my-1">
+        <div class="w-full">
+          <div *ngFor="let screenshot of gameScreenshots; let i = index" id="item{{i+1}}" class=" my-2 w-full">
+            <img src="{{screenshot.image}}" class="w-full" alt=""/>
+          </div>
+        </div>
+      </div>
+
+      <input type="radio" name="my_tabs_1" role="tab" class="tab text-2xl" aria-label="Videos"/>
+      <div role="tabpanel" class="tab-content my-1">
+        <video *ngFor="let trailer of gameTrailers" class="w-full" controls >
+          <source src="{{trailer.videos[0].max}}" type="video/mp4">
+        </video>
+      </div>
     </div>
   </div>
 </div>
