@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Cloudinary\Models\Photo\" />
       <Folder Include="RawgApi\Models\Games\" />
     </ItemGroup>
 

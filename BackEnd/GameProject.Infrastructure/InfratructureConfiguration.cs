@@ -1,6 +1,9 @@
+using GameProject.Application.Contracts.Cloudinary;
 using GameProject.Application.Contracts.Games;
 using GameProject.Application.Contracts.RawgApi.Genres;
 using GameProject.Application.Contracts.RawgApi.Platforms;
+using GameProject.Infrastructure.Cloudinary.Models.Common;
+using GameProject.Infrastructure.Cloudinary.Services;
 using GameProject.Infrastructure.Games;
 using GameProject.Infrastructure.Models.Games;
 using GameProject.Infrastructure.RawgApi.Genres;
@@ -32,6 +35,12 @@ public static class InfratructureConfiguration
         services.AddScoped<IGenresResearcher, GenresResearcher>();
         services.Decorate<IGenresResearcher, CachedGenresResearcher>();
 
+
+        services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+
+        services.AddScoped<IPhotoService, PhotoService>();
+        
+        
         return services;
     }
 }

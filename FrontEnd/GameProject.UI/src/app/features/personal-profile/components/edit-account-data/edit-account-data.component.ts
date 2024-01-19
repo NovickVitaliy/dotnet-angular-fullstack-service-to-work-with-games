@@ -1,11 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
 import {ChangeAccountDataRequest} from "../../../../shared/models/dtos/change-account-data-request";
 import {FormValidatorsService} from "../../../../core/services/form-validators.service";
 import {AccountService} from "../../../../core/services/account.service";
 import {ToastrService} from "ngx-toastr";
-import {map, take} from "rxjs";
+import {map, Observable, take} from "rxjs";
+import {User} from "../../../../shared/models/user";
+import {ChangeProfilePhotoResponse} from "../../../../shared/models/dtos/change-profile-photo-response";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-edit-account-data',
@@ -21,6 +24,8 @@ export class EditAccountDataComponent implements OnInit {
     {platform: 'Nintendo Switch', selected: false, id: 3},
     {platform: 'Pc', selected: false, id: 4}
   ];
+  @ViewChild("profileImg") profileImage: ElementRef;
+  currentUser$: Observable<User>;
 
   constructor(private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
@@ -32,6 +37,7 @@ export class EditAccountDataComponent implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
     this.setCurrentUserEmail();
+    this.currentUser$ = this.authenticationService.currentUser$;
   }
 
   private setCurrentUserEmail(){
@@ -105,5 +111,41 @@ export class EditAccountDataComponent implements OnInit {
       return this.formBuilder.control(platform.selected);
     });
     return this.formBuilder.array(arr, this.formValidator.atLeastOneItemSelected());
+  }
+
+  changeProfileImage(event: any){
+    const file = event.target.files[0];
+    this.accountService.changeAccountProfilePicture(file)
+      .subscribe({
+        next: (response: ChangeProfilePhotoResponse) => {
+          this.currentUser$.pipe(take(1))
+            .subscribe({
+              next: user => {
+                user.profilePhotoUrl = response.photoUrl;
+              },
+              error: error => {
+                this.toastrService.error(error.description);
+              }
+            })
+        }
+      })
+  }
+
+  deleteProfilePicture(){
+    this.accountService.deleteProfilePicture()
+      .subscribe({
+        next: value => {
+          this.currentUser$.pipe(take(1))
+            .subscribe({
+              next: user => {
+                user.profilePhotoUrl = null;
+              }
+            })
+        },
+        error: error => {
+          this.toastrService.error(error.description);
+        }
+      })
+
   }
 }

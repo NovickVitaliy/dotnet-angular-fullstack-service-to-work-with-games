@@ -3,9 +3,11 @@ using GameProject.Application.Contracts.Account;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
+using GameProject.Identity.Contracts.Repositories;
 using GameProject.Identity.DbContext;
 using GameProject.Identity.Helpers;
 using GameProject.Identity.Models;
+using GameProject.Identity.Repositories;
 using GameProject.Identity.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -61,6 +63,9 @@ public static class IdentityConfiguration
             });
 
         services.AddAuthorization();
+
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPhotoRepository, PhotoRepository>();
         
         return services;
     }

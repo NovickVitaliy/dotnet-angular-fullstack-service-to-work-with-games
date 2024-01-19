@@ -13,13 +13,13 @@
             <li><a routerLink="auth/register">Register</a></li>
             <li><a routerLink="auth/login">Log In</a></li>
           </ng-container>
-          <ng-container *ngIf="(currentUser$ | async)">
+          <ng-container *ngIf="(currentUser$ | async) as user">
             <li>
               <a class="justify-between" routerLink="profile">
                 Profile
                 <div class="avatar placeholder">
                   <div class="bg-neutral text-neutral-content rounded-full outline-0 w-8">
-                    <span class="text-xs"><img src="assets/images/defaultUserPicture.png" alt="user"></span>
+                    <span class="text-xs"><img src="{{user.profilePhotoUrl ? user.profilePhotoUrl : 'assets/images/defaultUserPicture.png'}}" alt="user"></span>
                   </div>
                 </div>
               </a>
@@ -50,12 +50,12 @@
         <button class="btn btn-secondary m-1" routerLink="auth/register">Register</button>
         <button class="btn btn-secondary m-1" routerLink="auth/login">Log In</button>
       </div>
-      <div *ngIf="(currentUser$ | async)" class="buttons flex align-middle">
+      <div *ngIf="(currentUser$ | async) as user" class="buttons flex align-middle">
         <div class="dropdown dropdown-end profile-button">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar mt-1">
             <div class="w-10 rounded-full">
               <img alt="user"
-                   src="assets/images/defaultUserPicture.png"/>
+                   src="{{user.profilePhotoUrl ? user.profilePhotoUrl : 'assets/images/defaultUserPicture.png'}}"/>
             </div>
           </div>
           <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">

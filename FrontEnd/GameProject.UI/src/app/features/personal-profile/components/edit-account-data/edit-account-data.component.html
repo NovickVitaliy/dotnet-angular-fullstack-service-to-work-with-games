@@ -1,26 +1,40 @@
-<div class="text-black w-full h-full text-xl">
+<div class="text-black w-full h-full text-xl" *ngIf="(currentUser$ | async) as user">
+  <div class="mb-3 flex">
+    <input type="file" class="hidden" #profileImageUpload (change)="changeProfileImage($event)">
+    <img src="{{user.profilePhotoUrl ? user.profilePhotoUrl : 'assets/images/defaultUserPicture.png'}}"
+         alt="user-profile.img" class="w-1/4 rounded-full" #profileImg>
+    <div class="flex flex-col justify-between">
+      <button class="btn btn-primary self-end" (click)="profileImageUpload.click()">Change profile picture</button>
+      <button class="btn btn-error self-end" (click)="deleteProfilePicture()">Delete profile picture</button>
+    </div>
+
+  </div>
   <form [formGroup]="editForm">
     <div class="flex flex-wrap justify-between lg:flex lg:flex-wrap lg:justify-between">
       <div class="flex flex-col w-full lg:w-auto mb-3">
         <label class="">First Name:</label>
         <input type="text" class="data-input" formControlName="firstName">
-        <span class="text-red-600 text-sm pl-1" *ngIf="editForm.controls['firstName'].touched && editForm.controls['firstName'].errors?.['required']">First Name cannot be empty.</span>
+        <span class="text-red-600 text-sm pl-1"
+              *ngIf="editForm.controls['firstName'].touched && editForm.controls['firstName'].errors?.['required']">First Name cannot be empty.</span>
       </div>
       <div class="flex flex-col w-full lg:w-auto mb-3">
         <label>Last Name:</label>
         <input type="text" class="data-input" formControlName="lastName">
-        <span class="text-red-600 text-sm pl-1" *ngIf="editForm.controls['lastName'].touched && editForm.controls['lastName'].errors?.['required']">Last Name cannot be empty.</span>
+        <span class="text-red-600 text-sm pl-1"
+              *ngIf="editForm.controls['lastName'].touched && editForm.controls['lastName'].errors?.['required']">Last Name cannot be empty.</span>
 
       </div>
       <div class="flex flex-col w-full lg:w-auto mb-3">
         <label>Username:</label>
         <input type="text" class="data-input" formControlName="username">
-        <span class="text-red-600 text-sm pl-1" *ngIf="editForm.controls['username'].touched && editForm.controls['username'].errors?.['required']">Username cannot be empty.</span>
+        <span class="text-red-600 text-sm pl-1"
+              *ngIf="editForm.controls['username'].touched && editForm.controls['username'].errors?.['required']">Username cannot be empty.</span>
       </div>
       <div class="flex flex-col w-full lg:w-auto mb-3">
         <label>Location:</label>
         <input type="text" class="data-input" formControlName="location">
-        <span class="text-red-600 text-sm pl-1" *ngIf="editForm.controls['location'].touched && editForm.controls['location'].errors?.['required']">Location cannot be empty.</span>
+        <span class="text-red-600 text-sm pl-1"
+              *ngIf="editForm.controls['location'].touched && editForm.controls['location'].errors?.['required']">Location cannot be empty.</span>
       </div>
     </div>
     <div class="mb-3">
@@ -32,7 +46,8 @@
                  [formControl]="$any(platform)">
           <label for="{{platforms[i].platform}}">{{platforms[i].platform}}</label>
         </div>
-        <span class="text-red-600 text-sm pl-1" *ngIf="editForm.controls['platforms'].touched && editForm.controls['platforms'].errors?.['atLeastOneItemSelected']">At least one item must be chosen.</span>
+        <span class="text-red-600 text-sm pl-1"
+              *ngIf="editForm.controls['platforms'].touched && editForm.controls['platforms'].errors?.['atLeastOneItemSelected']">At least one item must be chosen.</span>
       </div>
     </div>
     <div class="flex flex-col w-full mb-3">

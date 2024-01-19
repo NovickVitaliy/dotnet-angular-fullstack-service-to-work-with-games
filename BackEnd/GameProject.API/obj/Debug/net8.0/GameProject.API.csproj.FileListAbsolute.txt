@@ -250,3 +250,4 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameP
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Infrastructure.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\GameProject.Infrastructure.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\Scrutor.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.API\bin\Debug\net8.0\CloudinaryDotNet.dll

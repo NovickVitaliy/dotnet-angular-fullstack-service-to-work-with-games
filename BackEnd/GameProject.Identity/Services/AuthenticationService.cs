@@ -7,6 +7,7 @@ using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace GameProject.Identity.Services;
@@ -29,7 +30,9 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<BaseResponse<AuthenticationResponse>> LoginAsync(LoginRequest loginRequest)
     {
-        var user = await _userManager.FindByEmailAsync(loginRequest.Email);
+        var user = await _userManager
+            .Users.Include(u => u.ProfilePhoto)
+            .SingleAsync(u => u.Email == loginRequest.Email);
         bool isPasswordCorrect = await _userManager.CheckPasswordAsync(user, loginRequest.Password);
 
         if (!isPasswordCorrect || user == null)
@@ -56,7 +59,8 @@ public class AuthenticationService : IAuthenticationService
                     LastName = user.LastName,
                     Description = user.Description,
                     Location = user.Country,
-                    Platforms = user.Platforms.Split(';')
+                    Platforms = user.Platforms.Split(';'),
+                    ProfilePhotoUrl = user.ProfilePhoto?.Url
                 }
             };
         }

@@ -1,3 +1,4 @@
+using System.Reflection;
 using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,4 +10,11 @@ public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser, I
 {
     public ApplicationIdentityDbContext(DbContextOptions options) : base(options)
     { }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
 }

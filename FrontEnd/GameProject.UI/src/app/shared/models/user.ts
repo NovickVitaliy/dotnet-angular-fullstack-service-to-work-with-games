@@ -8,4 +8,5 @@ export interface User {
   platforms: string[];
   description: string;
   location: string;
+  profilePhotoUrl?: string;
 }
