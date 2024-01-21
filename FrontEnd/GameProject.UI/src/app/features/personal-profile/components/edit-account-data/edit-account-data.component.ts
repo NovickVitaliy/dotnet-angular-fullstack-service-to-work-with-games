@@ -8,7 +8,6 @@ import {ToastrService} from "ngx-toastr";
 import {map, Observable, take} from "rxjs";
 import {User} from "../../../../shared/models/user";
 import {ChangeProfilePhotoResponse} from "../../../../shared/models/dtos/change-profile-photo-response";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-edit-account-data',

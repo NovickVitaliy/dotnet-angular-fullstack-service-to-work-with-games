@@ -20,7 +20,7 @@
     <ItemGroup>
       <ProjectReference Include="..\GameProject.Application\GameProject.Application.csproj" />
       <ProjectReference Include="..\GameProject.Identity\GameProject.Identity.csproj" />
-      <ProjectReference Include="..\GameProject.Infrastructure\GameProject.Infrastructure.csproj" />
+      <ProjectReference Include="..\GameProject.Persistence\GameProject.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>

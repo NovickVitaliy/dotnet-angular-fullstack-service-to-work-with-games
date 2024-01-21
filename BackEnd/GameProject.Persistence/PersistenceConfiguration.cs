@@ -14,7 +14,7 @@ public static class PersistenceConfiguration
         {
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
-        
+
 
         return services;
     }

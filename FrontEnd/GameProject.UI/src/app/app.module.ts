@@ -9,6 +9,7 @@ import {ToastrModule} from "ngx-toastr";
 import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {authenticationInterceptor} from "./core/interceptors/authentication.interceptor";
 import {CoreModule} from "./core/core.module";
+import {emailInterceptor} from "./core/interceptors/email.interceptor";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import {CoreModule} from "./core/core.module";
     }),
   ],
   providers: [
-    provideHttpClient(withInterceptors([authenticationInterceptor]))
+    provideHttpClient(withInterceptors([authenticationInterceptor, emailInterceptor]))
   ],
   bootstrap: [AppComponent]
 })

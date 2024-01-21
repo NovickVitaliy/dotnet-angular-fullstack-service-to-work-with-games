@@ -32,8 +32,8 @@
               "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj": {
                 "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj"
               },
-              "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj"
+              "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj"
               }
             }
           }
@@ -128,6 +128,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
             "CloudinaryDotNet": {
               "target": "Package",
               "version": "[1.25.0, )"
@@ -260,6 +268,10 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.EntityFrameworkCore.Proxies": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -277,6 +289,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.0, )"
+            },
+            "Scrutor": {
+              "target": "Package",
+              "version": "[4.2.2, )"
             }
           },
           "imports": [
@@ -299,14 +315,14 @@
         }
       }
     },
-    "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj": {
+    "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj",
-        "projectName": "GameProject.Infrastructure",
-        "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj",
+        "projectName": "GameProject.Persistence",
+        "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -321,8 +337,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj": {
-                "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj"
+              "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj": {
+                "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj"
               }
             }
           }
@@ -337,21 +353,9 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.Extensions.Caching.Abstractions": {
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Caching.Memory": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Microsoft.Extensions.Http": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Scrutor": {
-              "target": "Package",
-              "version": "[4.2.2, )"
             }
           },
           "imports": [

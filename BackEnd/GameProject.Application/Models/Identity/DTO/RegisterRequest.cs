@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using GameProject.Application.Models.Shared;
 
 namespace GameProject.Application.Models.Identity;
 
-public class RegisterRequest
+public class RegisterRequest : BaseRequest
 {
     [Required]
     public string Username { get; set; }

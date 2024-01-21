@@ -2,5 +2,5 @@ namespace GameProject.Domain.Models;
 
 public class GameVideo
 {
-    public string Max { get; set; }
+    public string? Max { get; set; }
 }

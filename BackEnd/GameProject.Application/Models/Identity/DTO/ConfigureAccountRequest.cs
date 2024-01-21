@@ -1,6 +1,8 @@
+using GameProject.Application.Models.Shared;
+
 namespace GameProject.Application.Models.Identity;
 
-public class ConfigureAccountRequest
+public class ConfigureAccountRequest : BaseRequest
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;

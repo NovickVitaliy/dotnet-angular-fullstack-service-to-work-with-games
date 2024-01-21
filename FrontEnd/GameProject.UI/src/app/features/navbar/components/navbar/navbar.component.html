@@ -24,6 +24,7 @@
                 </div>
               </a>
             </li>
+            <li><a routerLink="games/user-list">My lists</a></li>
           </ng-container>
           <li><a routerLink="home">Home</a></li>
           <li><a>News</a></li>
@@ -34,7 +35,7 @@
               <span>{{getCurrentTheme() === 'sony' ? 'Ps4' : 'Xbox'}}</span>
             </a>
           </li>
-          <li><a class="text-red-600" (click)="logout()">Logout</a></li>
+          <li *ngIf="(currentUser$ | async)"><a class="text-red-600" (click)="logout()">Logout</a></li>
         </ul>
       </div>
       <div class="navigation-items inline">
@@ -65,6 +66,7 @@
               </a>
             </li>
             <li><a>Settings</a></li>
+            <li ><a routerLink="games/user-list">My lists</a></li>
             <li><a class="text-red-600" (click)="logout()">Logout</a></li>
           </ul>
         </div>

@@ -1,16 +1,24 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using GameProject.API.Middlewares;
 using GameProject.Application;
 using GameProject.Identity;
 using GameProject.Infrastructure;
+using GameProject.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("all", policyBuilder =>
@@ -20,7 +28,6 @@ builder.Services.AddCors(options =>
             .AllowAnyOrigin();
     });
 });
-builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using GameProject.Application.Models.Shared;
 
 namespace GameProject.Application.Models.Account;
 
-public class ChangeAccountDataRequest
+public class ChangeAccountDataRequest : BaseRequest
 {
     [Required]
     public string Email { get; set; } = string.Empty;

@@ -1,0 +1,23 @@
+<div class="flex w-full p-5 border-b border-neutral">
+  <div class="w-1/6 rounded-2xl my-auto">
+    <img src="{{game.backgroundImage}}" class="w-full rounded-2xl" alt="">
+  </div>
+  <div class="w-3/6 pl-3 my-auto">
+    <p class="text-2xl">{{game.name}}</p>
+  </div>
+  <div class="w-1/6 my-auto">
+    <p class="text-xl">{{game.platform}}</p>
+  </div>
+  <div class="w-1/6 my-auto">
+    <select (change)="setNewStatus($event)" class="select select-bordered w-full max-w-xs text-xl mb-3">
+      <option *ngFor="let gameStatus of gameStatuses" [value]="gameStatus"
+              [selected]="gameStatus === GameStatusToLabelMapping[status]"
+      >{{GameStatusToLabelMapping[gameStatus]}}</option>
+    </select>
+    <div class="flex space-x-3 w-full justify-between">
+      <button class="btn btn-primary" [disabled]="newStatus === status">Save</button>
+      <button class="btn btn-error">Remove</button>
+    </div>
+  </div>
+
+</div>

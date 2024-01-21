@@ -6,11 +6,11 @@ public class GameCardItem
 {
     public int Id { get; set; }
 
-    public string Name { get; set; } = string.Empty;
+    public string? Name { get; set; } = string.Empty;
 
     [JsonPropertyName("background_image")] 
-    public string BackgroundImage { get; set; } = string.Empty;
+    public string? BackgroundImage { get; set; } = string.Empty;
 
     [JsonPropertyName("metacritic")] 
-    public int MetacriticScore { get; set; }
+    public int? MetacriticScore { get; set; }
 }

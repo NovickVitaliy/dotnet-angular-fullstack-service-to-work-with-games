@@ -7,5 +7,5 @@ public class GameTrailer
     public int Id { get; set; }
     
     [JsonPropertyName("data")]
-    public GameVideo Video { get; set; }
+    public GameVideo? Video { get; set; }
 }

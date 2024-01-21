@@ -1,3 +1,5 @@
+using GameProject.Application.Models.Bussiness.DTOs;
+
 namespace GameProject.Application.Models.Identity;
 
 public class AuthenticationResponse
@@ -12,4 +14,9 @@ public class AuthenticationResponse
     public string AccessToken { get; set; }
     public string RefreshToken { get; set; }
     public string? ProfilePhotoUrl { get; set; }
+    public List<BaseGameResponse> StartedGames { get; set; }
+    public List<BaseGameResponse> InProgressGames { get; set; } 
+    public List<BaseGameResponse> FinishedGames { get; set; } 
+    public List<BaseGameResponse> AbandonedGames { get; set; } 
+    public List<BaseGameResponse> DesiredGames { get; set; }
 }

@@ -4,8 +4,10 @@ import {GameAllInfo} from "../../../../shared/models/rawg-api/games/game-all-inf
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
 import {ScoreColorService} from "../../../../core/services/score-color.service";
 import {GameScreenshot} from "../../../../shared/models/rawg-api/games/game-screenshot";
-import {forkJoin} from "rxjs";
+import {forkJoin, Observable} from "rxjs";
 import {GameTrailer} from "../../../../shared/models/rawg-api/games/game-trailer";
+import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
+import {User} from "../../../../shared/models/user";
 
 @Component({
   selector: 'app-game-info',
@@ -17,16 +19,19 @@ export class GameInfoComponent implements OnInit {
   game: GameAllInfo | null;
   gameScreenshots: GameScreenshot[];
   gameTrailers: GameTrailer[];
+  currentUser$: Observable<User | null>
 
   constructor(private activatedRoute: ActivatedRoute,
               private gamesResearcher: GamesResearcherService,
-              private colorScoreService: ScoreColorService) {
+              private colorScoreService: ScoreColorService,
+              private authenticationService: AuthenticationService) {
 
   }
 
   ngOnInit(): void {
     this.gameId = +this.activatedRoute.snapshot.paramMap.get("id");
     this.loadGame();
+    this.currentUser$ = this.authenticationService.currentUser$;
   }
 
   private loadGame() {

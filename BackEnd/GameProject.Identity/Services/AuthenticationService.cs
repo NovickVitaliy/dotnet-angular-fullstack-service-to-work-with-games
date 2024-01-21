@@ -1,7 +1,9 @@
 using System.Security.Claims;
+using AutoMapper;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Exceptions;
+using GameProject.Application.Models.Bussiness.DTOs;
 using GameProject.Application.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
@@ -17,14 +19,16 @@ public class AuthenticationService : IAuthenticationService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RefreshTokenSettings _refreshTokenSettings;
     private readonly ITokenService _tokenService;
-
+    private readonly IMapper _mapper;
     public AuthenticationService(
         UserManager<ApplicationUser> userManager,
         ITokenService tokenService,
-        IOptionsSnapshot<RefreshTokenSettings> refreshTokenOptions)
+        IOptionsSnapshot<RefreshTokenSettings> refreshTokenOptions,
+        IMapper mapper)
     {
         _userManager = userManager;
         _tokenService = tokenService;
+        _mapper = mapper;
         _refreshTokenSettings = refreshTokenOptions.Value;
     }
 
@@ -47,21 +51,12 @@ public class AuthenticationService : IAuthenticationService
         var identityResult = await _userManager.UpdateAsync(user);
         if (identityResult.Succeeded)
         {
+            var userToReturn = _mapper.Map<AuthenticationResponse>(user);
+            userToReturn.AccessToken = accessToken;
+            userToReturn.RefreshToken = refreshToken;
             return new BaseResponse<AuthenticationResponse>()
             {
-                Data = new AuthenticationResponse()
-                {
-                    Username = user.UserName,
-                    Email = user.Email,
-                    AccessToken = accessToken,
-                    RefreshToken = refreshToken,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Description = user.Description,
-                    Location = user.Country,
-                    Platforms = user.Platforms.Split(';'),
-                    ProfilePhotoUrl = user.ProfilePhoto?.Url
-                }
+                Data = userToReturn
             };
         }
 
@@ -97,7 +92,7 @@ public class AuthenticationService : IAuthenticationService
                 throw new BadRequestException(string.Join('\n', 
                     updateAsync.Errors.Select(err => err.Description)));
             }
-
+            var userToReturn = _mapper.Map<AuthenticationResponse>(user);
             return new BaseResponse<AuthenticationResponse>()
             {
                 Data = new AuthenticationResponse()

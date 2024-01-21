@@ -94,7 +94,6 @@ public class AccountController : ControllerBase
             await _photoRepository.DeletePhoto(currentUser.ProfilePhoto.Id);
         }
         
-        profilePhoto.User = currentUser;
         profilePhoto.UserId = currentUser.Id;
         currentUser.ProfilePhoto = profilePhoto;
         await _userRepository.SaveChangesAsync();
