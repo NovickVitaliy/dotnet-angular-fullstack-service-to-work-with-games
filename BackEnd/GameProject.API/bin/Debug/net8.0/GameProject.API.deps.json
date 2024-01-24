@@ -9,8 +9,7 @@
       "GameProject.API/1.0.0": {
         "dependencies": {
           "GameProject.Application": "1.0.0",
-          "GameProject.Identity": "1.0.0",
-          "GameProject.Persistence": "1.0.0",
+          "GameProject.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.OpenApi": "8.0.0",
           "Microsoft.EntityFrameworkCore.Design": "8.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.0",
@@ -2299,7 +2298,7 @@
           "GameProject.Domain.dll": {}
         }
       },
-      "GameProject.Identity/1.0.0": {
+      "GameProject.Infrastructure/1.0.0": {
         "dependencies": {
           "GameProject.Application": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
@@ -2312,16 +2311,7 @@
           "Scrutor": "4.2.2"
         },
         "runtime": {
-          "GameProject.Identity.dll": {}
-        }
-      },
-      "GameProject.Persistence/1.0.0": {
-        "dependencies": {
-          "GameProject.Identity": "1.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0"
-        },
-        "runtime": {
-          "GameProject.Persistence.dll": {}
+          "GameProject.Infrastructure.dll": {}
         }
       }
     }
@@ -3833,12 +3823,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "GameProject.Identity/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GameProject.Persistence/1.0.0": {
+    "GameProject.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

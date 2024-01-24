@@ -15,11 +15,11 @@ public class UsersFinishedGamesConfiguration : IEntityTypeConfiguration<UsersFin
         builder.HasOne(e => e.User)
             .WithMany(e => e.UsersFinishedGames)
             .HasForeignKey(e => e.UserId)
-            .OnDelete(DeleteBehavior.Restrict);;
+            .OnDelete(DeleteBehavior.Cascade);;
 
         builder.HasOne(e => e.FinishedGame)
             .WithMany(e => e.UsersFinishedGames)
             .HasForeignKey(e => e.FinishedGameId)
-            .OnDelete(DeleteBehavior.Restrict);;
+            .OnDelete(DeleteBehavior.Cascade);;
     }
 }

@@ -172,7 +172,8 @@ public class UserGameListService : IUserGameListService
         {
             Email = changeGameStatusRequest.Email,
             Game = changeGameStatusRequest.Game,
-            Status = changeGameStatusRequest.NewStatus
+            Status = changeGameStatusRequest.NewStatus,
+            Platform = changeGameStatusRequest.Platform,
         });
     }
 }

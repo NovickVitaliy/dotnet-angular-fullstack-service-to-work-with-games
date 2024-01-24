@@ -114,6 +114,7 @@ export class EditAccountDataComponent implements OnInit {
 
   changeProfileImage(event: any){
     const file = event.target.files[0];
+
     this.accountService.changeAccountProfilePicture(file)
       .subscribe({
         next: (response: ChangeProfilePhotoResponse) => {

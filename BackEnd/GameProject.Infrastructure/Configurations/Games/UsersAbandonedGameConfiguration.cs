@@ -15,11 +15,11 @@ public class UsersAbandonedGameConfiguration : IEntityTypeConfiguration<UsersAba
         builder.HasOne(e => e.User)
             .WithMany(e => e.UsersAbandonedGames)
             .HasForeignKey(e => e.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.AbandonedGame)
             .WithMany(e => e.UsersAbandonedGames)
             .HasForeignKey(e => e.AbandonedGameId)
-            .OnDelete(DeleteBehavior.Restrict);;
+            .OnDelete(DeleteBehavior.Cascade);;
     }
 }

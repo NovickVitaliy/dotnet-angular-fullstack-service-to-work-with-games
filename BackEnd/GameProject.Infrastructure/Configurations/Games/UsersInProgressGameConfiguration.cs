@@ -15,11 +15,11 @@ public class UsersInProgressGameConfiguration : IEntityTypeConfiguration<UsersIn
         builder.HasOne(e => e.User)
             .WithMany(e => e.UsersInProgressGames)
             .HasForeignKey(e => e.UserId)
-            .OnDelete(DeleteBehavior.Restrict);;
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.InProgressGame)
             .WithMany(e => e.UsersInProgressGames)
             .HasForeignKey(e => e.InProgressGameId)
-            .OnDelete(DeleteBehavior.Restrict);;
+            .OnDelete(DeleteBehavior.Cascade);;
     }
 }

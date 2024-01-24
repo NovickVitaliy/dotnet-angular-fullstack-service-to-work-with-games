@@ -15,8 +15,8 @@
       >{{GameStatusToLabelMapping[gameStatus]}}</option>
     </select>
     <div class="flex space-x-3 w-full justify-between">
-      <button class="btn btn-primary" [disabled]="newStatus === status">Save</button>
-      <button class="btn btn-error">Remove</button>
+      <button class="btn btn-primary" [disabled]="newStatus === status" (click)="changeGameStatus()">Save</button>
+      <button class="btn btn-error" (click)="removeGameFromList()">Remove</button>
     </div>
   </div>
 

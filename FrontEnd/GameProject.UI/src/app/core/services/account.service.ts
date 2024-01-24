@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ChangeAccountDataRequest} from "../../shared/models/dtos/change-account-data-request";
 import {environment} from "../../../environments/environment.development";
 import {ChangePasswordRequest} from "../../shared/models/dtos/change-password-request";
@@ -22,8 +22,7 @@ export class AccountService {
 
   changeAccountProfilePicture(file: File){
     const formData = new FormData();
-    formData.append('image', file);
-
+    formData.append('image', file, file.name);
     return this.httpClient.post<ChangeProfilePhotoResponse>(`${environment.apiUrl}Account/ChangeAccountProfilePicture`, formData);
   }
 

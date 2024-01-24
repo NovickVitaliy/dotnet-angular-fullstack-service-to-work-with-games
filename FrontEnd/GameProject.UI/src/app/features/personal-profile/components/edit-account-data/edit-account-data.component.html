@@ -1,6 +1,6 @@
 <div class="text-black w-full h-full text-xl" *ngIf="(currentUser$ | async) as user">
   <div class="mb-3 lg:flex">
-    <input type="file" class="hidden" #profileImageUpload (change)="changeProfileImage($event)">
+    <input type="file" class="hidden" #profileImageUpload (change)="changeProfileImage($event)" >
     <img src="{{user.profilePhotoUrl ? user.profilePhotoUrl : 'assets/images/defaultUserPicture.png'}}"
          alt="user-profile.img" class="w-1/4 rounded-full" #profileImg>
     <div class="flex flex-col justify-between space-y-2">
