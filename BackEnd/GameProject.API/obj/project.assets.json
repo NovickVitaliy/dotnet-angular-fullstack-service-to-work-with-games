@@ -3676,7 +3676,7 @@
           "bin/placeholder/GameProject.Domain.dll": {}
         }
       },
-      "GameProject.Identity/1.0.0": {
+      "GameProject.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
@@ -3691,24 +3691,10 @@
           "Scrutor": "4.2.2"
         },
         "compile": {
-          "bin/placeholder/GameProject.Identity.dll": {}
+          "bin/placeholder/GameProject.Infrastructure.dll": {}
         },
         "runtime": {
-          "bin/placeholder/GameProject.Identity.dll": {}
-        }
-      },
-      "GameProject.Persistence/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "GameProject.Identity": "1.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.0"
-        },
-        "compile": {
-          "bin/placeholder/GameProject.Persistence.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/GameProject.Persistence.dll": {}
+          "bin/placeholder/GameProject.Infrastructure.dll": {}
         }
       }
     }
@@ -10899,22 +10885,16 @@
       "path": "../GameProject.Domain/GameProject.Domain.csproj",
       "msbuildProject": "../GameProject.Domain/GameProject.Domain.csproj"
     },
-    "GameProject.Identity/1.0.0": {
+    "GameProject.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../GameProject.Identity/GameProject.Identity.csproj",
-      "msbuildProject": "../GameProject.Identity/GameProject.Identity.csproj"
-    },
-    "GameProject.Persistence/1.0.0": {
-      "type": "project",
-      "path": "../GameProject.Persistence/GameProject.Persistence.csproj",
-      "msbuildProject": "../GameProject.Persistence/GameProject.Persistence.csproj"
+      "path": "../GameProject.Infrastructure/GameProject.Infrastructure.csproj",
+      "msbuildProject": "../GameProject.Infrastructure/GameProject.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "GameProject.Application >= 1.0.0",
-      "GameProject.Identity >= 1.0.0",
-      "GameProject.Persistence >= 1.0.0",
+      "GameProject.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.0",
@@ -10949,11 +10929,8 @@
             "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj": {
               "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Application\\GameProject.Application.csproj"
             },
-            "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Identity\\GameProject.Identity.csproj"
-            },
-            "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj": {
-              "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Persistence\\GameProject.Persistence.csproj"
+            "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\GameProject\\BackEnd\\GameProject.Infrastructure\\GameProject.Infrastructure.csproj"
             }
           }
         }
