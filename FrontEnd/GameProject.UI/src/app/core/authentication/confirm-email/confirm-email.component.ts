@@ -3,6 +3,7 @@ import {ConfirmEmailService} from "../../services/confirm-email.service";
 import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
 import {Toast, ToastrService} from "ngx-toastr";
 import {ConfirmEmailRequest} from "../../../shared/models/dtos/identity/confirm-email-request";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-confirm-email',
@@ -17,7 +18,8 @@ export class ConfirmEmailComponent implements OnInit {
   constructor(private confirmEmailService: ConfirmEmailService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
-              private toastrService: ToastrService) {
+              private toastrService: ToastrService,
+              private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
@@ -36,7 +38,13 @@ export class ConfirmEmailComponent implements OnInit {
       .subscribe({
         next: _ => {
           this.toastrService.success("Email has been successfully confirmed");
-          this.router.navigateByUrl('')
+          this.authenticationService.currentUser$.subscribe({
+            next: user => {
+              user.emailConfirmed = true;
+              this.authenticationService.setCurrentUser(user);
+            }
+          })
+          this.router.navigateByUrl('');
         }
       });
   }
