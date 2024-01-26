@@ -1,4 +1,5 @@
 using GameProject.Application.Common.DTO;
+using GameProject.Application.Models.Account;
 using GameProject.Application.Models.Identity;
 
 namespace GameProject.Application.Contracts.Identity;

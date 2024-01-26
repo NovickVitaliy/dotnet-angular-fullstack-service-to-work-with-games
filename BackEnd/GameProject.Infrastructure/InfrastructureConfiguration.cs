@@ -18,6 +18,7 @@ using GameProject.Identity.Helpers;
 using GameProject.Identity.Models;
 using GameProject.Identity.Repositories;
 using GameProject.Identity.Services;
+using GameProject.Identity.Services.Account;
 using GameProject.Identity.Services.Bussiness.GameReview;
 using GameProject.Infrastructure.Cloudinary.Models.Common;
 using GameProject.Infrastructure.Cloudinary.Services;
@@ -42,6 +43,10 @@ public static class InfrastructureConfiguration
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.Configure<RefreshTokenSettings>(configuration.GetSection("RefreshTokenSettings"));
+        services.AddOptions<EmailSettings>()
+            .Bind(configuration.GetSection("MailSettings"))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
@@ -111,6 +116,8 @@ public static class InfrastructureConfiguration
         services.AddScoped<IUserGameListService, UserGameListService>();
 
         services.AddScoped<IGameReviewsService, GameReviewService>();
+
+        services.AddScoped<IConfirmEmailService, ConfirmEmailService>();
         
         return services;
     }

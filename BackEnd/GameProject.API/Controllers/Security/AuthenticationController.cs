@@ -2,6 +2,7 @@ using System.Security.Claims;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Exceptions;
+using GameProject.Application.Models.Account;
 using GameProject.Application.Models.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -72,12 +73,5 @@ public class AuthenticationController : ControllerBase
         await _authenticationService.ConfigureAccountAsync(configureAccountRequest);
 
         return NoContent();
-    }
-
-    [HttpGet]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public string Test()
-    {
-        return "Chel";
     }
 }
