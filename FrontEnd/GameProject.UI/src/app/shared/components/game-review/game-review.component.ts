@@ -32,6 +32,7 @@ export class GameReviewComponent {
           this.authenticationService.currentUser$.subscribe({
             next: user => {
               user.gameReviews = user.gameReviews.filter(review => review.reviewId !== reviewId)
+              this.authenticationService.setCurrentUser(user);
             }
           })
         }
