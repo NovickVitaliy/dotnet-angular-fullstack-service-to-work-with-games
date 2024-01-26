@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text;
 using GameProject.Application.Contracts.Account;
 using GameProject.Application.Contracts.Bussiness;
@@ -9,6 +10,7 @@ using GameProject.Application.Contracts.RawgApi.Genres;
 using GameProject.Application.Contracts.RawgApi.Platforms;
 using GameProject.Application.Models.Identity;
 using GameProject.Application.Services;
+using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Contracts.Repositories;
 using GameProject.Identity.DbContext;
@@ -16,6 +18,7 @@ using GameProject.Identity.Helpers;
 using GameProject.Identity.Models;
 using GameProject.Identity.Repositories;
 using GameProject.Identity.Services;
+using GameProject.Identity.Services.Bussiness.GameReview;
 using GameProject.Infrastructure.Cloudinary.Models.Common;
 using GameProject.Infrastructure.Cloudinary.Services;
 using GameProject.Infrastructure.Games;
@@ -39,7 +42,7 @@ public static class InfrastructureConfiguration
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.Configure<RefreshTokenSettings>(configuration.GetSection("RefreshTokenSettings"));
-        
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
             options
@@ -54,7 +57,7 @@ public static class InfrastructureConfiguration
             .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddScoped<ITokenService, IJwtService>();
+        services.AddScoped<ITokenService, JwtService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IAccountService, AccountService>();
 
@@ -106,6 +109,9 @@ public static class InfrastructureConfiguration
 
         services.AddScoped<IPhotoService, PhotoService>();
         services.AddScoped<IUserGameListService, UserGameListService>();
+
+        services.AddScoped<IGameReviewsService, GameReviewService>();
+        
         return services;
     }
 }

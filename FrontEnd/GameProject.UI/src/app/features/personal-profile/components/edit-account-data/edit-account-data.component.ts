@@ -1,13 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
-import {ChangeAccountDataRequest} from "../../../../shared/models/dtos/change-account-data-request";
+import {ChangeAccountDataRequest} from "../../../../shared/models/dtos/identity/change-account-data-request";
 import {FormValidatorsService} from "../../../../core/services/form-validators.service";
 import {AccountService} from "../../../../core/services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {map, Observable, take} from "rxjs";
 import {User} from "../../../../shared/models/user";
-import {ChangeProfilePhotoResponse} from "../../../../shared/models/dtos/change-profile-photo-response";
+import {ChangeProfilePhotoResponse} from "../../../../shared/models/dtos/account/change-profile-photo-response";
 
 @Component({
   selector: 'app-edit-account-data',

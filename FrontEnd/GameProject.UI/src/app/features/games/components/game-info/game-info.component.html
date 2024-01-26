@@ -5,8 +5,8 @@
       <div class="flex flex-row flex-wrap">
         <ng-container *ngIf="(currentUser$ | async) as user">
           <app-list-modal [game]="game" [currentUser$]="currentUser$"></app-list-modal>
-          <button class="btn btn-primary my-1 mx-2"><i class="fa-solid fa-book-bookmark"></i>Add to wishlist</button>
-          <button class="btn btn-primary my-1 mx-2"><i class="fa-solid fa-comment"></i>Add review</button>
+          <app-game-review-modal [gameName]="game.name" [gameRawgId]="game.id" [currentUser$]="currentUser$"
+                                 (newReview)="addReview($event)"></app-game-review-modal>
         </ng-container>
         <button class="btn btn-primary my-1 mx-2"><i class="fa-solid fa-store"></i>Find in stores</button>
       </div>
@@ -82,6 +82,18 @@
             <img src="{{screenshot.image}}" class="w-full" alt=""/>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="reviews flex flex-col w-full">
+      <h1 class="reviews-header text-3xl">Game Reviews:</h1>
+      <app-game-review *ngFor="let review of reviews.items" [review]="review"></app-game-review>
+      <div class="flex justify-center">
+        <app-pagination
+          [currentPage]="reviews.currentPage"
+          [itemsPerPage]="reviews.itemsPerPage"
+          [totalItemsCount]="reviews.totalCount"
+          (pageChanged)="loadNextPageOfReviews()"></app-pagination>
       </div>
     </div>
   </div>

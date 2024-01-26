@@ -1,0 +1,19 @@
+<div  class="reviews-items w-full flex border border-gray-500 rounded-2xl mb-3">
+  <div class="reviewer-profile-image w-1/5 p-3">
+    <img class="rounded-full"
+         src="{{review.authorProfilePhotoUrl ? review.authorProfilePhotoUrl : 'assets/images/defaultUserPicture.png' }}">
+    <p class="text-center">{{review.authorName}}</p>
+    <p class="text-center">{{review.dateWritten | date}}</p>
+  </div>
+  <div class="border-r-2 border-r-gray-500 my-5"></div>
+  <div class="w-3/5 my-7 mx-3">
+    <p>{{review.review}}</p>
+  </div>
+  <div class="border-r-2 border-r-gray-500 my-5"></div>
+  <div class="w-1/5 my-7 mx-3 rounded-3xl" [ngClass]="getColorBasedOnScore(review.score * 10)">
+    <div class="h-full w-full flex flex-col justify-center items-center">
+      <h1 class="text-2xl">Total Score:</h1>
+      <h1 class="text-5xl">{{review.score}}</h1>
+    </div>
+  </div>
+</div>

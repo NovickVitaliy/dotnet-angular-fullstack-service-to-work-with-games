@@ -5,7 +5,7 @@ import {environment} from "../../../environments/environment.development";
 import {map} from "rxjs";
 import {GameMainInfo} from "../../shared/models/rawg-api/games/game-main-info";
 import {GameFilterQuery} from "../../shared/models/rawg-api/common/game-filter-query";
-import {PagedResult} from "../../shared/models/dtos/paged-result";
+import {PagedResult} from "../../shared/models/shared/paged-result";
 import {GameAllInfo} from "../../shared/models/rawg-api/games/game-all-info";
 import {GameScreenshot} from "../../shared/models/rawg-api/games/game-screenshot";
 import {GameTrailer} from "../../shared/models/rawg-api/games/game-trailer";

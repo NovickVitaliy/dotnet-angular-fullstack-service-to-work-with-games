@@ -25,6 +25,39 @@ namespace GameProject.Identity.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("GameProject.Domain.Models.Business.GameReview", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DateWritten")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("GameName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("GameRawgId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Review")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("GameReviews", (string)null);
+                });
+
             modelBuilder.Entity("GameProject.Domain.Models.Business.Games.Common.BaseGame", b =>
                 {
                     b.Property<Guid>("Id")
@@ -53,82 +86,7 @@ namespace GameProject.Identity.Migrations
                     b.UseTpcMappingStrategy();
                 });
 
-            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersAbandonedGames", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AbandonedGameId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId", "AbandonedGameId");
-
-                    b.HasIndex("AbandonedGameId");
-
-                    b.ToTable("UsersAbandonedGames", (string)null);
-                });
-
-            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersDesiredGames", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("DesiredGameId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId", "DesiredGameId");
-
-                    b.HasIndex("DesiredGameId");
-
-                    b.ToTable("UsersDesiredGames", (string)null);
-                });
-
-            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersFinishedGames", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("FinishedGameId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId", "FinishedGameId");
-
-                    b.HasIndex("FinishedGameId");
-
-                    b.ToTable("UsersFinishedGames", (string)null);
-                });
-
-            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersInProgressGames", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("InProgressGameId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId", "InProgressGameId");
-
-                    b.HasIndex("InProgressGameId");
-
-                    b.ToTable("UsersInProgressGames", (string)null);
-                });
-
-            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersStartedGames", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("StartedGameId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("UserId", "StartedGameId");
-
-                    b.HasIndex("StartedGameId");
-
-                    b.ToTable("UsersStartedGames", (string)null);
-                });
-
-            modelBuilder.Entity("GameProject.Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("GameProject.Domain.Models.Identity.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -144,6 +102,9 @@ namespace GameProject.Identity.Migrations
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("DateRegistered")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -219,7 +180,7 @@ namespace GameProject.Identity.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("GameProject.Identity.Models.ProfilePhoto", b =>
+            modelBuilder.Entity("GameProject.Domain.Models.Identity.ProfilePhoto", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,6 +203,81 @@ namespace GameProject.Identity.Migrations
                         .IsUnique();
 
                     b.ToTable("ProfilePhotos", (string)null);
+                });
+
+            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersAbandonedGames", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AbandonedGameId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "AbandonedGameId");
+
+                    b.HasIndex("AbandonedGameId");
+
+                    b.ToTable("UsersAbandonedGames", (string)null);
+                });
+
+            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersDesiredGames", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("DesiredGameId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "DesiredGameId");
+
+                    b.HasIndex("DesiredGameId");
+
+                    b.ToTable("UsersDesiredGames", (string)null);
+                });
+
+            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersFinishedGames", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FinishedGameId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "FinishedGameId");
+
+                    b.HasIndex("FinishedGameId");
+
+                    b.ToTable("UsersFinishedGames", (string)null);
+                });
+
+            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersInProgressGames", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InProgressGameId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "InProgressGameId");
+
+                    b.HasIndex("InProgressGameId");
+
+                    b.ToTable("UsersInProgressGames", (string)null);
+                });
+
+            modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersStartedGames", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("StartedGameId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("UserId", "StartedGameId");
+
+                    b.HasIndex("StartedGameId");
+
+                    b.ToTable("UsersStartedGames", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -409,6 +445,28 @@ namespace GameProject.Identity.Migrations
                     b.ToTable("StartedGames");
                 });
 
+            modelBuilder.Entity("GameProject.Domain.Models.Business.GameReview", b =>
+                {
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "Author")
+                        .WithMany("GameReviews")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("GameProject.Domain.Models.Identity.ProfilePhoto", b =>
+                {
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "User")
+                        .WithOne("ProfilePhoto")
+                        .HasForeignKey("GameProject.Domain.Models.Identity.ProfilePhoto", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersAbandonedGames", b =>
                 {
                     b.HasOne("GameProject.Domain.Models.Business.Games.AbandonedGame", "AbandonedGame")
@@ -417,7 +475,7 @@ namespace GameProject.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", "User")
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "User")
                         .WithMany("UsersAbandonedGames")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -436,7 +494,7 @@ namespace GameProject.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", "User")
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "User")
                         .WithMany("UsersDesiredGames")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -455,7 +513,7 @@ namespace GameProject.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", "User")
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "User")
                         .WithMany("UsersFinishedGames")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -474,7 +532,7 @@ namespace GameProject.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", "User")
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "User")
                         .WithMany("UsersInProgressGames")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -493,24 +551,13 @@ namespace GameProject.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", "User")
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "User")
                         .WithMany("UsersStartedGames")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("StartedGame");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("GameProject.Identity.Models.ProfilePhoto", b =>
-                {
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", "User")
-                        .WithOne("ProfilePhoto")
-                        .HasForeignKey("GameProject.Identity.Models.ProfilePhoto", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -526,7 +573,7 @@ namespace GameProject.Identity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", null)
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -535,7 +582,7 @@ namespace GameProject.Identity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", null)
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -550,7 +597,7 @@ namespace GameProject.Identity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", null)
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -559,15 +606,17 @@ namespace GameProject.Identity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("GameProject.Identity.Models.ApplicationUser", null)
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GameProject.Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("GameProject.Domain.Models.Identity.ApplicationUser", b =>
                 {
+                    b.Navigation("GameReviews");
+
                     b.Navigation("ProfilePhoto");
 
                     b.Navigation("UsersAbandonedGames");

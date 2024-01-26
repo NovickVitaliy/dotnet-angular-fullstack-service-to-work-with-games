@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { GameReviewComponent } from './components/game-review/game-review.component';
 
 
 
 @NgModule({
   declarations: [
-    PaginationComponent
+    PaginationComponent,
+    GameReviewComponent
   ],
-  exports: [
-    PaginationComponent
-  ],
+    exports: [
+        PaginationComponent,
+        GameReviewComponent
+    ],
   imports: [
     CommonModule
   ]

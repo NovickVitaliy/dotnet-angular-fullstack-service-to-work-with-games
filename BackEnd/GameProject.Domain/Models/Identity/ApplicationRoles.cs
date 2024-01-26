@@ -1,4 +1,4 @@
-namespace GameProject.Identity.Models;
+namespace GameProject.Domain.Models.Identity;
 
 public static class ApplicationRoles
 {

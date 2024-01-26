@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {ChangeAccountDataRequest} from "../../shared/models/dtos/change-account-data-request";
+import {ChangeAccountDataRequest} from "../../shared/models/dtos/identity/change-account-data-request";
 import {environment} from "../../../environments/environment.development";
-import {ChangePasswordRequest} from "../../shared/models/dtos/change-password-request";
-import {ChangeProfilePhotoResponse} from "../../shared/models/dtos/change-profile-photo-response";
+import {ChangePasswordRequest} from "../../shared/models/dtos/identity/change-password-request";
+import {ChangeProfilePhotoResponse} from "../../shared/models/dtos/account/change-profile-photo-response";
 
 @Injectable({
   providedIn: 'root'

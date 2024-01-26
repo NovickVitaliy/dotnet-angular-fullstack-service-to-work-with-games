@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GameMainInfo} from "../../../../shared/models/rawg-api/games/game-main-info";
 import {GamesResearcherService} from "../../../../core/services/games-researcher.service";
-import {PagedResult} from "../../../../shared/models/dtos/paged-result";
+import {PagedResult} from "../../../../shared/models/shared/paged-result";
 import {GameFilterQuery} from "../../../../shared/models/rawg-api/common/game-filter-query";
 import {GenresResearcherService} from "../../../../core/services/genres-researcher.service";
 import {GenreMainInfo} from "../../../../shared/models/rawg-api/genres/genre-main-info";

@@ -16,5 +16,12 @@ export class PersonalProfileComponent implements OnInit{
 
   ngOnInit(): void {
     this.currentUser$ = this.authenticationService.currentUser$;
+    this.currentUser$.subscribe({
+      next: user => {
+        if(user){
+          console.log(user);
+        }
+      }
+    })
   }
 }

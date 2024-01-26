@@ -1,3 +1,4 @@
+using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

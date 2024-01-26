@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../../../environments/environment.development";
 import {HttpClient} from "@angular/common/http";
-import {RegisterRequest} from "../../../shared/models/dtos/register-request";
-import {BaseResponse} from "../../../shared/models/dtos/base-response";
-import {LoginRequest} from "../../../shared/models/dtos/login-request";
-import {ConfigureAccountRequest} from "../../../shared/models/dtos/configure-account-request";
+import {RegisterRequest} from "../../../shared/models/dtos/identity/register-request";
+import {BaseResponse} from "../../../shared/models/shared/base-response";
+import {LoginRequest} from "../../../shared/models/dtos/identity/login-request";
+import {ConfigureAccountRequest} from "../../../shared/models/dtos/identity/configure-account-request";
 import {BehaviorSubject, map, Observable, shareReplay} from "rxjs";
 import {User} from "../../../shared/models/user";
 

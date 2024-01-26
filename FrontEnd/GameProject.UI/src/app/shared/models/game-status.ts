@@ -8,7 +8,7 @@ export enum GameStatus{
 
 export const GameStatusToLabelMapping: Record<GameStatus, string> = {
   [GameStatus.Started]: "Started",
-  [GameStatus.InProgress]: "In Progress",
+  [GameStatus.InProgress]: "InProgress",
   [GameStatus.Finished]: "Finished",
   [GameStatus.Abandoned]: "Abandoned",
   [GameStatus.Desired]: "Desired"

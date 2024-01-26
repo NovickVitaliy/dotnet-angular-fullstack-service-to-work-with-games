@@ -1,5 +1,5 @@
 using GameProject.Domain.Models.Business.Games;
-using GameProject.Identity.Models;
+using GameProject.Domain.Models.Identity;
 
 namespace GameProject.Domain.Models.Shared;
 

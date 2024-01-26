@@ -1,6 +1,5 @@
 using AutoMapper;
 using GameProject.Application.Models.Identity;
-using GameProject.Identity.Models;
 
 namespace GameProject.Application.AutoMapper.CustomConverters.Identity;
 

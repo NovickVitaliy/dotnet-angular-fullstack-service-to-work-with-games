@@ -14,9 +14,11 @@ public class AuthenticationResponse
     public string AccessToken { get; set; }
     public string RefreshToken { get; set; }
     public string? ProfilePhotoUrl { get; set; }
-    public List<BaseGameResponse> StartedGames { get; set; }
-    public List<BaseGameResponse> InProgressGames { get; set; } 
-    public List<BaseGameResponse> FinishedGames { get; set; } 
-    public List<BaseGameResponse> AbandonedGames { get; set; } 
-    public List<BaseGameResponse> DesiredGames { get; set; }
+    public int DaysWithUs { get; set; }
+    public List<BaseGameResponse> StartedGames { get; set; } = new();
+    public List<BaseGameResponse> InProgressGames { get; set; } = new();
+    public List<BaseGameResponse> FinishedGames { get; set; } = new();
+    public List<BaseGameResponse> AbandonedGames { get; set; } = new();
+    public List<BaseGameResponse> DesiredGames { get; set; } = new();
+    public List<GameReviewDto> GameReviews { get; set; } = new();
 }

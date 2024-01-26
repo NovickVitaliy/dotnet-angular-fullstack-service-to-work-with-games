@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountService} from "../../../../core/services/account.service";
 import {ToastrService} from "ngx-toastr";
 import {FormValidatorsService} from "../../../../core/services/form-validators.service";
-import {ChangePasswordRequest} from "../../../../shared/models/dtos/change-password-request";
+import {ChangePasswordRequest} from "../../../../shared/models/dtos/identity/change-password-request";
 import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
 
 @Component({

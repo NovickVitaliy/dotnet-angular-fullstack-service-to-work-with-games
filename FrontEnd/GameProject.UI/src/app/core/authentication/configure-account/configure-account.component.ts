@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuoteService} from "../../services/quote.service";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ConfigureAccountRequest} from "../../../shared/models/dtos/configure-account-request";
+import {ConfigureAccountRequest} from "../../../shared/models/dtos/identity/configure-account-request";
 import {AuthenticationService} from "../services/authentication.service";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";

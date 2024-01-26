@@ -9,7 +9,8 @@ import { GameInfoComponent } from './components/game-info/game-info.component';
 import { ListModalComponent } from './components/list-modal/list-modal.component';
 import {FormsModule} from "@angular/forms";
 import { UserGameListComponent } from './components/user-game-list/user-game-list.component';
-import { UserGameListItemComponent } from './user-game-list-item/user-game-list-item.component';
+import { UserGameListItemComponent } from './components/user-game-list-item/user-game-list-item.component';
+import { GameReviewModalComponent } from './components/game-review-modal/game-review-modal.component';
 
 
 
@@ -21,7 +22,8 @@ import { UserGameListItemComponent } from './user-game-list-item/user-game-list-
     GameInfoComponent,
     ListModalComponent,
     UserGameListComponent,
-    UserGameListItemComponent
+    UserGameListItemComponent,
+    GameReviewModalComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,5 @@
+.data-input {
+  @apply p-3 text-xl rounded-lg border-2 border-gray-400 focus:outline-none focus:outline-gray-500 text-black;
+}
+
+/*# sourceMappingURL=game-review-modal.component.css.map */

@@ -3,6 +3,7 @@ import {GameDeveloper} from "../developers/game-developer";
 import {GenreMainInfo} from "../genres/genre-main-info";
 import {GameTag} from "../tags/game-tag";
 import {GamePublisher} from "../publishers/game-publisher";
+import {GameReview} from "../../bussiness/game-reviews/game-review";
 
 export interface GameAllInfo{
   id: number;

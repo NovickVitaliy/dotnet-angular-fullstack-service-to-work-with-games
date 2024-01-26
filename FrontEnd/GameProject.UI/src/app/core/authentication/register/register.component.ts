@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FormValidatorsService} from "../../services/form-validators.service";
 import {AuthenticationService} from "../services/authentication.service";
-import {RegisterRequest} from "../../../shared/models/dtos/register-request";
+import {RegisterRequest} from "../../../shared/models/dtos/identity/register-request";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 

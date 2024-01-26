@@ -4,20 +4,31 @@ import {AuthenticationService} from "../authentication/services/authentication.s
 import {map, take} from "rxjs";
 
 export const emailInterceptor: HttpInterceptorFn = (req, next) => {
+  console.log("Email interceptor")
+  console.log(req.method)
   if (req.headers.get("Content-Type") !== "multipart/form-data") {
+    let userEmail;
     const authenticationService = inject(AuthenticationService);
     authenticationService.currentUser$.pipe(take(1)).subscribe({
       next: user => {
         if (user) {
-          console.log("Email interceptor")
-          const bodyWithEmail = {...(req.body as any), email: user.email};
-          console.log(JSON.stringify(bodyWithEmail))
-          req = req.clone({
-            body: bodyWithEmail
-          });
+          userEmail = user.email;
         }
       }
     })
+    if (req.method === 'POST') {
+      if (userEmail) {
+        console.log(userEmail)
+        const bodyWithEmail = {...(req.body as any), email: userEmail};
+        req = req.clone({
+          body: bodyWithEmail
+        });
+      }
+    } else if (req.method === 'GET') {
+      if (userEmail) {
+        req.params.append('email', userEmail)
+      }
+    }
   }
 
   return next(req);

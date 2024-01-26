@@ -1,7 +1,7 @@
 using AutoMapper;
 using GameProject.Application.AutoMapper.CustomConverters.Identity;
 using GameProject.Application.Models.Identity;
-using GameProject.Identity.Models;
+using GameProject.Domain.Models.Identity;
 
 namespace GameProject.Application.Mappings.Identity;
 

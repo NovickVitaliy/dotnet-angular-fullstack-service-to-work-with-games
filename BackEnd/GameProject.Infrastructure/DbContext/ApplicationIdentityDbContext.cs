@@ -1,6 +1,8 @@
 using System.Reflection;
+using GameProject.Domain.Models.Business;
 using GameProject.Domain.Models.Business.Games;
 using GameProject.Domain.Models.Business.Games.Common;
+using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,6 +17,7 @@ public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser, I
     public DbSet<FinishedGame> FinishedGames { get; set; }
     public DbSet<AbandonedGame> AbandonedGames { get; set; }
     public DbSet<DesiredGame> DesiredGames { get; set; }
+    public DbSet<GameReview> GameReviews { get; set; }
     public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options) : base(options)
     { }
 

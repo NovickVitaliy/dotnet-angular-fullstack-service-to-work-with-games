@@ -109,9 +109,7 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\ne
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Application.dll
-C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Identity.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Application.pdb
-C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Identity.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\net8.0\GameProject.IdentityTests.csproj.AssemblyReference.cache
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\net8.0\GameProject.IdentityTests.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\net8.0\GameProject.IdentityTests.AssemblyInfoInputs.cache
@@ -124,3 +122,13 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\ne
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\net8.0\GameProject.IdentityTests.pdb
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\net8.0\GameProject.IdentityTests.genruntimeconfig.cache
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\obj\Debug\net8.0\ref\GameProject.IdentityTests.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\Scrutor.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Domain.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Infrastructure.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Infrastructure.pdb
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\GameProject.Domain.pdb

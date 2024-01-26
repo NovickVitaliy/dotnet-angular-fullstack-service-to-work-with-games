@@ -3,6 +3,7 @@ using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
+using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
 using GameProject.Identity.Services;

@@ -2,11 +2,10 @@ using GameProject.Application.Contracts.Account;
 using GameProject.Application.Contracts.Cloudinary;
 using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Account;
+using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts.Repositories;
 using GameProject.Identity.Extensions;
-using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

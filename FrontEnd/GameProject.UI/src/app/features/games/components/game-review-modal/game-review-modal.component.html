@@ -1,0 +1,23 @@
+<button class="btn btn-primary my-1 mx-2" onclick="my_modal_2.showModal()"><i class="fa-solid fa-comment"></i>Add review</button>
+<dialog id="my_modal_2" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Add review</h3>
+    <div class="py-4">
+      <p class="text-2xl mb-1">Score</p>
+      <div class="rating space-x-0.5">
+        <input *ngFor="let score of scores" type="radio" name="rating-1" class="mask mask-star" [checked]="score === 5" (click)="setReviewScore(score)" />
+      </div>
+      <div class="flex justify-between">
+        <p class="text-2xl mb-1">Review</p>
+        <p>{{availableCharsForReview}}/{{reviewMaxLength}}</p>
+      </div>
+      <textarea (keyup)="calculateAvailableChars($event)" [maxLength]="reviewMaxLength" class="data-input w-full h-72" #reviewTextArea></textarea>
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn mx-1" #closeModalButton>Close</button>
+      </form>
+      <button class="btn btn-primary mx-1" (click)="addReview()">Add review</button>
+    </div>
+  </div>
+</dialog>
