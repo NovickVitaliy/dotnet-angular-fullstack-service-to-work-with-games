@@ -5,6 +5,11 @@ import {ToastrService} from "ngx-toastr";
 import {FormValidatorsService} from "../../../../core/services/form-validators.service";
 import {ChangePasswordRequest} from "../../../../shared/models/dtos/identity/change-password-request";
 import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
+import {SendConfirmEmailMessageRequest} from "../../../../shared/models/dtos/identity/send-confirm-email-message-request";
+import {environment} from "../../../../../environments/environment.development";
+import {ConfirmEmailService} from "../../../../core/services/confirm-email.service";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-edit-account-security',
@@ -13,17 +18,24 @@ import {AuthenticationService} from "../../../../core/authentication/services/au
 })
 export class EditAccountSecurityComponent implements OnInit {
   changeAccountPasswordForm: FormGroup = new FormGroup<any>({});
+  isEmailConfirmed: boolean;
 
   constructor(private accountService: AccountService,
               private formBuilder: FormBuilder,
               private toastrService: ToastrService,
               private formValidator: FormValidatorsService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private confirmEmailService: ConfirmEmailService) {
 
   }
 
   ngOnInit(): void {
     this.initializeForm();
+    this.authenticationService.currentUser$.subscribe({
+      next: user => {
+        this.isEmailConfirmed = user.emailConfirmed;
+      }
+    })
   }
 
   private initializeForm() {
@@ -56,5 +68,21 @@ export class EditAccountSecurityComponent implements OnInit {
           this.toastrService.error(error.error.description);
         }
       });
+  }
+
+  sendConfirmEmailMessage(){
+    const confirmEmailRequest: SendConfirmEmailMessageRequest = {
+      confirmUrl: environment.confirmEmailUrl
+    }
+
+    this.confirmEmailService.sendConfirmEmailMessage(confirmEmailRequest)
+      .subscribe({
+        next: _ => {
+          this.toastrService.success("Confirmation email has been sent to your email")
+        },
+        error: (error: HttpErrorResponse) => {
+          this.toastrService.error(error.message);
+        }
+      })
   }
 }

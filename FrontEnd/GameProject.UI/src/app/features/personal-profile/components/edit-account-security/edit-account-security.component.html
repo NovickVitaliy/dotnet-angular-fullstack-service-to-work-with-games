@@ -1,7 +1,7 @@
 <div class="text-black w-full h-full text-xl">
   <form [formGroup]="changeAccountPasswordForm">
     <label class="text-3xl">Change Password</label>
-    <div class="flex flex-wrap justify-between lg:flex lg:flex-wrap lg:justify-between">
+    <div class="flex flex-wrap justify-between lg:flex lg:flex-wrap lg:justify-between mb-3">
       <div class="flex flex-col w-full lg:w-auto mb-3">
         <label class="">Old Password:</label>
         <input type="password" class="data-input" formControlName="oldPassword">
@@ -24,8 +24,26 @@
       </div>
 
     </div>
+
     <div class="flex justify-end">
-      <button class="btn btn-primary" (click)="changeAccountPassword()" [disabled]="changeAccountPasswordForm.invalid">Change password</button>
+      <button class="btn btn-primary" (click)="changeAccountPassword()" [disabled]="changeAccountPasswordForm.invalid">
+        Change password
+      </button>
+    </div>
+    <div class="flex">
+      <div class="w-fit">
+        <h1 class="text-2xl mb-1 w-fit">Confirm Email</h1>
+        <button class="btn btn-primary" [disabled]="isEmailConfirmed" (click)="sendConfirmEmailMessage()">Send confirm
+          email
+        </button>
+      </div>
+      <div class="flex items-end ml-2">
+        <div>
+          <span class="mr-1">Email Confirmed:</span>
+          <i *ngIf="isEmailConfirmed" class="fa-solid fa-check text-green-600"></i>
+          <i *ngIf="!isEmailConfirmed" class="fa-solid fa-x text-red-600"></i>
+        </div>
+      </div>
     </div>
   </form>
 </div>

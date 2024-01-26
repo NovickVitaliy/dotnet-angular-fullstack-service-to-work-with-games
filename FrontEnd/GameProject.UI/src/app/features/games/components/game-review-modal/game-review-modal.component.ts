@@ -5,6 +5,7 @@ import {CreateGameReviewRequest} from "../../../../shared/models/dtos/bussiness/
 import {Observable, take} from "rxjs";
 import {User} from "../../../../shared/models/user";
 import {GameReview} from "../../../../shared/models/bussiness/game-reviews/game-review";
+import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
 
 @Component({
   selector: 'app-game-review-modal',
@@ -22,9 +23,11 @@ export class GameReviewModalComponent {
   @Input({required: true}) gameRawgId: number;
   @Input({required: true}) currentUser$: Observable<User>;
   @Output() newReview: EventEmitter<GameReview> = new EventEmitter<GameReview>();
+  @Input({required: true}) isEmailConfirmed: boolean;
 
   constructor(private gameReviewerService: GameReviewerService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private authenticationService: AuthenticationService) {
   }
 
   addReview() {
@@ -45,6 +48,7 @@ export class GameReviewModalComponent {
               .subscribe({
                 next: user => {
                   user.gameReviews.push(newReview);
+                  this.authenticationService.setCurrentUser(user);
                 }
               })
             this.newReview.emit(newReview);

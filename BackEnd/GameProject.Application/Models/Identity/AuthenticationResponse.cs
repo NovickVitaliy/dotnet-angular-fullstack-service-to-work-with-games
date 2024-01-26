@@ -15,6 +15,7 @@ public class AuthenticationResponse
     public string RefreshToken { get; set; }
     public string? ProfilePhotoUrl { get; set; }
     public int DaysWithUs { get; set; }
+    public bool EmailConfirmed { get; set; }
     public List<BaseGameResponse> StartedGames { get; set; } = new();
     public List<BaseGameResponse> InProgressGames { get; set; } = new();
     public List<BaseGameResponse> FinishedGames { get; set; } = new();

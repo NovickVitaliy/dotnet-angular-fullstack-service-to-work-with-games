@@ -17,6 +17,7 @@ export interface User {
   location: string;
   profilePhotoUrl?: string;
   daysWithUs: number;
+  emailConfirmed: boolean;
   startedGames: StartedGame[];
   inProgressGames: InProgressGame[];
   finishedGames: FinishedGame[];

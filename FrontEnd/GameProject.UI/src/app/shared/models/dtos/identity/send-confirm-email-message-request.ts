@@ -1,3 +1,3 @@
-export interface ConfirmEmailRequest{
+export interface SendConfirmEmailMessageRequest {
   confirmUrl: string;
 }
