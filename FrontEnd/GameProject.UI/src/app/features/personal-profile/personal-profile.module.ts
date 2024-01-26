@@ -6,6 +6,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { EditAccountDataComponent } from './components/edit-account-data/edit-account-data.component';
 import { EditAccountSecurityComponent } from './components/edit-account-security/edit-account-security.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {SharedModule} from "../../shared/shared.module";
 
 
 
@@ -16,10 +17,11 @@ import {ReactiveFormsModule} from "@angular/forms";
     EditAccountDataComponent,
     EditAccountSecurityComponent
   ],
-  imports: [
-    CommonModule,
-    PersonalProfileRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        PersonalProfileRoutingModule,
+        ReactiveFormsModule,
+        SharedModule
+    ]
 })
 export class PersonalProfileModule { }

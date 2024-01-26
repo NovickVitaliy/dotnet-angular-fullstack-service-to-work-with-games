@@ -47,7 +47,7 @@ public class GameReviewsController : ControllerBase
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DeleteGameReview([FromRoute] DeleteGameReviewRequest deleteGameReviewRequest)
+    public async Task<ActionResult> DeleteGameReview([FromQuery]DeleteGameReviewRequest deleteGameReviewRequest)
     {
         await _gameReviewsService.DeleteGameReview(deleteGameReviewRequest);
         return Ok();

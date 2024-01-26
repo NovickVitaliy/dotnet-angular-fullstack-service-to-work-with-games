@@ -16,7 +16,7 @@ export const emailInterceptor: HttpInterceptorFn = (req, next) => {
         }
       }
     })
-    if (req.method === 'POST') {
+    if (req.method === 'POST' || req.method === "PUT") {
       if (userEmail) {
         console.log(userEmail)
         const bodyWithEmail = {...(req.body as any), email: userEmail};
@@ -24,9 +24,13 @@ export const emailInterceptor: HttpInterceptorFn = (req, next) => {
           body: bodyWithEmail
         });
       }
-    } else if (req.method === 'GET') {
+    } else if (req.method === 'GET' || req.method === "DELETE") {
       if (userEmail) {
-        req.params.append('email', userEmail)
+        req = req.clone({
+          setParams: {
+            email: userEmail
+          }
+        });
       }
     }
   }

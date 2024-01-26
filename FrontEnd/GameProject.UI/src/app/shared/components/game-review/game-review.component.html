@@ -4,6 +4,10 @@
          src="{{review.authorProfilePhotoUrl ? review.authorProfilePhotoUrl : 'assets/images/defaultUserPicture.png' }}">
     <p class="text-center">{{review.authorName}}</p>
     <p class="text-center">{{review.dateWritten | date}}</p>
+    <div *ngIf="isEditable" class="flex justify-between">
+      <button class="btn btn-primary" (click)="editReview()">Edit</button>
+      <button class="btn btn-error" (click)="removeReview(review.reviewId)">Remove</button>
+    </div>
   </div>
   <div class="border-r-2 border-r-gray-500 my-5"></div>
   <div class="w-3/5 my-7 mx-3">

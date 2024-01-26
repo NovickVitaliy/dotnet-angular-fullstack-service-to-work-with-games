@@ -1,8 +1,10 @@
-<div *ngIf="(currentUser$ | async) as user" class="relative w-3/4 top-14 bg-base-100 flex items-center rounded-lg justify-center mx-auto p-5 profile">
+<div *ngIf="(currentUser$ | async) as user"
+     class="relative w-3/4 top-14 bg-base-100 flex flex-col items-center rounded-lg justify-center mx-auto p-5 profile">
   <div class="profile-top lg:flex justify-start w-full lg:space-x-3">
     <div class="profile-top-image w-full flex justify-center lg:w-1/5">
       <div>
-        <img class="rounded-full" src="{{user.profilePhotoUrl ? user.profilePhotoUrl : 'assets/images/defaultUserPicture.png'}}" alt="">
+        <img class="rounded-full"
+             src="{{user.profilePhotoUrl ? user.profilePhotoUrl : 'assets/images/defaultUserPicture.png'}}" alt="">
         <div class="mt-2">
           <button class="btn btn-primary w-full" routerLink="edit/account-data">Edit profile</button>
         </div>
@@ -41,6 +43,21 @@
             <div class="stat-title">Days with us</div>
             <div class="stat-value text-center">{{user.daysWithUs}}</div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-body w-full">
+    <div role="tablist" class="tabs tabs-bordered">
+      <input type="radio" name="my_tabs_1" role="tab" class="tab text-2xl pb-2" aria-label="Game Moments" checked/>
+      <div role="tabpanel" class="tab-content my-1">
+
+      </div>
+
+      <input type="radio" name="my_tabs_1" role="tab" class="tab text-2xl" aria-label="Reviews"/>
+      <div role="tabpanel" class="tab-content my-1">
+        <div class="w-full">
+          <app-game-review [isEditable]="true" *ngFor="let review of user.gameReviews" [review]="review"></app-game-review>
         </div>
       </div>
     </div>

@@ -87,13 +87,13 @@
 
     <div class="reviews flex flex-col w-full">
       <h1 class="reviews-header text-3xl">Game Reviews:</h1>
-      <app-game-review *ngFor="let review of reviews.items" [review]="review"></app-game-review>
+      <app-game-review *ngFor="let review of reviews.items" [review]="review" [isEditable]="false"></app-game-review>
       <div class="flex justify-center">
-        <app-pagination
-          [currentPage]="reviews.currentPage"
-          [itemsPerPage]="reviews.itemsPerPage"
-          [totalItemsCount]="reviews.totalCount"
-          (pageChanged)="loadNextPageOfReviews()"></app-pagination>
+<!--        <app-pagination-->
+<!--          [currentPage]="reviews.currentPage"-->
+<!--          [itemsPerPage]="reviews.itemsPerPage"-->
+<!--          [totalItemsCount]="reviews.totalCount"-->
+<!--          (pageChanged)="loadNextPageOfReviews()"></app-pagination>-->
       </div>
     </div>
   </div>

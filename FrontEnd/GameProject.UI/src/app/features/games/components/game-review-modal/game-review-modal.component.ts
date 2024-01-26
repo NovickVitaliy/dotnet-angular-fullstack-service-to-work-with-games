@@ -17,6 +17,7 @@ export class GameReviewModalComponent {
   scores: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   reviewScore: number | null = 5;
   @ViewChild("reviewTextArea") reviewerTextArea: ElementRef;
+  @ViewChild("closeModalButton") closeModalButton: ElementRef;
   @Input({required: true}) gameName: string;
   @Input({required: true}) gameRawgId: number;
   @Input({required: true}) currentUser$: Observable<User>;
@@ -46,7 +47,9 @@ export class GameReviewModalComponent {
                   user.gameReviews.push(newReview);
                 }
               })
-            this.newReview.emit(newReview)
+            this.newReview.emit(newReview);
+            this.toastr.success("Your review has been successfully added");
+            this.closeModalButton.nativeElement.click();
           }
         })
     } else {
