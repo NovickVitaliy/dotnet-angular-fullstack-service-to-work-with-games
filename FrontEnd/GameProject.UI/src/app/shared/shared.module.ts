@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { GameReviewComponent } from './components/game-review/game-review.component';
+import { GameReviewComponent } from '../features/games/components/game-review/game-review.component';
+import {GamesModule} from "../features/games/games.module";
 
 
 
 @NgModule({
   declarations: [
-    PaginationComponent,
-    GameReviewComponent
+    PaginationComponent
   ],
     exports: [
-        PaginationComponent,
-        GameReviewComponent
+        PaginationComponent
     ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class SharedModule { }

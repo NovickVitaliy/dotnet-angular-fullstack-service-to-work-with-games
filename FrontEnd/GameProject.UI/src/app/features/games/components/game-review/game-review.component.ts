@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {GameReview} from "../../models/bussiness/game-reviews/game-review";
-import {ScoreColorService} from "../../../core/services/score-color.service";
-import {GameReviewerService} from "../../../core/services/game-reviewer.service";
+import {GameReview} from "../../../../shared/models/bussiness/game-reviews/game-review";
+import {ScoreColorService} from "../../../../core/services/score-color.service";
+import {GameReviewerService} from "../../../../core/services/game-reviewer.service";
 import {ToastrService} from "ngx-toastr";
-import {AuthenticationService} from "../../../core/authentication/services/authentication.service";
+import {AuthenticationService} from "../../../../core/authentication/services/authentication.service";
 
 @Component({
   selector: 'app-game-review',
