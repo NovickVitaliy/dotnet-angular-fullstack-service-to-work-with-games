@@ -1,6 +1,6 @@
 <div class="login-form h-screen flex items-center justify-center">
   <div class="w-auto">
-    <form [formGroup]="loginForm"
+    <form [formGroup]="loginForm" autocomplete="off"
           class="max-w-sm mx-auto font-sans my-auto border text-neutral bg-base-100 border-black rounded-lg p-16">
       <div class="form-input flex flex-col mb-3">
         <label class="text-lg mb-1">Email:</label>
@@ -24,6 +24,9 @@
              *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.['required']">
           Password is required
         </div>
+      </div>
+      <div class="flex justify-end mb-3 text-sm text-blue-500">
+        <a routerLink="/auth/reset-password-request">Forgot password?</a>
       </div>
       <div class="buttons flex justify-between">
         <button class="btn btn-base" (click)="cancel()">Cancel</button>

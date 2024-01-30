@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GameProject.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4a640f9d5a143dcf25060f17ff4d6024e5a84fd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01e5f9aa1f3191ef7dabd37f11dbcd9867e57d94")]
 [assembly: System.Reflection.AssemblyProductAttribute("GameProject.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GameProject.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,6 +6,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { ConfigureAccountComponent } from './configure-account/configure-account.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { ResetPasswordRequestFormComponent } from './reset-password-request-form/reset-password-request-form.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,8 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
     LoginComponent,
     ConfigureAccountComponent,
     ConfirmEmailComponent,
+    ResetPasswordRequestFormComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,

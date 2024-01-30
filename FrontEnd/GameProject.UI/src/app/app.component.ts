@@ -31,9 +31,12 @@ export class AppComponent implements OnInit{
     this.router.events.subscribe({
       next: event => {
         if(event instanceof NavigationEnd){
-          this.isAuthenticationMode = event.url === '/auth/register'
+          this.isAuthenticationMode =
+               event.url === '/auth/register'
             || event.url === '/auth/login'
-            || event.url === '/auth/configure';
+            || event.url === '/auth/configure'
+            || event.url === '/auth/reset-password-request'
+            || event.url.includes('/auth/reset-password');
         }
       }
     });

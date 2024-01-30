@@ -12,6 +12,7 @@ using GameProject.Application.Models.Identity;
 using GameProject.Application.Services;
 using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts;
+using GameProject.Identity.Contracts.Emailer;
 using GameProject.Identity.Contracts.Repositories;
 using GameProject.Identity.DbContext;
 using GameProject.Identity.Helpers;
@@ -20,6 +21,7 @@ using GameProject.Identity.Repositories;
 using GameProject.Identity.Services;
 using GameProject.Identity.Services.Account;
 using GameProject.Identity.Services.Bussiness.GameReview;
+using GameProject.Identity.Services.Emailer;
 using GameProject.Infrastructure.Cloudinary.Models.Common;
 using GameProject.Infrastructure.Cloudinary.Services;
 using GameProject.Infrastructure.Games;
@@ -118,6 +120,10 @@ public static class InfrastructureConfiguration
         services.AddScoped<IGameReviewsService, GameReviewService>();
 
         services.AddScoped<IConfirmEmailService, ConfirmEmailService>();
+
+        services.AddScoped<IServerEmailer, ServerEmailer>();
+
+        services.AddScoped<IResetPasswordService, ResetPasswordService>();
         
         return services;
     }
