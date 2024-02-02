@@ -1,16 +1,14 @@
-<div class="relative w-3/4 top-14 bg-base-100 flex items-center rounded-lg justify-center mx-auto p-5 profile">
-    <div class="w-full flex flex-col">
-      <h1 class="text-3xl mb-3">Top 10 highest rated games of all time</h1>
-      <div class="flex flex-wrap justify-between">
-        <div *ngFor="let game of top10highestRatedGamesOfAllTime" class="card w-1/6 m-2 image-full cursor-pointer" routerLink="/games/{{game.id}}">
-          <figure><img src="{{game.background_image}}" /></figure>
-          <div class="card-body justify-between">
-            <h2 class="card-title">{{game.name}}</h2>
-            <div [ngClass]="getColorBasedOnScore(game.metacritic)" class="w-fit p-5 rounded-lg text-3xl text-white self-end">
-              <h1>{{game.metacritic}}</h1>
-            </div>
-          </div>
-        </div>
+<div class="relative w-3/4 top-7 bg-base-100 items-center rounded-lg justify-center mx-auto p-5 profile">
+  <div class="hero min-h-screen" style="background-image: url('assets/images/gow-wallpaper.jpg');">
+    <div class="hero-overlay bg-opacity-60"></div>
+    <div class="hero-content text-center text-neutral-content">
+      <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Welcome to Game Harbor - Your Ultimate Gaming Hub!</h1>
+        <p class="mb-5">Are you a dedicated gamer, constantly exploring the vast and immersive world
+          of video games? Look no further! 'Game Harbor' is your go-to platform, designed for
+          gaming enthusiasts like you who want to take their gaming experience to the next level.</p>
+        <button class="btn btn-primary" routerLink="/auth/register">Get Started</button>
       </div>
     </div>
+  </div>
 </div>

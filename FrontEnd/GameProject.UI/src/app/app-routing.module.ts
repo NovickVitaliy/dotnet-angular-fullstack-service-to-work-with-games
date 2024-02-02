@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'auth', loadChildren: () => import('./core/authentication/authentication.module').then(m => m.AuthenticationModule)},
   {path: 'profile', loadChildren: () => import('./features/personal-profile/personal-profile.module').then(m => m.PersonalProfileModule), canActivate: [authenticatedUserGuard]},
   {path: 'games', loadChildren: () => import('./features/games/games.module').then(m => m.GamesModule)},
+  {path: 'news', loadChildren: () => import('./features/news/news.module').then(m => m.NewsModule)},
   {path: '**', redirectTo: '/home', pathMatch: "full"}
 ];
 

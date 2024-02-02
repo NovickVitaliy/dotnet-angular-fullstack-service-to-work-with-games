@@ -23,9 +23,12 @@
         <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['required']">Confirm password is required</div>
         <div class="text-red-600" *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.controls['confirmPassword'].errors?.['compare']">Confirm password and Password must be equal</div>
       </div>
-      <div class="buttons flex justify-between">
+      <div class="buttons flex justify-between mb-3">
         <button class="btn btn-base" routerLink="/home">Cancel</button>
         <button class="btn btn-primary" [disabled]="registerForm.invalid" (click)="register()">Register</button>
+      </div>
+      <div class="flex justify-end text-sm text-blue-500">
+        <a routerLink="/auth/login">Already have an account?</a>
       </div>
     </form>
   </div>
