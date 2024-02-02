@@ -8,6 +8,7 @@ using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Contracts.Persistence;
 using GameProject.Application.Contracts.RawgApi.Genres;
 using GameProject.Application.Contracts.RawgApi.Platforms;
+using GameProject.Application.Contracts.RawgApi.Stores;
 using GameProject.Application.Models.Identity;
 using GameProject.Application.Services;
 using GameProject.Domain.Models.Identity;
@@ -17,6 +18,9 @@ using GameProject.Identity.Contracts.Repositories;
 using GameProject.Identity.DbContext;
 using GameProject.Identity.Helpers;
 using GameProject.Identity.Models;
+using GameProject.Identity.RawgApi.GameStores;
+using GameProject.Identity.RawgApi.Platforms;
+using GameProject.Identity.RawgApi.Stores;
 using GameProject.Identity.Repositories;
 using GameProject.Identity.Services;
 using GameProject.Identity.Services.Account;
@@ -124,6 +128,12 @@ public static class InfrastructureConfiguration
         services.AddScoped<IServerEmailer, ServerEmailer>();
 
         services.AddScoped<IResetPasswordService, ResetPasswordService>();
+
+        services.AddScoped<IStoresResearcher, StoresResearcher>();
+        services.Decorate<IStoresResearcher, CachedStoreResearcher>();
+
+        services.AddScoped<IGamesStoreResearcher, GameStoresResearcher>();
+        services.Decorate<IGamesStoreResearcher, CachedGameStoresResearcher>();
         
         return services;
     }

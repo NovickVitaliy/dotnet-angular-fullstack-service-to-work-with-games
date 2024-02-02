@@ -11,6 +11,8 @@ import {User} from "../../../../shared/models/user";
 import {GameReview} from "../../../../shared/models/bussiness/game-reviews/game-review";
 import {GameReviewerService} from "../../../../core/services/game-reviewer.service";
 import {PagedResult} from "../../../../shared/models/shared/paged-result";
+import {GameStoreResearcherService} from "../../../../core/services/game-store-researcher.service";
+import {GameStore} from "../../../../shared/models/rawg-api/game-stores/game-store";
 
 @Component({
   selector: 'app-game-info',
@@ -24,12 +26,14 @@ export class GameInfoComponent implements OnInit {
   gameTrailers: GameTrailer[];
   currentUser$: Observable<User | null>
   reviews: PagedResult<GameReview>;
+  gameStores: GameStore[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private gamesResearcher: GamesResearcherService,
               private colorScoreService: ScoreColorService,
               private authenticationService: AuthenticationService,
-              private gameReviewerService: GameReviewerService) {
+              private gameReviewerService: GameReviewerService,
+              private gameStoresService: GameStoreResearcherService) {
 
   }
 
@@ -44,13 +48,15 @@ export class GameInfoComponent implements OnInit {
       gameData: this.gamesResearcher.getGameInfo(this.gameId),
       gameScreenshots: this.gamesResearcher.getGamesScreenshots(this.gameId),
       gameTrailers: this.gamesResearcher.getGamesTrailers(this.gameId),
-      reviews: this.gameReviewerService.getReviewsForGame({gameRawgId: this.gameId, page: 1, itemsPerPage: 10})
+      reviews: this.gameReviewerService.getReviewsForGame({gameRawgId: this.gameId, page: 1, itemsPerPage: 10}),
+      gameStores: this.gameStoresService.getStoresForGame(this.gameId)
     }).subscribe({
       next: response => {
         this.game = response.gameData;
         this.gameScreenshots = response.gameScreenshots;
         this.gameTrailers = response.gameTrailers;
         this.reviews = response.reviews;
+        this.gameStores = response.gameStores;
       }
     })
   }

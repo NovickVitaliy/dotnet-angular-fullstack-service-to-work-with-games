@@ -4,5 +4,5 @@ namespace GameProject.Application.Contracts.RawgApi.Stores;
 
 public interface IGamesStoreResearcher
 {
-    Task<List<GameStore>> GetGamesStoreForGame(int rawgId);
+    Task<List<GameStore>> GetGamesStoreForGame(int gameId);
 }

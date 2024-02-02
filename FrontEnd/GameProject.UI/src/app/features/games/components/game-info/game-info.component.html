@@ -7,8 +7,8 @@
           <app-list-modal [game]="game" [currentUser$]="currentUser$"></app-list-modal>
           <app-game-review-modal [gameName]="game.name" [gameRawgId]="game.id" [currentUser$]="currentUser$"
                                  (newReview)="addReview($event)" [isEmailConfirmed]="user.emailConfirmed"></app-game-review-modal>
+          <app-game-stores-modal [gameStores]="gameStores"></app-game-stores-modal>
         </ng-container>
-        <button class="btn btn-primary my-1 mx-2"><i class="fa-solid fa-store"></i>Find in stores</button>
       </div>
     </div>
     <div class="2xl:w-1/2 2xl:pr-3">

@@ -12,6 +12,7 @@ import {UserGameListComponent} from './components/user-game-list/user-game-list.
 import {UserGameListItemComponent} from './components/user-game-list-item/user-game-list-item.component';
 import {GameReviewModalComponent} from './components/game-review-modal/game-review-modal.component';
 import {GameReviewComponent} from "./components/game-review/game-review.component";
+import { GameStoresModalComponent } from './components/game-stores-modal/game-stores-modal.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {GameReviewComponent} from "./components/game-review/game-review.componen
     UserGameListComponent,
     UserGameListItemComponent,
     GameReviewModalComponent,
-    GameReviewComponent
+    GameReviewComponent,
+    GameStoresModalComponent,
   ],
   exports: [
     GameReviewComponent

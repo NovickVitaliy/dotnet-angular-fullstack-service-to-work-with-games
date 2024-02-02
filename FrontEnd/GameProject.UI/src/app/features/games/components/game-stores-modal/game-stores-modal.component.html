@@ -1,0 +1,16 @@
+<button class="btn btn-primary my-1 mx-2" onclick="my_modal_5.showModal()"><i class="fa-solid fa-store"></i>Game in stores</button>
+<dialog id="my_modal_5" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Game in the stores</h3>
+    <div class="py-4">
+      <button class="w-full btn btn-primary mb-3" *ngFor="let gameStore of gameStores">
+        <a target="_blank" href="{{gameStore.url}}">{{gameStore.name}}</a>
+      </button>
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn mx-1" #closeModalButton>Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

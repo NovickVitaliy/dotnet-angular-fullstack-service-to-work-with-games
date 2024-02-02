@@ -4,7 +4,7 @@ using GameProject.Domain.Models;
 using GameProject.Infrastructure.Models.Games;
 using Microsoft.Extensions.Options;
 
-namespace GameProject.Infrastructure.RawgApi.Platforms;
+namespace GameProject.Identity.RawgApi.Platforms;
 
 public class PlatformsResearcher : IPlatformsResearcher
 {
