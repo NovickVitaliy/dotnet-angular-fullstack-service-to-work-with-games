@@ -21,9 +21,10 @@ export class AccountService {
   }
 
   changeAccountProfilePicture(file: File){
-    const formData = new FormData();
-    formData.append('image', file, file.name);
-    return this.httpClient.post<ChangeProfilePhotoResponse>(`${environment.apiUrl}Account/ChangeAccountProfilePicture`, formData);
+    const formData: FormData = new FormData();
+    formData.append('image', file);
+    return this.httpClient.post<ChangeProfilePhotoResponse>(
+      `${environment.apiUrl}Account/ChangeAccountProfilePicture`, formData);
   }
 
   deleteProfilePicture(){

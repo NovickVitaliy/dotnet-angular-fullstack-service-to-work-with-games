@@ -37,6 +37,7 @@ public class AccountController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> ChangeAccountData(ChangeAccountDataRequest changeAccountDataRequest)
     {
+        changeAccountDataRequest.Email = User.GetUserEmail();
         if (!ModelState.IsValid)
         {
             throw new BadRequestException(string.Join('\n', 
@@ -53,6 +54,7 @@ public class AccountController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> ChangeAccountPassword(ChangeAccountPasswordRequest changeAccountPasswordRequest)
     {
+        changeAccountPasswordRequest.Email = User.GetUserEmail();
         if (!ModelState.IsValid)
         {
             throw new BadRequestException(string.Join('\n', 

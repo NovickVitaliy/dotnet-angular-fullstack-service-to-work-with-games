@@ -4,6 +4,7 @@ using GameProject.Application.Models.Bussiness.Requests;
 using GameProject.Application.Models.Bussiness.Requests.GameReview;
 using GameProject.Application.Models.Shared;
 using GameProject.Domain.Models.Business;
+using GameProject.Identity.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameProject.API.Controllers;
@@ -33,6 +34,7 @@ public class GameReviewsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<GameReviewDto>> CreateGameReview(CreateGameReviewRequest createGameReviewRequest)
     {
+        createGameReviewRequest.Email = User.GetUserEmail();
         return Ok(await _gameReviewsService.CreateGameReviewReview(createGameReviewRequest));
     }
 
@@ -41,6 +43,7 @@ public class GameReviewsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<GameReviewDto>> UpdateGameReview(UpdateGameReviewRequest updateGameReviewRequest)
     {
+        updateGameReviewRequest.Email = User.GetUserEmail();
         return Ok(await _gameReviewsService.UpdateGameReview(updateGameReviewRequest));
     }
 
@@ -49,6 +52,7 @@ public class GameReviewsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> DeleteGameReview([FromQuery]DeleteGameReviewRequest deleteGameReviewRequest)
     {
+        deleteGameReviewRequest.Email = User.GetUserEmail();
         await _gameReviewsService.DeleteGameReview(deleteGameReviewRequest);
         return Ok();
     }
