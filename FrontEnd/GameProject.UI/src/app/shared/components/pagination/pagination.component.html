@@ -1,12 +1,11 @@
 <div class="join">
-  <button (click)="nextPage(currentPage - 1)" class="join-item btn" [ngClass]="{'btn-disabled': currentPage === 1}"><i class="fa-solid fa-arrow-left"></i></button>
-  <button (click)="nextPage(1)" *ngIf="currentPage > 3" class="join-item btn">1</button>
-  <button (click)="nextPage(2)" *ngIf="currentPage > 4" class="join-item btn">2</button>
-  <button (click)="nextPage(currentPage + 3)" *ngIf="currentPage > 3" class="join-item btn btn-disabled">...</button>
-  <button class="join-item btn btn-active btn-disabled">{{currentPage}}</button>
-  <button (click)="nextPage(currentPage + 1)" *ngIf="currentPage + 1 < Math.ceil(totalItemsCount / itemsPerPage)" class="join-item btn">{{currentPage + 1}}</button>
-  <button (click)="nextPage(currentPage + 2)" *ngIf="currentPage + 2 < Math.ceil(totalItemsCount / itemsPerPage)" class="join-item btn">{{currentPage + 2}}</button>
-  <button (click)="nextPage(currentPage + 3)" *ngIf="currentPage + 3 < Math.ceil(totalItemsCount / itemsPerPage)" class="join-item btn btn-disabled">...</button>
-  <button (click)="nextPage((Math.ceil(totalItemsCount / itemsPerPage)))" *ngIf="currentPage !== (Math.ceil(totalItemsCount / itemsPerPage))" class="join-item btn">{{(Math.ceil(totalItemsCount / itemsPerPage))}}</button>
-  <button (click)="nextPage(currentPage + 1)" class="join-item btn" [ngClass]="{'btn-disabled': currentPage === Math.ceil(totalItemsCount / itemsPerPage)}"><i class="fa-solid fa-arrow-right"></i></button>
+  <button class="join-item btn btn-square" name="options" (click)="nextPage(1)" [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'" *ngIf="firstLastButtons"><<</button>
+  <button class="join-item btn btn-square"  name="options" (click)="previous()" [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'" *ngIf="nextPreviousButtons"><</button>
+    <ng-container *ngFor="let p of totalPages; index as i">
+      <button class="join-item btn btn-square"  name="options" (click)="selectPageNumber(i + 1)" value="{{i + 1}}" *ngIf="i + 1 >= (currentPage - maxSize) && i + 1 <= (currentPage + maxSize)"
+              [disabled]="currentPage === (i + 1)" [class]="currentPage === (i  + 1) ? 'page-item active' : 'page-item'">{{i + 1}}</button>
+    </ng-container>
+    <button class="join-item btn btn-square"  name="options" (click)="next()" [class]="currentPage === totalPages.length ? 'page-item disabled' : 'page-item'"
+            *ngIf="nextPreviousButtons"> > </button>
+  <button class="join-item btn btn-square" name="options" (click)="selectPageNumber(totalPages.length)" [class]="currentPage === totalPages.length ? 'page-item disabled' : 'page-item'" *ngIf="firstLastButtons">>> </button>
 </div>

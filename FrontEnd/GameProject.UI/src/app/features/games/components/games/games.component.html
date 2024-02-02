@@ -71,5 +71,6 @@
                   [currentPage]="games?.currentPage"
                   [itemsPerPage]="games?.itemsPerPage"
                   (pageChanged)="changePage($event)"
+                  [collectionSize]="games.totalCount"
   ></app-pagination>
 </div>
