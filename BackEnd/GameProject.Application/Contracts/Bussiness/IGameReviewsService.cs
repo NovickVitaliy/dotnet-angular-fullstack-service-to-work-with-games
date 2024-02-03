@@ -11,4 +11,6 @@ public interface IGameReviewsService
     Task<GameReviewDto> CreateGameReviewReview(CreateGameReviewRequest createGameReviewRequest);
     Task<GameReviewDto> UpdateGameReview(UpdateGameReviewRequest updateGameReviewRequest);
     Task DeleteGameReview(DeleteGameReviewRequest deleteGameReviewRequest);
+    Task<bool> HasUserReviewedTheGame(string userEmail, int gameRawgId);
+    Task<PagedResult<GameReviewDto>> GetUserGameReviews(GetUserGameReviewsRequest getUserGameReviewsRequest);
 }

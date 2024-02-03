@@ -38,4 +38,12 @@ export class GameReviewerService {
   deleteGameReview(deleteGameReviewRequest: DeleteGameReviewRequest){
     return this.http.delete(`${environment.apiUrl}GameReviews/DeleteGameReview?reviewId=${deleteGameReviewRequest.reviewId}`)
   }
+
+  userHasReviewedTheGame(gameRawgId: number){
+    return this.http.get<boolean>(`${environment.apiUrl}GameReviews/HasUserReviewedTheGame/${gameRawgId}`);
+  }
+
+  getGameReviewsForUser(page: number, itemsPerPage: number) {
+    return this.http.get<PagedResult<GameReview>>(`${environment.apiUrl}GameReviews/GetGameReviewsForUser?page=${page}&itemsPerPage=${itemsPerPage}`)
+  }
 }

@@ -13,6 +13,7 @@ import {UserGameListItemComponent} from './components/user-game-list-item/user-g
 import {GameReviewModalComponent} from './components/game-review-modal/game-review-modal.component';
 import {GameReviewComponent} from "./components/game-review/game-review.component";
 import { GameStoresModalComponent } from './components/game-stores-modal/game-stores-modal.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { GameStoresModalComponent } from './components/game-stores-modal/game-st
     CommonModule,
     GamesRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class GamesModule {

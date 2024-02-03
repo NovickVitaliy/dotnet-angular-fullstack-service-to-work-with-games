@@ -23,6 +23,8 @@ public class IdentityUserToUserResponseProfile : Profile
             .ForMember(e => e.AbandonedGames, 
                 opt => opt.MapFrom(e => e.UsersAbandonedGames.Select(g => g.AbandonedGame)))
             .ForMember(e => e.DesiredGames,
-                opt => opt.MapFrom(e => e.UsersDesiredGames.Select(g => g.DesiredGame)));
+                opt => opt.MapFrom(e => e.UsersDesiredGames.Select(g => g.DesiredGame)))
+            .ForMember(e => e.GameReviews,
+                opt => opt.Ignore());
     }
 }

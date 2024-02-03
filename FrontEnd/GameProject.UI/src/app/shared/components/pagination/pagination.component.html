@@ -1,11 +1,9 @@
+<!-- pagination.component.html -->
+
 <div class="join">
-  <button class="join-item btn btn-square" name="options" (click)="nextPage(1)" [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'" *ngIf="firstLastButtons"><<</button>
-  <button class="join-item btn btn-square"  name="options" (click)="previous()" [class]="currentPage === 1 ? 'page-item disabled' : 'page-item'" *ngIf="nextPreviousButtons"><</button>
-    <ng-container *ngFor="let p of totalPages; index as i">
-      <button class="join-item btn btn-square"  name="options" (click)="selectPageNumber(i + 1)" value="{{i + 1}}" *ngIf="i + 1 >= (currentPage - maxSize) && i + 1 <= (currentPage + maxSize)"
-              [disabled]="currentPage === (i + 1)" [class]="currentPage === (i  + 1) ? 'page-item active' : 'page-item'">{{i + 1}}</button>
-    </ng-container>
-    <button class="join-item btn btn-square"  name="options" (click)="next()" [class]="currentPage === totalPages.length ? 'page-item disabled' : 'page-item'"
-            *ngIf="nextPreviousButtons"> > </button>
-  <button class="join-item btn btn-square" name="options" (click)="selectPageNumber(totalPages.length)" [class]="currentPage === totalPages.length ? 'page-item disabled' : 'page-item'" *ngIf="firstLastButtons">>> </button>
+  <button class="join-item btn" (click)="selectPageNumber(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span *ngFor="let page of getPagesArray()">
+    <button class="join-item btn" (click)="selectPageNumber(page)" [disabled]="currentPage === page" [class.btn-primary]="currentPage === page">{{ page }}</button>
+  </span>
+  <button class="join-item btn" (click)="selectPageNumber(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
 </div>

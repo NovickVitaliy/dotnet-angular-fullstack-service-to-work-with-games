@@ -6,6 +6,7 @@ using GameProject.Application.Models.Bussiness.DTOs;
 using GameProject.Application.Models.Bussiness.Requests;
 using GameProject.Application.Models.Bussiness.Requests.GameReview;
 using GameProject.Application.Models.Shared;
+using GameProject.Domain.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameProject.Identity.Services.Bussiness.GameReview;
@@ -41,11 +42,7 @@ public class GameReviewService : IGameReviewsService
 
     public async Task<GameReviewDto> CreateGameReviewReview(CreateGameReviewRequest createGameReviewRequest)
     {
-        var currentUser = await (await
-                _repositoryManager.UserRepository.GetByPredicateAsync(e => e.Email == createGameReviewRequest.Email,
-                    true))
-            .SingleAsync();
-
+        var currentUser = await GetUser(createGameReviewRequest.Email);
         Domain.Models.Business.GameReview gameReview = new Domain.Models.Business.GameReview()
         {
             GameRawgId = createGameReviewRequest.GameRawgId,
@@ -64,11 +61,7 @@ public class GameReviewService : IGameReviewsService
 
     public async Task<GameReviewDto> UpdateGameReview(UpdateGameReviewRequest updateGameReviewRequest)
     {
-        var currentUser = await (await
-                _repositoryManager.UserRepository.GetByPredicateAsync(e => e.Email == updateGameReviewRequest.Email,
-                    true))
-            .SingleAsync();
-
+        var currentUser = await GetUser(updateGameReviewRequest.Email);
         var gameReview = currentUser.GameReviews.SingleOrDefault(e => e.Id == updateGameReviewRequest.ReviewId);
 
         if (gameReview is null) throw new BadRequestException("Such review does not exist!");
@@ -82,15 +75,41 @@ public class GameReviewService : IGameReviewsService
 
     public async Task DeleteGameReview(DeleteGameReviewRequest deleteGameReviewRequest)
     {
-        var currentUser = await (await
-                _repositoryManager.UserRepository.GetByPredicateAsync(e => e.Email == deleteGameReviewRequest.Email,
-                    true))
-            .SingleAsync();
+        var currentUser = await GetUser(deleteGameReviewRequest.Email!);
 
         var reviewToDelete = currentUser.GameReviews.FirstOrDefault(e => e.Id == deleteGameReviewRequest.ReviewId);
         if (reviewToDelete is null) throw new BadRequestException("Such review does not exist");
         currentUser.GameReviews.Remove(reviewToDelete);
 
         await _repositoryManager.SaveChangesAsync();
+    }
+
+    public async Task<bool> HasUserReviewedTheGame(string userEmail, int gameRawgId)
+    {
+        var user = await GetUser(userEmail);
+
+        return user.GameReviews.Any(re => re.GameRawgId == gameRawgId);
+    }
+
+    public async Task<PagedResult<GameReviewDto>> GetUserGameReviews(GetUserGameReviewsRequest getUserGameReviewsRequest)
+    {
+        var user = await GetUser(getUserGameReviewsRequest.Email);
+
+        return new PagedResult<GameReviewDto>()
+        {
+            TotalCount = user.GameReviews.Count,
+            CurrentPage = getUserGameReviewsRequest.Page,
+            ItemsPerPage = getUserGameReviewsRequest.ItemsPerPage,
+            Items = _mapper.Map<List<GameReviewDto>>(user.GameReviews.Skip((getUserGameReviewsRequest.Page - 1)* getUserGameReviewsRequest.ItemsPerPage)
+                .Take(getUserGameReviewsRequest.ItemsPerPage))
+        };
+    }
+
+    private async Task<ApplicationUser> GetUser(string email)
+    {
+        return await (await
+                _repositoryManager.UserRepository.GetByPredicateAsync(e => e.Email == email,
+                    true))
+            .SingleAsync();
     }
 }

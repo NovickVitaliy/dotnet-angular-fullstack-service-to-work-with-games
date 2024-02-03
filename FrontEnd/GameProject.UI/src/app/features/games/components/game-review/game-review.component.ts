@@ -29,14 +29,17 @@ export class GameReviewComponent {
       .subscribe({
         next: _ => {
           this.toastr.success("Review has been successfully deleted");
-          this.authenticationService.currentUser$.subscribe({
-            next: user => {
-              user.gameReviews = user.gameReviews.filter(review => review.reviewId !== reviewId)
-              this.authenticationService.setCurrentUser(user);
-            }
-          })
         }
       });
+
+    this.authenticationService.currentUser$.subscribe({
+      next: user => {
+        if(user.gameReviews.items.some(re => re.reviewId=== reviewId)){
+          user.gameReviews.items = user.gameReviews.items.filter(review => review.reviewId !== reviewId)
+        }
+        localStorage.setItem('user', JSON.stringify(user));
+      }
+    })
   }
 
   editReview(){

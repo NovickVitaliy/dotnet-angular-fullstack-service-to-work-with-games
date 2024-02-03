@@ -1,6 +1,6 @@
 <button class="btn btn-primary my-1 mx-2" onclick="my_modal_2.showModal()"><i class="fa-solid fa-comment"></i>Add review</button>
 <dialog id="my_modal_2" class="modal">
-  <div *ngIf="isEmailConfirmed" class="modal-box">
+  <div *ngIf="isEmailConfirmed && !hasReviewed" class="modal-box">
     <h3 class="font-bold text-lg">Add review</h3>
     <div class="py-4">
       <p class="text-2xl mb-1">Score</p>
@@ -24,6 +24,17 @@
     <h3 class="font-bold text-lg">Add review</h3>
     <div class="py-4">
       <p>To add reviews your email must be confirmed</p>
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn btn-primary mx-1" #closeModalButton>Ok</button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="hasReviewed" class="modal-box">
+    <h3 class="font-bold text-lg">Add review</h3>
+    <div class="py-4">
+      <p>You have already added the review for this game.</p>
     </div>
     <div class="modal-action">
       <form method="dialog">

@@ -23,6 +23,7 @@
     "@fortawesome/fontawesome-free": "^6.5.1",
     "class-transformer": "^0.5.1",
     "flowbite": "^2.2.1",
+    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "theme-change": "^2.5.0",

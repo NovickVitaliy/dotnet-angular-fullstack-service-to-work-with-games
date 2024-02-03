@@ -5,6 +5,8 @@ using GameProject.Application.Contracts.Identity;
 using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Bussiness.DTOs;
 using GameProject.Application.Models.Identity;
+using GameProject.Application.Models.Shared;
+using GameProject.Domain.Models.Business;
 using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.Models;
@@ -56,6 +58,13 @@ public class AuthenticationService : IAuthenticationService
             userToReturn.AccessToken = accessToken;
             userToReturn.RefreshToken = refreshToken;
             userToReturn.DaysWithUs = (DateTime.UtcNow - user.DateRegistered).Days;
+            userToReturn.GameReviews = new PagedResult<GameReviewDto>()
+            {
+                CurrentPage = 1,
+                Items = _mapper.Map<List<GameReviewDto>>(user.GameReviews.Take(10)),
+                TotalCount = user.GameReviews.Count,
+                ItemsPerPage = 10
+            };
             return new BaseResponse<AuthenticationResponse>()
             {
                 Data = userToReturn

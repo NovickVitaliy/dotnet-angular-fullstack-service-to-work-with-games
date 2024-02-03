@@ -4,6 +4,7 @@ import {FinishedGame} from "./bussiness/games/finished-game";
 import {AbandonedGame} from "./bussiness/games/abandoned-game";
 import {DesiredGame} from "./bussiness/games/desired-game";
 import {GameReview} from "./bussiness/game-reviews/game-review";
+import {PagedResult} from "./shared/paged-result";
 
 export interface User {
   firstName: string;
@@ -23,5 +24,5 @@ export interface User {
   finishedGames: FinishedGame[];
   abandonedGames: AbandonedGame[];
   desiredGames: DesiredGame[];
-  gameReviews: GameReview[];
+  gameReviews: PagedResult<GameReview>;
 }

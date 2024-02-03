@@ -43,7 +43,7 @@
       </div>
       <div class="w-full flex space-x-1">
         <div class="flex-wrap flex space-y-1 justify-around lg:justify-start">
-          <div *ngFor="let game of games?.items" class="card w-full lg:w-[24%] m-[0.1px] cursor-pointer lg:m-0.5 image-full" routerLink="{{game.id}}">
+          <div *ngFor="let game of games?.items | paginate: {id: 'foo', itemsPerPage: games.itemsPerPage, currentPage: games.currentPage, totalItems: games.totalCount}" class="card w-full lg:w-[24%] m-[0.1px] cursor-pointer lg:m-0.5 image-full" routerLink="{{game.id}}">
             <figure><img src="{{game.background_image}}"/></figure>
             <div class="card-body justify-between">
               <h2 class="card-title">{{game.name}}</h2>
@@ -67,10 +67,9 @@
       </div>
     </div>
   </div>
-  <app-pagination [totalItemsCount]="games?.totalCount"
-                  [currentPage]="games?.currentPage"
-                  [itemsPerPage]="games?.itemsPerPage"
+  <app-pagination [totalItemsCount]="games.totalCount"
+                  [itemsPerPage]="games.itemsPerPage"
+                  [currentPage]="games.currentPage"
                   (pageChanged)="changePage($event)"
-                  [collectionSize]="games.totalCount"
   ></app-pagination>
 </div>

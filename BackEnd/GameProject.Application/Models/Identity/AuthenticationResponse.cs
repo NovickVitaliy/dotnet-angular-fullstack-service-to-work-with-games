@@ -1,4 +1,6 @@
 using GameProject.Application.Models.Bussiness.DTOs;
+using GameProject.Application.Models.Shared;
+using GameProject.Domain.Models.Business;
 
 namespace GameProject.Application.Models.Identity;
 
@@ -21,5 +23,5 @@ public class AuthenticationResponse
     public List<BaseGameResponse> FinishedGames { get; set; } = new();
     public List<BaseGameResponse> AbandonedGames { get; set; } = new();
     public List<BaseGameResponse> DesiredGames { get; set; } = new();
-    public List<GameReviewDto> GameReviews { get; set; } = new();
+    public PagedResult<GameReviewDto> GameReviews { get; set; } = new();
 }

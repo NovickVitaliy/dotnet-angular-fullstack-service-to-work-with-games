@@ -37,7 +37,7 @@
           </div>
           <div class="stat">
             <div class="stat-title">Reviews Count</div>
-            <div class="stat-value text-center">{{user.gameReviews.length}}</div>
+            <div class="stat-value text-center">{{user.gameReviews.totalCount}}</div>
           </div>
           <div class="stat">
             <div class="stat-title">Days with us</div>
@@ -57,7 +57,13 @@
       <input type="radio" name="my_tabs_1" role="tab" class="tab text-2xl" aria-label="Reviews"/>
       <div role="tabpanel" class="tab-content my-1">
         <div class="w-full">
-          <app-game-review [isEditable]="true" *ngFor="let review of user.gameReviews" [review]="review"></app-game-review>
+          <app-game-review [isEditable]="true" *ngFor="let review of user.gameReviews.items"
+                           [review]="review"></app-game-review>
+          <app-pagination [currentPage]="user.gameReviews.currentPage"
+                          [itemsPerPage]="user.gameReviews.itemsPerPage"
+                          [totalItemsCount]="user.gameReviews.totalCount"
+                          (pageChanged)="loadNextPageOfReviews($event)"
+          ></app-pagination>
         </div>
       </div>
     </div>

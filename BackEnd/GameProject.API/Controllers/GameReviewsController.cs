@@ -5,6 +5,7 @@ using GameProject.Application.Models.Bussiness.Requests.GameReview;
 using GameProject.Application.Models.Shared;
 using GameProject.Domain.Models.Business;
 using GameProject.Identity.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameProject.API.Controllers;
@@ -55,5 +56,20 @@ public class GameReviewsController : ControllerBase
         deleteGameReviewRequest.Email = User.GetUserEmail();
         await _gameReviewsService.DeleteGameReview(deleteGameReviewRequest);
         return Ok();
+    }
+
+    [HttpGet("{gameRawgId}")]
+    [Authorize]
+    public async Task<ActionResult<bool>> HasUserReviewedTheGame(int gameRawgId)
+    {
+        return Ok(await _gameReviewsService.HasUserReviewedTheGame(User.GetUserEmail(), gameRawgId));
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<ActionResult<PagedResult<GameReviewDto>>> GetGameReviewsForUser([FromQuery]GetUserGameReviewsRequest getUserGameReviewsRequest)
+    {
+        getUserGameReviewsRequest.Email = User.GetUserEmail();
+        return Ok(await _gameReviewsService.GetUserGameReviews(getUserGameReviewsRequest));
     }
 }
