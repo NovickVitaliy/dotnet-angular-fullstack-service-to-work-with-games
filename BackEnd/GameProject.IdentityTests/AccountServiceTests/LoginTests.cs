@@ -32,7 +32,7 @@ public class LoginTests
         _mockUserManager.Setup(x => x.FindByEmailAsync(It.IsAny<string>()))
             .ReturnsAsync(() => null);
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
-            .Returns(It.IsAny<string>());
+            .ReturnsAsync(It.IsAny<string>());
 
         IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
 
@@ -53,7 +53,7 @@ public class LoginTests
         _mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<ApplicationUser>(),
             It.IsAny<string>())).ReturnsAsync(false);
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
-            .Returns(It.IsAny<string>());
+            .ReturnsAsync(It.IsAny<string>());
 
         IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
 
@@ -74,7 +74,7 @@ public class LoginTests
         _mockUserManager.Setup(x => x.CheckPasswordAsync(It.IsAny<ApplicationUser>(),
             It.IsAny<string>())).ReturnsAsync(true);
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
-            .Returns(It.IsAny<string>());
+            .ReturnsAsync(It.IsAny<string>());
 
         IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
 

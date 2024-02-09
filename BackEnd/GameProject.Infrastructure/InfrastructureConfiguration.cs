@@ -26,6 +26,7 @@ using GameProject.Identity.Services;
 using GameProject.Identity.Services.Account;
 using GameProject.Identity.Services.Bussiness.GameReview;
 using GameProject.Identity.Services.Emailer;
+using GameProject.Identity.Services.Identity;
 using GameProject.Infrastructure.Cloudinary.Models.Common;
 using GameProject.Infrastructure.Cloudinary.Services;
 using GameProject.Infrastructure.Games;
@@ -54,20 +55,24 @@ public static class InfrastructureConfiguration
             .ValidateDataAnnotations()
             .ValidateOnStart();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        
+
+        services.AddIdentityCore<ApplicationUser>(options =>
+            {
+                options.Password.ConfigurePasswordOptions();
+            })
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+            .AddDefaultTokenProviders();
+        
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
             options
                 .UseLazyLoadingProxies()
                 .UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
-
-        services.AddIdentityCore<ApplicationUser>(options =>
-            {
-                options.Password.ConfigurePasswordOptions();
-            })
-            .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
-            .AddDefaultTokenProviders();
-
+        
+        services.AddScoped<IRolesService, RolesService>();
         services.AddScoped<ITokenService, JwtService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IAccountService, AccountService>();
@@ -134,6 +139,7 @@ public static class InfrastructureConfiguration
 
         services.AddScoped<IGamesStoreResearcher, GameStoresResearcher>();
         services.Decorate<IGamesStoreResearcher, CachedGameStoresResearcher>();
+
         
         return services;
     }

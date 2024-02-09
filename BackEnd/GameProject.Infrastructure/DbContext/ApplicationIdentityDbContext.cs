@@ -14,7 +14,7 @@ public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser, I
 {
     public DbSet<StartedGame> StartedGames { get; set; }
     public DbSet<InProgressGame> InProgressGames { get; set; }
-    public DbSet<FinishedGame> FinishedGames { get; set; }
+    public DbSet<FinishedGame> FinishedGames { get; set; }  
     public DbSet<AbandonedGame> AbandonedGames { get; set; }
     public DbSet<DesiredGame> DesiredGames { get; set; }
     public DbSet<GameReview> GameReviews { get; set; }

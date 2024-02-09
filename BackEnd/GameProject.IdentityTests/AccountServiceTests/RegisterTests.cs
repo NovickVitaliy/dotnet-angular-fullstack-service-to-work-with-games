@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentAssertions;
 using GameProject.Application.Common.DTO;
 using GameProject.Application.Contracts.Identity;
@@ -17,12 +18,14 @@ public class RegisterTests
 {
     private readonly Mock<UserManager<ApplicationUser>> _mockUserManager;
     private readonly Mock<ITokenService> _mockJwtService;
+    private readonly Mock<IMapper> _mockMapper;
 
     public RegisterTests()
     {
         _mockUserManager = new Mock<UserManager<ApplicationUser>>(Mock.Of<IUserStore<ApplicationUser>>(), null, null,
             null, null, null, null, null, null);
         _mockJwtService = new Mock<ITokenService>();
+        _mockMapper = new Mock<IMapper>();
     }
 
     [Fact]
@@ -33,7 +36,9 @@ public class RegisterTests
             .ReturnsAsync(IdentityResult.Success);
         RegisterRequest registerRequest = new RegisterRequest();
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
-            .Returns(It.IsAny<string>());
+            .ReturnsAsync(It.IsAny<string>());
+
+        _mockMapper.Setup(x => x.Map<It.IsAnyType>(It.IsAny<ApplicationUser>()));
 
         IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
 
@@ -53,7 +58,7 @@ public class RegisterTests
 
         RegisterRequest registerRequest = new RegisterRequest();
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
-            .Returns(It.IsAny<string>());
+            .ReturnsAsync(It.IsAny<string>());
 
         IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
 

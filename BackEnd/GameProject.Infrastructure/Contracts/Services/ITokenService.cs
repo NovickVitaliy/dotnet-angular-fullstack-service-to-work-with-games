@@ -6,7 +6,7 @@ namespace GameProject.Identity.Contracts;
 
 public interface ITokenService
 {
-    string CreateAccessToken(ApplicationUser user);
+    Task<string> CreateAccessToken(ApplicationUser user);
     string CreateRefreshToken();
     ClaimsPrincipal GetClaimsFromExpiredToken(string token);
 }
