@@ -18,6 +18,7 @@ public class AuthenticationResponse
     public string? ProfilePhotoUrl { get; set; }
     public int DaysWithUs { get; set; }
     public bool EmailConfirmed { get; set; }
+    public string[] Roles { get; set; } = Array.Empty<string>();
     public List<BaseGameResponse> StartedGames { get; set; } = new();
     public List<BaseGameResponse> InProgressGames { get; set; } = new();
     public List<BaseGameResponse> FinishedGames { get; set; } = new();

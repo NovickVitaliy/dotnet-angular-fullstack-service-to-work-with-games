@@ -1,0 +1,4 @@
+<div *ngIf="(currentAdmin$ | async) as admin"
+     class="relative w-3/4 top-7 bg-base-100 flex flex-col items-center rounded-lg justify-center mx-auto p-5 profile">
+<h1 class="text-4xl">Admin panel for Admin: {{admin.username}}</h1>
+</div>

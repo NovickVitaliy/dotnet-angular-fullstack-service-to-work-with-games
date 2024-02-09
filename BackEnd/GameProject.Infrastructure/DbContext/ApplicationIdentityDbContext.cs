@@ -14,17 +14,23 @@ public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser, I
 {
     public DbSet<StartedGame> StartedGames { get; set; }
     public DbSet<InProgressGame> InProgressGames { get; set; }
-    public DbSet<FinishedGame> FinishedGames { get; set; }  
+    public DbSet<FinishedGame> FinishedGames { get; set; }
     public DbSet<AbandonedGame> AbandonedGames { get; set; }
     public DbSet<DesiredGame> DesiredGames { get; set; }
     public DbSet<GameReview> GameReviews { get; set; }
+
     public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options) : base(options)
-    { }
+    {
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         builder.Entity<BaseGame>().UseTpcMappingStrategy();
+
+        builder.Entity<IdentityRole>()
+            .HasData(new IdentityRole()
+                { Name = ApplicationRoles.Admin, NormalizedName = ApplicationRoles.Admin.ToUpper() });
     }
 }

@@ -7,13 +7,12 @@ using GameProject.Application.Models.Identity;
 using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts;
 using GameProject.Identity.IdentityHelpers.Claims;
-using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
-namespace GameProject.Identity.Services;
+namespace GameProject.Identity.Services.Identity;
 
 public class JwtService : ITokenService
 {
@@ -38,8 +37,10 @@ public class JwtService : ITokenService
             new(ApplicationClaims.EmailConfirmed, user.EmailConfirmed.ToString())
         };
         var userRoles = await _userManager.GetRolesAsync(user);
+        var userClaims = await _userManager.GetClaimsAsync(user);
         var userRolesClaims = userRoles.Select(role => new Claim(ClaimTypes.Role, role));
         claims.AddRange(userRolesClaims);
+        claims.AddRange(userClaims);
 
         SymmetricSecurityKey symmetricSecurityKey = new(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
 

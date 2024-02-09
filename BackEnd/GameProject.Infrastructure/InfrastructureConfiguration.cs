@@ -52,28 +52,27 @@ public static class InfrastructureConfiguration
     {
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
         services.Configure<RefreshTokenSettings>(configuration.GetSection("RefreshTokenSettings"));
+        services.Configure<InitialAdminConfiguration>(
+            configuration.GetSection(InitialAdminConfiguration.PathToConfiguration));
         services.AddOptions<EmailSettings>()
             .Bind(configuration.GetSection("MailSettings"))
             .ValidateDataAnnotations()
             .ValidateOnStart();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        
 
-        services.AddIdentityCore<ApplicationUser>(options =>
-            {
-                options.Password.ConfigurePasswordOptions();
-            })
+
+        services.AddIdentityCore<ApplicationUser>(options => { options.Password.ConfigurePasswordOptions(); })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
             .AddDefaultTokenProviders();
-        
+
         services.AddDbContext<ApplicationIdentityDbContext>(options =>
         {
             options
                 .UseLazyLoadingProxies()
                 .UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
-        });
-        
+        }, ServiceLifetime.Transient);
+
         services.AddScoped<IRolesService, RolesService>();
         services.AddScoped<ITokenService, JwtService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
@@ -95,31 +94,30 @@ public static class InfrastructureConfiguration
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Secret"])),
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Secret"])),
                 };
             });
 
         services.AddSingleton<IAuthorizationHandler, EmailConfirmedRequirementAuthorizationHandler>();
-        
-        services.AddAuthorization(options =>
-        {
-        });
 
-        services.AddScoped<IUserRepository, UserRepository>(); 
+        services.AddAuthorization(options => { });
+
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPhotoRepository, PhotoRepository>();
 
         services.AddScoped<IRepositoryManager, RepositoryManager>();
         services.AddMemoryCache();
         services.Configure<RawgSettings>(configuration.GetSection("RawgSettings"));
-        services.AddHttpClient("RawgClient",(provider, client) =>
+        services.AddHttpClient("RawgClient", (provider, client) =>
         {
             var options = provider.GetRequiredService<IOptions<RawgSettings>>();
             client.BaseAddress = new Uri(options.Value.BaseUrl);
         });
-        
+
         services.AddScoped<IGamesResearcher, GamesResearcher>();
         services.Decorate<IGamesResearcher, CachedGamesResearcher>();
-        
+
         services.AddScoped<IPlatformsResearcher, PlatformsResearcher>();
         services.Decorate<IPlatformsResearcher, CachedPlatformsResearcher>();
 
@@ -146,7 +144,7 @@ public static class InfrastructureConfiguration
         services.AddScoped<IGamesStoreResearcher, GameStoresResearcher>();
         services.Decorate<IGamesStoreResearcher, CachedGameStoresResearcher>();
 
-        
+
         return services;
     }
 }

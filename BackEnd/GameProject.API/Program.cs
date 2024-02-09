@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using GameProject.API.Middlewares;
 using GameProject.Application;
 using GameProject.Identity;
+using GameProject.Identity.IdentityHelpers.InitialAdminCreating;
 using GameProject.Infrastructure;
 using GameProject.Persistence;
 var builder = WebApplication.CreateBuilder(args);
@@ -29,7 +30,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
+app.ConfigureInitialAdmin();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

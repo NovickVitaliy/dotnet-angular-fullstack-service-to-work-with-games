@@ -25,6 +25,7 @@
               </a>
             </li>
             <li><a routerLink="games/user-list">My lists</a></li>
+            <li><a routerLink="admin/admin-home" *ngIf="isAdmin(user.roles)">Admin panel</a></li>
           </ng-container>
           <li><a routerLink="home">Home</a></li>
           <li><a routerLink="news">News</a></li>
@@ -66,7 +67,8 @@
               </a>
             </li>
             <li><a>Settings</a></li>
-            <li ><a routerLink="games/user-list">My lists</a></li>
+            <li><a routerLink="admin/admin-home" *ngIf="isAdmin(user.roles)">Admin panel</a></li>
+            <li><a routerLink="games/user-list">My lists</a></li>
             <li><a class="text-red-600" (click)="logout()">Logout</a></li>
           </ul>
         </div>

@@ -68,6 +68,7 @@ public class AuthenticationService : IAuthenticationService
                 TotalCount = user.GameReviews.Count,
                 ItemsPerPage = 10
             };
+            userToReturn.Roles = (await _userManager.GetRolesAsync(user)).ToArray();
             return new BaseResponse<AuthenticationResponse>()
             {
                 Data = userToReturn
@@ -137,7 +138,6 @@ public class AuthenticationService : IAuthenticationService
     public async Task ConfigureAccountAsync(ConfigureAccountRequest configureAccountRequest)
     {
         var user = await _userManager.FindByEmailAsync(configureAccountRequest.Email);
-
         if (user == null)
         {
             throw new NotFoundException("User with given email does not exist");

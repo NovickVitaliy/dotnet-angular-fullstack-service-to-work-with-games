@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: 'profile', loadChildren: () => import('./features/personal-profile/personal-profile.module').then(m => m.PersonalProfileModule), canActivate: [authenticatedUserGuard]},
   {path: 'games', loadChildren: () => import('./features/games/games.module').then(m => m.GamesModule)},
   {path: 'news', loadChildren: () => import('./features/news/news.module').then(m => m.NewsModule)},
+  {path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)},
   {path: '**', redirectTo: '/home', pathMatch: "full"}
 ];
 

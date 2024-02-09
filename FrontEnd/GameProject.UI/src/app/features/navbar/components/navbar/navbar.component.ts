@@ -46,4 +46,10 @@ export class NavbarComponent implements OnInit  {
   getCurrentTheme(){
     return this.themeService.getCurrentTheme();
   }
+
+  isAdmin(roles: string[]){
+    let isAdmin = roles.some(role => role === "Admin");
+    console.log(isAdmin);
+    return isAdmin;
+  }
 }

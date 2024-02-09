@@ -19,6 +19,7 @@ export interface User {
   profilePhotoUrl?: string;
   daysWithUs: number;
   emailConfirmed: boolean;
+  roles: string[];
   startedGames: StartedGame[];
   inProgressGames: InProgressGame[];
   finishedGames: FinishedGame[];
