@@ -7,6 +7,7 @@ using GameProject.Application.Models.Bussiness.Requests;
 using GameProject.Application.Models.Bussiness.Requests.GameReview;
 using GameProject.Application.Models.Shared;
 using GameProject.Domain.Models.Identity;
+using GameProject.Identity.IdentityHelpers.AuthorizationAttributes.EmailConfirmed;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameProject.Identity.Services.Bussiness.GameReview;
@@ -40,6 +41,7 @@ public class GameReviewService : IGameReviewsService
         };
     }
 
+    [EmailConfirmed(true)]
     public async Task<GameReviewDto> CreateGameReviewReview(CreateGameReviewRequest createGameReviewRequest)
     {
         var currentUser = await GetUser(createGameReviewRequest.Email);

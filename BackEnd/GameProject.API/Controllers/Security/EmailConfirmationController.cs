@@ -2,7 +2,6 @@ using GameProject.Application.Contracts.Account;
 using GameProject.Application.Models.Account;
 using GameProject.Identity.Extensions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameProject.API.Controllers.Security;
@@ -20,7 +19,8 @@ public class EmailConfirmationController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> SendConfirmEmailMessage(SendConfirmEmailMessageRequest sendConfirmEmailMessageRequest)
+    public async Task<ActionResult> SendConfirmEmailMessage(
+        SendConfirmEmailMessageRequest sendConfirmEmailMessageRequest)
     {
         sendConfirmEmailMessageRequest.Email = User.GetUserEmail();
         await _confirmEmailService.SendConfirmMessage(sendConfirmEmailMessageRequest);
@@ -29,10 +29,9 @@ public class EmailConfirmationController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<ActionResult> ConfirmEmail(ConfirmEmailRequest confirmEmailRequest)
+    public async Task<ActionResult<string>> ConfirmEmail(ConfirmEmailRequest confirmEmailRequest)
     {
         confirmEmailRequest.Email = User.GetUserEmail();
-        await _confirmEmailService.ConfirmEmail(confirmEmailRequest);
-        return Ok();
+        return Ok(await _confirmEmailService.ConfirmEmail(confirmEmailRequest));
     }
 }

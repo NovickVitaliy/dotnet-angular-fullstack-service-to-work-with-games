@@ -17,6 +17,7 @@ using GameProject.Identity.Contracts.Emailer;
 using GameProject.Identity.Contracts.Repositories;
 using GameProject.Identity.DbContext;
 using GameProject.Identity.Helpers;
+using GameProject.Identity.IdentityHelpers.AuthorizationAttributes.EmailConfirmed;
 using GameProject.Identity.Models;
 using GameProject.Identity.RawgApi.GameStores;
 using GameProject.Identity.RawgApi.Platforms;
@@ -34,6 +35,7 @@ using GameProject.Infrastructure.Models.Games;
 using GameProject.Infrastructure.RawgApi.Genres;
 using GameProject.Infrastructure.RawgApi.Platforms;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -97,7 +99,11 @@ public static class InfrastructureConfiguration
                 };
             });
 
-        services.AddAuthorization();
+        services.AddSingleton<IAuthorizationHandler, EmailConfirmedRequirementAuthorizationHandler>();
+        
+        services.AddAuthorization(options =>
+        {
+        });
 
         services.AddScoped<IUserRepository, UserRepository>(); 
         services.AddScoped<IPhotoRepository, PhotoRepository>();

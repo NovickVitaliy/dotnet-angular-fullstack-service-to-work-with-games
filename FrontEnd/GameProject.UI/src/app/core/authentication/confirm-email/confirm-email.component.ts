@@ -36,11 +36,12 @@ export class ConfirmEmailComponent implements OnInit {
 
     this.confirmEmailService.confirmEmail(confirmEmailRequest)
       .subscribe({
-        next: _ => {
+        next: newToken => {
           this.toastrService.success("Email has been successfully confirmed");
           this.authenticationService.currentUser$.subscribe({
             next: user => {
               user.emailConfirmed = true;
+              user.accessToken = newToken;
               this.authenticationService.setCurrentUser(user);
             }
           })

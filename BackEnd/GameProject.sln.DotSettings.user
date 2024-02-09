@@ -3,5 +3,6 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::2012618F-A5F3-44AD-A55D-17A703B32B9E::net8.0::GameProject.IdentityTests.AccountServiceTests.RegisterTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::2012618F-A5F3-44AD-A55D-17A703B32B9E::net8.0::GameProject.IdentityTests.AccountServiceTests.LoginTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::2012618F-A5F3-44AD-A55D-17A703B32B9E::net8.0::GameProject.IdentityTests.GameReviewerServiceTests.CreateGameReview.GetAsync_InvalidScope_ReturnsUnauthorizedResult&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

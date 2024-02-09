@@ -2,6 +2,7 @@ using GameProject.Application.Contracts.Account;
 using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Account;
 using GameProject.Domain.Models.Identity;
+using GameProject.Identity.Contracts;
 using GameProject.Identity.Contracts.Emailer;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -16,12 +17,14 @@ public class ConfirmEmailService : IConfirmEmailService
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IServerEmailer _serverEmailer;
+    private readonly ITokenService _tokenService;
     private const string ConfirmationEmailSubject = "Email confirmation";
 
-    public ConfirmEmailService(UserManager<ApplicationUser> userManager, IServerEmailer serverEmailer)
+    public ConfirmEmailService(UserManager<ApplicationUser> userManager, IServerEmailer serverEmailer, ITokenService tokenService)
     {
         _userManager = userManager;
         _serverEmailer = serverEmailer;
+        _tokenService = tokenService;
     }
 
     public async Task SendConfirmMessage(SendConfirmEmailMessageRequest sendConfirmEmailMessageRequest)
@@ -52,16 +55,18 @@ public class ConfirmEmailService : IConfirmEmailService
         return await _userManager.GenerateEmailConfirmationTokenAsync(user);
     }
 
-    public async Task ConfirmEmail(ConfirmEmailRequest confirmEmailRequest)
+    public async Task<string> ConfirmEmail(ConfirmEmailRequest confirmEmailRequest)
     {
         var user = await GetUser(confirmEmailRequest.Email);
 
         var confirmationResult = await _userManager.ConfirmEmailAsync(user, confirmEmailRequest.ConfirmToken);
 
-        if (!confirmationResult.Succeeded)
+        if (confirmationResult.Succeeded)
         {
-            throw new BadRequestException(string.Join('\n', confirmationResult.Errors.Select(err => err.Description)));
+            return await _tokenService.CreateAccessToken(user);
         }
+        
+        throw new BadRequestException(string.Join('\n', confirmationResult.Errors.Select(err => err.Description)));
     }
 
     private async Task<ApplicationUser> GetUser(string email)

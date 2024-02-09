@@ -15,6 +15,6 @@ export class ConfirmEmailService {
   }
 
   confirmEmail(confirmEmailRequest: ConfirmEmailRequest){
-    return this.httpClient.post(`${environment.apiUrl}EmailConfirmation/ConfirmEmail`, confirmEmailRequest);
+    return this.httpClient.post<string>(`${environment.apiUrl}EmailConfirmation/ConfirmEmail`, confirmEmailRequest);
   }
 }

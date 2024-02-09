@@ -135,3 +135,4 @@ C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\ne
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\MailKit.dll
 C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\MimeKit.dll
+C:\Users\User\Desktop\GameProject\BackEnd\GameProject.IdentityTests\bin\Debug\net8.0\Microsoft.AspNetCore.TestHost.dll

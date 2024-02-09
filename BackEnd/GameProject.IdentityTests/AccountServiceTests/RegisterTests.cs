@@ -40,7 +40,7 @@ public class RegisterTests
 
         _mockMapper.Setup(x => x.Map<It.IsAnyType>(It.IsAny<ApplicationUser>()));
 
-        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null, null);
 
         var register = await authenticationService.RegisterAsync(registerRequest);
 
@@ -60,7 +60,7 @@ public class RegisterTests
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .ReturnsAsync(It.IsAny<string>());
 
-        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null, null);
 
         Func<Task> action = async () =>
         {

@@ -11,6 +11,7 @@
           "FluentAssertions": "7.0.0-alpha.3",
           "GameProject.Application": "1.0.0",
           "GameProject.Infrastructure": "1.0.0",
+          "Microsoft.AspNetCore.TestHost": "8.0.1",
           "Microsoft.NET.Test.Sdk": "17.6.0",
           "Moq": "4.20.70",
           "coverlet.collector": "6.0.0",
@@ -154,6 +155,17 @@
           "lib/net8.0/Microsoft.AspNetCore.Identity.UI.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.23.53112"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.TestHost/8.0.1": {
+        "dependencies": {
+          "System.IO.Pipelines": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.TestHost.dll": {
+            "assemblyVersion": "8.0.1.0",
+            "fileVersion": "8.0.123.58008"
           }
         }
       },
@@ -985,6 +997,7 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.IO.Pipelines/8.0.0": {},
       "System.Linq/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1637,6 +1650,13 @@
       "path": "microsoft.aspnetcore.identity.ui/8.0.0",
       "hashPath": "microsoft.aspnetcore.identity.ui.8.0.0.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.TestHost/8.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+htc+QLkyJvvOerM66UP9pPPNl5cxKrIWwg69QknLigvdq+lI8SOs8vp4oMGsGKRhNgq20Okhu73nzSnIgh32w==",
+      "path": "microsoft.aspnetcore.testhost/8.0.1",
+      "hashPath": "microsoft.aspnetcore.testhost.8.0.1.nupkg.sha512"
+    },
     "Microsoft.CodeCoverage/17.6.0": {
       "type": "package",
       "serviceable": true,
@@ -2196,6 +2216,13 @@
       "sha512": "sha512-6QOb2XFLch7bEc4lIcJH49nJN2HV+OC3fHDgsLVsBVBk3Y4hFAnOBGzJ2lUu7CyDDFo9IBWkSsnbkT6IBwwiMw==",
       "path": "system.io.filesystem.primitives/4.3.0",
       "hashPath": "system.io.filesystem.primitives.4.3.0.nupkg.sha512"
+    },
+    "System.IO.Pipelines/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FHNOatmUq0sqJOkTx+UF/9YK1f180cnW5FVqnQMvYUN0elp6wFzbtPSiqbo1/ru8ICp43JM1i7kKkk6GsNGHlA==",
+      "path": "system.io.pipelines/8.0.0",
+      "hashPath": "system.io.pipelines.8.0.0.nupkg.sha512"
     },
     "System.Linq/4.3.0": {
       "type": "package",

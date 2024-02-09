@@ -6,6 +6,7 @@ using GameProject.Application.Exceptions;
 using GameProject.Application.Models.Identity;
 using GameProject.Domain.Models.Identity;
 using GameProject.Identity.Contracts;
+using GameProject.Identity.IdentityHelpers.Claims;
 using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -34,6 +35,7 @@ public class JwtService : ITokenService
             new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
             new(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+            new(ApplicationClaims.EmailConfirmed, user.EmailConfirmed.ToString())
         };
         var userRoles = await _userManager.GetRolesAsync(user);
         var userRolesClaims = userRoles.Select(role => new Claim(ClaimTypes.Role, role));

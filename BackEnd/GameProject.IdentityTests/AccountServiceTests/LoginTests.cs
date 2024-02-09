@@ -34,7 +34,7 @@ public class LoginTests
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .ReturnsAsync(It.IsAny<string>());
 
-        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null, null);
 
         Func<Task> action = async () =>
         {
@@ -55,7 +55,7 @@ public class LoginTests
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .ReturnsAsync(It.IsAny<string>());
 
-        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null, null);
 
         Func<Task> action = async () =>
         {
@@ -76,7 +76,7 @@ public class LoginTests
         _mockJwtService.Setup(x => x.CreateAccessToken(It.IsAny<ApplicationUser>()))
             .ReturnsAsync(It.IsAny<string>());
 
-        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null);
+        IAuthenticationService authenticationService = new AuthenticationService(_mockUserManager.Object, _mockJwtService.Object, null, null, null);
 
         LoginRequest loginRequest = new LoginRequest();
         BaseResponse<AuthenticationResponse> response = await authenticationService.LoginAsync(loginRequest);
