@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Text;
 using GameProject.Application.Contracts.Account;
+using GameProject.Application.Contracts.Admin;
 using GameProject.Application.Contracts.Bussiness;
 using GameProject.Application.Contracts.Cloudinary;
 using GameProject.Application.Contracts.Games;
@@ -25,6 +26,7 @@ using GameProject.Identity.RawgApi.Stores;
 using GameProject.Identity.Repositories;
 using GameProject.Identity.Services;
 using GameProject.Identity.Services.Account;
+using GameProject.Identity.Services.Admin.News;
 using GameProject.Identity.Services.Bussiness.GameReview;
 using GameProject.Identity.Services.Emailer;
 using GameProject.Identity.Services.Identity;
@@ -144,6 +146,7 @@ public static class InfrastructureConfiguration
         services.AddScoped<IGamesStoreResearcher, GameStoresResearcher>();
         services.Decorate<IGamesStoreResearcher, CachedGameStoresResearcher>();
 
+        services.AddScoped<IAdminNewsService, AdminNewsService>();
 
         return services;
     }

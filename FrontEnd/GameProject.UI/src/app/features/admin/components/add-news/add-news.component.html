@@ -1,0 +1,16 @@
+<div class="relative w-3/4 top-7 bg-base-100 flex flex-col items-center rounded-lg justify-center mx-auto p-5 profile">
+  <a class="self-start text-base" routerLink="/admin/admin-home"><i class="fa-solid fa-less-than mr-1"></i>Back</a>
+  <h1 class="text-3xl self-start mb-3">Title</h1>
+  <input
+            class="block p-2.5 w-full mb-3 text-sm bg-base-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 border-2 border-gray-400 focus:outline-none focus:outline-gray-500"
+            placeholder="Title goes here..." [(ngModel)]="newsTitle">
+  <h1 class="text-3xl self-start mb-3">News</h1>
+  <textarea
+         class="block p-2.5 w-full mb-3 text-sm bg-base-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 border-2 border-gray-400 focus:outline-none focus:outline-gray-500"
+         placeholder="Content goes here..." [(ngModel)]="newsContent"></textarea>
+  <h1 class="text-3xl self-start mb-3">Author</h1>
+  <input
+    class="block p-2.5 w-full mb-3 text-sm bg-base-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 border-2 border-gray-400 focus:outline-none focus:outline-gray-500"
+    placeholder="Author goes here..." [value]="adminEmail" disabled>
+  <button class="btn btn-primary self-end" (click)="publishNews()">Publish</button>
+</div>

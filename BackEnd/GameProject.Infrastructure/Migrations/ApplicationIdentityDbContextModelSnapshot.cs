@@ -205,6 +205,37 @@ namespace GameProject.Identity.Migrations
                     b.ToTable("ProfilePhotos", (string)null);
                 });
 
+            modelBuilder.Entity("GameProject.Domain.Models.News.News", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AuthorName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DatePublished")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersAbandonedGames", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -278,33 +309,6 @@ namespace GameProject.Identity.Migrations
                     b.HasIndex("StartedGameId");
 
                     b.ToTable("UsersStartedGames", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IdentityRole");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "802c0a18-2624-4123-a300-72e2a9f2c516",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -494,6 +498,17 @@ namespace GameProject.Identity.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("GameProject.Domain.Models.News.News", b =>
+                {
+                    b.HasOne("GameProject.Domain.Models.Identity.ApplicationUser", "Author")
+                        .WithMany("PublishedNews")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("GameProject.Domain.Models.Shared.UsersAbandonedGames", b =>
                 {
                     b.HasOne("GameProject.Domain.Models.Business.Games.AbandonedGame", "AbandonedGame")
@@ -645,6 +660,8 @@ namespace GameProject.Identity.Migrations
                     b.Navigation("GameReviews");
 
                     b.Navigation("ProfilePhoto");
+
+                    b.Navigation("PublishedNews");
 
                     b.Navigation("UsersAbandonedGames");
 

@@ -3,6 +3,7 @@ using GameProject.Domain.Models.Business;
 using GameProject.Domain.Models.Business.Games;
 using GameProject.Domain.Models.Business.Games.Common;
 using GameProject.Domain.Models.Identity;
+using GameProject.Domain.Models.News;
 using GameProject.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,6 +19,7 @@ public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser, I
     public DbSet<AbandonedGame> AbandonedGames { get; set; }
     public DbSet<DesiredGame> DesiredGames { get; set; }
     public DbSet<GameReview> GameReviews { get; set; }
+    public DbSet<News> News { get; set; }
 
     public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options) : base(options)
     {
@@ -29,8 +31,5 @@ public class ApplicationIdentityDbContext : IdentityDbContext<ApplicationUser, I
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         builder.Entity<BaseGame>().UseTpcMappingStrategy();
 
-        builder.Entity<IdentityRole>()
-            .HasData(new IdentityRole()
-                { Name = ApplicationRoles.Admin, NormalizedName = ApplicationRoles.Admin.ToUpper() });
     }
 }

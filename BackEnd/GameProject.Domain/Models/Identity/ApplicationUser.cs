@@ -21,4 +21,5 @@ public class ApplicationUser : IdentityUser<Guid>
     public virtual List<UsersAbandonedGames> UsersAbandonedGames { get; set; } = new();
     public virtual List<UsersDesiredGames> UsersDesiredGames { get; set; } = new();
     public virtual List<GameReview> GameReviews { get; set; } = new();
+    public virtual List<News.News> PublishedNews { get; set; } = new();
 }
